@@ -7,13 +7,14 @@
 
 " For pathogen.vim: auto load all plugins in .vim/bundle
 
-let g:pathogen_disabled = []
-if !has('gui_running')
-   call add(g:pathogen_disabled, 'powerline')
-endif
-execute pathogen#infect()
-"call pathogen#incubate()
-call pathogen#helptags()
+"let g:pathogen_disabled = []
+"if !has('gui_running')
+ "  call add(g:pathogen_disabled, 'powerline')
+"endif
+set nocp
+call pathogen#infect()
+syntax on
+filetype plugin indent on
 
 " General Settings
 if has("gui_running")
