@@ -1,16 +1,4 @@
-" vgod's vimrc
-" Tsung-Hsiang (Sean) Chang <vgod@vgod.tw>
-" Fork me on GITHUB  https://github.com/vgod/vimrc
 
-" read https://github.com/vgod/vimrc/blob/master/README.md for more info
-
-
-" For pathogen.vim: auto load all plugins in .vim/bundle
-
-"let g:pathogen_disabled = []
-"if !has('gui_running')
- "  call add(g:pathogen_disabled, 'powerline')
-"endif
 set nocp
 call pathogen#infect()
 syntax on
@@ -31,14 +19,13 @@ if has("gui_running")
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview
 autocmd Colorscheme * highlight FoldColumn guifg=black guibg=bg
-
   "augroup PROSE|
    "autocmd InsertEnter <buffer> set fo+=a
    "autocmd InsertLeave <buffer> set fo-=a
  "augroup END"augroup END
 
 
-
+set iskeyword=45,48-58,a-z,A-Z,192-255  "note these are not default so be careful with files other than .tex
 set guioptions-=r 
 set guioptions-=l
 set nocompatible	" not compatible with the old-fashion vi mode
@@ -352,7 +339,7 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<D-j>"  
  
 
-" KeyMaps movement other Remaps 
+" KeyMaps for movement, other Remaps 
  
 
  map f <leader><leader>f
@@ -413,7 +400,8 @@ noremap <D-d> <C-d>
 noremap <D-u> <C-u>
 nnoremap <silent> <Leader>y :YRGetElem<CR>
 map ' "
-"map " "
+inoremap <D-]> <C-x><C-]> 
+inoremap <C-]> <C-x><C-]> 
 
 
 
