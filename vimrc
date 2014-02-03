@@ -1,5 +1,5 @@
 
-set nocp
+"set nocp
 call pathogen#infect()
 syntax on
 filetype plugin indent on
@@ -36,6 +36,12 @@ set undolevels=100000         " How many undos
 set undoreload=10000		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set autoread		" auto read when file is changed from outside
+set nohlsearch
+
+ 
+
+
+
 
 "filetype off          " necessary to make ftdetect work on Linux
 syntax on
@@ -122,21 +128,6 @@ endfunction
 "}
 
 
-"" C/C++ specific settings
-"autocmd FileType c,cpp,cc  set cindent comments=sr:/*,mb:*,el:*/,:// cino=>s,e0,n0,f0,{0,}0,^-1s,:0,=s,g0,h1s,p2,t0,+2,(2,)20,*30
-
-""Restore cursor to file position in previous editing session
-"set viminfo='10,\"100,:20,%,n~/.viminfo
-"au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
-
-""--------------------------------------------------------------------------- 
-"" Tip #382: Search for <cword> and replace with input() in all open buffers 
-""--------------------------------------------------------------------------- 
-"fun! Replace() 
-    "let s:word = input("Replace " . expand('<cword>') . " with:") 
-    ":exe 'bufdo! %s/\<' . expand('<cword>') . '\>/' . s:word . '/ge' 
-    ":unlet! s:word 
-"endfun 
 
 
 "--------------------------------------------------------------------------- 
@@ -199,40 +190,6 @@ vnoremap > >gv
 " :cd. change working directory to that of the current file
 cmap cd. lcd %:p:h
 
-" Writing Restructured Text (Sphinx Documentation) {
-   " Ctrl-u 1:    underline Parts w/ #'s
-   "noremap  <C-u>1 yyPVr#yyjp
-   "inoremap <C-u>1 <esc>yyPVr#yyjpA
-   "" Ctrl-u 2:    underline Chapters w/ *'s
-   "noremap  <C-u>2 yyPVr*yyjp
-   "inoremap <C-u>2 <esc>yyPVr*yyjpA
-   "" Ctrl-u 3:    underline Section Level 1 w/ ='s
-   "noremap  <C-u>3 yypVr=
-   "inoremap <C-u>3 <esc>yypVr=A
-   "" Ctrl-u 4:    underline Section Level 2 w/ -'s
-   "noremap  <C-u>4 yypVr-
-   "inoremap <C-u>4 <esc>yypVr-A
-   "" Ctrl-u 5:    underline Section Level 3 w/ ^'s
-   "noremap  <C-u>5 yypVr^
-   "inoremap <C-u>5 <esc>yypVr^A
-""}
-
-"--------------------------------------------------------------------------- 
-" PROGRAMMING SHORTCUTS
-"--------------------------------------------------------------------------- 
-
-"" Ctrl-[ jump out of the tag stack (undo Ctrl-])
-"map <C-[> <ESC>:po<CR>
-
-"" ,g generates the header guard
-"map <leader>g :call IncludeGuard()<CR>
-"fun! IncludeGuard()
-   "let basename = substitute(bufname(""), '.*/', '', '')
-   "let guard = '_' . substitute(toupper(basename), '\.', '_', "H")
-   "call append(0, "#ifndef " . guard)
-   "call append(1, "#define " . guard)
-   "call append( line("$"), "#endif // for #ifndef " . guard)
-"endfun
 
 
 
@@ -362,7 +319,7 @@ let g:UltiSnipsJumpForwardTrigger="<D-j>"
 
  nmap <S-h> v<Left>T<Space>ad
  nmap <S-l> vt<Space>ad
- imap <D-Space> <C-X><C-o>
+ "imap <D-Space> <C-X><C-o>
  imap <C-s> <Esc>:w<CR>
  "nunmap w
  "map ' "
@@ -400,8 +357,8 @@ noremap <D-d> <C-d>
 noremap <D-u> <C-u>
 nnoremap <silent> <Leader>y :YRGetElem<CR>
 map ' "
-inoremap <D-]> <C-x><C-]> 
-inoremap <C-]> <C-x><C-]> 
+inoremap <D-]> <C-x><C-]>
+inoremap <C-]> <C-x><C-]>
 
 
 
@@ -423,7 +380,6 @@ hi MatchParen guibg=NONE guifg=green gui=NONE
         let g:undotree_SetFocusWhenToggle=1
         "noremap <D-z> :UndotreeToggle<CR> 
     " }
-" CtrlP 
 
 nnoremap <D-e> :let g:ctrlp_match_window =
          \ 'bottom,order:btt,min:1,max:1000,results:1000'<CR>:CtrlPTag<CR>
@@ -433,19 +389,25 @@ map <D-t> :cd /users/yashasavelyev/GoogleDrive/workspace<CR>:CommandT<CR>
 "map <D-e> :cd /users/yashasavelyev/GoogleDrive/workspace<CR>:CommandT<CR>
 imap <D-t> <Esc>:cd /users/yashasavelyev/GoogleDrive/workspace<CR>:CommandT<CR>
 "CtrlP /users/yashasavelyev/GoogleDrive/workspace<cr>
-set nohlsearch
-" LatexBox
-"nnoremap <localleader>l :call latex#latexmk#compile()<cr>
+
+" You complete me
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_auto_trigger = 0 
+set tags=~/GoogleDrive/workspace/tags 
+set tags=~/GoogleDrive/workspace/tagstest 
+set tags+=/usr/local/texlive/texmf-local/bibtex/bib/local/tags
+
+"let g:ycm_key_invoke_completion = ''
+             
+"let g:ycm_key_invoke_completion = '<D-5>'
+" Latex shortcuts
+
 map <silent> <Leader>l  :silent !latexmk -pdflatex='pdflatex -file-line-error -synctex=1'  
        \ -interaction=nonstopmode -pdf  
          \ % <CR>
 map  <Leader>v  :!/Applications/Skim.app/Contents/SharedSupport/displayline
                 \ <C-R>=line('.')<CR>  "%:p:h/document.pdf" 
                 \ "%:p"<CR><CR>
-"imap <silent> <D-4> <Esc>:silent
-                "\ !/Applications/Skim.app/Contents/SharedSupport/displayline
-                "\ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>"
-                "\ "%:p" <CR>
 "let g:LatexBox_latexmk_options="-pdflatex='pdflatex -interaction=nonstopmode -synctex=1 \%O \%S'"
 "let g:LatexBox_latexmk_async=1
 "let g:LatexBox_latexmk_preview_continuously=1
@@ -454,5 +416,5 @@ map  <Leader>v  :!/Applications/Skim.app/Contents/SharedSupport/displayline
 "let g:LatexBox_ignore_warnings = ['Package pgfplots Warning']
 " autocmd FileType tex call Tex_SetTeXCompilerTarget('View','pdf') 
 "let tlist_tex_settings   = 'latex;s:sections;g:graphics;l:labels'
-let tlist_make_settings  = 'make;m:makros;t:targets'
+"let tlist_make_settings  = 'make;m:makros;t:targets'
 
