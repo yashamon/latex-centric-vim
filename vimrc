@@ -21,7 +21,7 @@ autocmd Colorscheme * highlight FoldColumn guifg=black guibg=bg
    "autocmd InsertEnter <buffer> set fo+=a
    "autocmd InsertLeave <buffer> set fo-=a
  "augroup END"augroup END
-au Filetype set iskeyword=48-58,a-z,A-Z,192-255  "note these are not default so be careful with files other than .tex
+au Filetype tex set iskeyword=48-58,a-z,A-Z,192-255  
 set guioptions-=r 
 set guioptions-=l
 set nocompatible	" not compatible with the old-fashion vi mode
@@ -389,7 +389,7 @@ map <silent> <Leader>l  :silent !latexmk -pdflatex='pdflatex -file-line-error -s
        \ -interaction=nonstopmode -pdf  
          \ %<CR>
 "forward search
-map  <Leader>v  :!/Applications/Skim.app/Contents/SharedSupport/displayline
+map  <silent> <Leader>v  :silent !/Applications/Skim.app/Contents/SharedSupport/displayline
                 \ <C-R>=line('.')<CR>  "%:p:h/document.pdf" 
                 \ "%:p"<CR>
 "let g:LatexBox_latexmk_options="-pdflatex='pdflatex -interaction=nonstopmode -synctex=1 \%O \%S'"
@@ -402,3 +402,7 @@ map  <Leader>v  :!/Applications/Skim.app/Contents/SharedSupport/displayline
 "let tlist_tex_settings   = 'latex;s:sections;g:graphics;l:labels'
 "let tlist_make_settings  = 'make;m:makros;t:targets'
 
+ 
+"vmail
+let g:gmail_user_name = 'yashasavelyev@gmail.com' 
+source ~/.anyname

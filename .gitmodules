@@ -58,3 +58,6 @@
 [submodule "bundle/vmail"]
 	path = bundle/vmail
 	url = https://github.com/yuratomo/gmail.vim.git
+[submodule "bundle/vimproc"]
+	path = bundle/vimproc
+	url = https://github.com/Shougo/vimproc.vim.git
