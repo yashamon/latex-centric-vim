@@ -55,3 +55,6 @@
 [submodule "bundle/tComment"]
 	path = bundle/tComment
 	url = https://github.com/vim-scripts/tComment.git
+[submodule "bundle/vmail"]
+	path = bundle/vmail
+	url = https://github.com/yuratomo/gmail.vim.git
