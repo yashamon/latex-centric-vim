@@ -1,10 +1,9 @@
 
-"set nocp
 call pathogen#infect()
 syntax on
 filetype plugin indent on
 
-" General Settings
+"  General Settings
 if has("gui_running")
   set fuoptions=maxvert,maxhorz
   au GUIEnter * set fullscreen
@@ -12,10 +11,9 @@ if has("gui_running")
   set formatoptions=ant
   set textwidth=80
   set wrapmargin=0
+  set nohlsearch
   highlight SignColumn guibg=bg
       endif    
-
-      "Autocommands 
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview
 autocmd Colorscheme * highlight FoldColumn guifg=black guibg=bg
@@ -23,9 +21,7 @@ autocmd Colorscheme * highlight FoldColumn guifg=black guibg=bg
    "autocmd InsertEnter <buffer> set fo+=a
    "autocmd InsertLeave <buffer> set fo-=a
  "augroup END"augroup END
-
-
-set iskeyword=45,48-58,a-z,A-Z,192-255  "note these are not default so be careful with files other than .tex
+au Filetype set iskeyword=48-58,a-z,A-Z,192-255  "note these are not default so be careful with files other than .tex
 set guioptions-=r 
 set guioptions-=l
 set nocompatible	" not compatible with the old-fashion vi mode
@@ -38,24 +34,13 @@ set ruler		" show the cursor position all the time
 set autoread		" auto read when file is changed from outside
 set nohlsearch
 
- 
-
-
-
-
-"filetype off          " necessary to make ftdetect work on Linux
-syntax on
-filetype on           " Enable filetype detection 
-filetype indent on    " Enable filetype-specific indenting
-filetype plugin on    " Enable filetype-specific plugins
-
 
 " auto reload vimrc when editing it
 autocmd! bufwritepost .vimrc source ~/.vimrc
 
 
 syntax on		" syntax highlight
-set hlsearch		" search highlighting
+" set hlsearch		" search highlighting
 
 if has("gui_running")	" GUI color and font settings
   set guifont=Source\ Code\ Pro:h18
@@ -63,10 +48,6 @@ if has("gui_running")	" GUI color and font settings
   "set vimroom_background=dark
   set t_Co=256          " 256 color mode
 "  set cursorline        " highlight current line
-  "colorscheme ir_black  
-  
-"let moria_monochrome = 1  
- "colorscheme moria
  colorscheme grey 
   highlight CursorLine          guibg=#003853 ctermbg=24  gui=none cterm=none
 else
@@ -339,7 +320,8 @@ let g:UltiSnipsJumpForwardTrigger="<D-j>"
  "nnoremap z= =  
  "nnoremap A A<Space>
  nnoremap <Backspace> i<Backspace><Esc> 
- map <D-/> <Leader>c<Space> 
+ ""map <D-/> <Leader>c<Space>
+ map <D-/> <Leader>__
  nmap ` ~
  nmap 1 <C-o>
  nmap 2 <C-i>
@@ -383,33 +365,35 @@ hi MatchParen guibg=NONE guifg=green gui=NONE
 
 nnoremap <D-e> :let g:ctrlp_match_window =
          \ 'bottom,order:btt,min:1,max:1000,results:1000'<CR>:CtrlPTag<CR>
-"autocmd VimEnter let g:ctrlp_match_window =
-"'bottom,order:btt,min:1,max:10000,results:10000'
 map <D-t> :cd /users/yashasavelyev/GoogleDrive/workspace<CR>:CommandT<CR>
-"map <D-e> :cd /users/yashasavelyev/GoogleDrive/workspace<CR>:CommandT<CR>
 imap <D-t> <Esc>:cd /users/yashasavelyev/GoogleDrive/workspace<CR>:CommandT<CR>
-"CtrlP /users/yashasavelyev/GoogleDrive/workspace<cr>
 
-" You complete me
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_auto_trigger = 0 
-set tags=~/GoogleDrive/workspace/tags 
-set tags=~/GoogleDrive/workspace/tagstest 
-set tags+=/usr/local/texlive/texmf-local/bibtex/bib/local/tags
+" YouCompleteMe not using this plugin at the moment
+   " let g:ycm_collect_identifiers_from_tags_files = 1
+   " let g:ycm_auto_trigger = 0 
+   " set tags=~/GoogleDrive/workspace/tags 
+   " set tags=~/GoogleDrive/workspace/tagstest 
+   " set tags+=/usr/local/texlive/texmf-local/bibtex/bib/local/tags
+   "let g:ycm_key_invoke_completion = ''
+   "let g:ycm_key_invoke_completion = '<D-5>'
+   " Latex shortcuts
 
-"let g:ycm_key_invoke_completion = ''
-             
-"let g:ycm_key_invoke_completion = '<D-5>'
-" Latex shortcuts
-
+    
+   "Latex compile. The first if a fall back in case something goes wrong with latexmk, which is
+   "still kinda buggy. Alternatively run latexmk command directly from terminal
+   "as this is more reliable.
+   
+map <silent> <Leader>s :silent !pdflatex -file-line-error -synctex=1  -interaction=nonstopmode -recorder
+         \ %<CR>
 map <silent> <Leader>l  :silent !latexmk -pdflatex='pdflatex -file-line-error -synctex=1'  
        \ -interaction=nonstopmode -pdf  
-         \ % <CR>
+         \ %<CR>
+"forward search
 map  <Leader>v  :!/Applications/Skim.app/Contents/SharedSupport/displayline
                 \ <C-R>=line('.')<CR>  "%:p:h/document.pdf" 
-                \ "%:p"<CR><CR>
+                \ "%:p"<CR>
 "let g:LatexBox_latexmk_options="-pdflatex='pdflatex -interaction=nonstopmode -synctex=1 \%O \%S'"
-"let g:LatexBox_latexmk_async=1
+" let g:LatexBox_latexmk_async=1
 "let g:LatexBox_latexmk_preview_continuously=1
 "let g:LatexBox_quickfix=2
 "let g:LatexBox_show_warnings=0
