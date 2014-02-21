@@ -64,3 +64,6 @@
 [submodule "/Users/yashasavelyev/.vim/bundle/autotag"]
 	path = /Users/yashasavelyev/.vim/bundle/autotag
 	url = https://github.com/vim-scripts/AutoTag.git
+[submodule "bundle/easytags"]
+	path = bundle/easytags
+	url = https://github.com/xolox/vim-easytags.git
