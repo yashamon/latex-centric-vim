@@ -61,3 +61,6 @@
 [submodule "bundle/vimproc"]
 	path = bundle/vimproc
 	url = https://github.com/Shougo/vimproc.vim.git
+[submodule "/Users/yashasavelyev/.vim/bundle/autotag"]
+	path = /Users/yashasavelyev/.vim/bundle/autotag
+	url = https://github.com/vim-scripts/AutoTag.git

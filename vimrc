@@ -68,7 +68,7 @@ set wildignore=*.o,*.class,*.pyc
 set incsearch		" incremental search
 set nobackup		" no *~ backup files
 set copyindent		" copy the previous indentation on autoindenting
-"set ignorecase		" ignore case when searching
+set ignorecase		" ignore case when searching
 set smartcase		" ignore case if search pattern is all lowercase,case-sensitive otherwise
 "set smarttab		" insert tabs on the start of a line according to context
 
@@ -316,6 +316,9 @@ let g:UltiSnipsJumpForwardTrigger="<D-j>"
  vmap ge <Leader><Leader>ge 
  nmap ] ]S
  nmap [ [S 
+
+  
+
  "nnoremap g zg
  "nnoremap z= =  
  "nnoremap A A<Space>
@@ -379,19 +382,17 @@ imap <D-t> <Esc>:cd /users/yashasavelyev/GoogleDrive/workspace<CR>:CommandT<CR>
    " Latex shortcuts
 
     
-   "Latex compile. The first if a fall back in case something goes wrong with latexmk, which is
-   "still kinda buggy. Alternatively run latexmk command directly from terminal
-   "as this is more reliable.
+   "Latex compile. For various reasons I prefer to echo these so that i can
+   "them to an external terminal and run there. One can also combine and run in
+   "vim terminal.
    
-map <silent> <Leader>s :silent !pdflatex -file-line-error -synctex=1  -interaction=nonstopmode -recorder
-         \ %<CR>
-map <silent> <Leader>l  :silent !latexmk -pdflatex='pdflatex -file-line-error -synctex=1'  
-       \ -interaction=nonstopmode -pdf  
-         \ %<CR>
-"forward search
-map  <silent> <Leader>v  :silent !/Applications/Skim.app/Contents/SharedSupport/displayline
-                \ <C-R>=line('.')<CR>  "%:p:h/document.pdf" 
-                \ "%:p"<CR>
+map <Leader>l :!echo latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder<CR>
+    \ :!echo %:p:h/document.tex<CR>
+map <Leader>s :!echo  latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder<CR>
+"forward search on os X
+map <silent> <Leader>v :silent !/Applications/Skim.app/Contents/SharedSupport/displayline
+                \ <C-R>=line('.')<CR>  ~/GoogleDrive/workspace/%:h/document.pdf
+                \ ~/GoogleDrive/workspace/%<CR>
 "let g:LatexBox_latexmk_options="-pdflatex='pdflatex -interaction=nonstopmode -synctex=1 \%O \%S'"
 " let g:LatexBox_latexmk_async=1
 "let g:LatexBox_latexmk_preview_continuously=1
@@ -403,6 +404,3 @@ map  <silent> <Leader>v  :silent !/Applications/Skim.app/Contents/SharedSupport/
 "let tlist_make_settings  = 'make;m:makros;t:targets'
 
  
-"vmail
-let g:gmail_user_name = 'yashasavelyev@gmail.com' 
-source ~/.anyname
