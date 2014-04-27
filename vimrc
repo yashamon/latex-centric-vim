@@ -21,7 +21,7 @@ autocmd Colorscheme * highlight FoldColumn guifg=black guibg=bg
    "autocmd InsertEnter <buffer> set fo+=a
    "autocmd InsertLeave <buffer> set fo-=a
  "augroup END"augroup END
-au Filetype tex set iskeyword=48-58,a-z,A-Z,192-255  
+let g:tex_isk = '@,48-57,58,_,192-255'
 set guioptions-=r 
 set guioptions-=l
 set nocompatible	" not compatible with the old-fashion vi mode
@@ -29,7 +29,7 @@ set bs=2		" allow backspacing over everything in insert mode
 set undofile                " Save undo's after file closes
 set undodir=/users/yashasavelyev/.vim/undo " where to save undo histories
 set undolevels=100000         " How many undos
-set undoreload=10000		" keep 50 lines of command line history
+set undoreload=10000		
 set ruler		" show the cursor position all the time
 set autoread		" auto read when file is changed from outside
 set nohlsearch
@@ -280,42 +280,42 @@ let g:UltiSnipsJumpForwardTrigger="<D-j>"
 " KeyMaps for movement, other Remaps 
  
 
- map f <leader><leader>f
+ map f /
+ map F ?
  map t <leader><leader>t
  map T <leader><leader>T
- noremap m /
- map F  <leader><leader>F
+"  map F  <leader><leader>F
  "vmap f <leader><leader>f     
- "map M ?
  "vmap <leader><leader>F
  
  "nmap F ?  nnoremap v/ ?
+ map 9 $
  nmap j gj
  nmap k gk
- noremap <Space> /<Space><enter>
+ noremap <Space> .
  noremap <S-Space> ?<Space><enter>
  "vnoremap <Space> /<Space><enter>
- "vnoremap <S-Space> ?<Space><enter>
- inoremap <CR> <Space><CR>
+ "vnoremap <S-Space> <CR> <Space><CR>
 
  nmap <S-h> v<Left>T<Space>ad
  nmap <S-l> vt<Space>ad
  "imap <D-Space> <C-X><C-o>
- imap <C-s> <Esc>:w<CR>
+"  imap <C-s> <Esc>:w<CR>
  "nunmap w
  "map ' "
  "map " '
  "map
- nmap w <leader><leader>w
- vmap w <leader><leader>w
- nmap b <Leader><Leader>b
- vmap b <Leader><Leader>b
- nmap e <Leader><Leader>e
- vmap e <Leader><Leader>e
- nmap ge <Leader><Leader>ge
- vmap ge <Leader><Leader>ge 
+"  nmap w <leader><leader>w
+"  vmap w <leader><leader>w
+"  nmap b <Leader><Leader>b
+"  vmap b <Leader><Leader>b
+"  nmap e <Leader><Leader>e
+"  vmap e <Leader><Leader>e
+"  nmap ge <Leader><Leader>ge
+"  vmap ge <Leader><Leader>ge 
  nmap ] ]S
  nmap [ [S 
+
 
   
 
@@ -324,10 +324,13 @@ let g:UltiSnipsJumpForwardTrigger="<D-j>"
  "nnoremap A A<Space>
  nnoremap <Backspace> i<Backspace><Esc> 
  ""map <D-/> <Leader>c<Space>
+"  nnoremap / /\$<CR>
+"  nnoremap ? ?\$<CR>
  map <D-/> <Leader>__
  nmap ` ~
  nmap 1 <C-o>
  nmap 2 <C-i>
+ nmap <S-CR> k$
  noremap <Leader>1 :buffer 1<CR>
 nnoremap <silent> <Leader>b :CommandTBuffer<CR>
  noremap <Leader>2 :buffer 2<CR>
@@ -344,10 +347,29 @@ nnoremap <silent> <Leader>y :YRGetElem<CR>
 map ' "
 inoremap <D-]> <C-x><C-]>
 inoremap <C-]> <C-x><C-]>
+" map <D-s> <Esc>:w<CR> :silent ! /usr/local/bin/ctags -R<CR>
+" map <C-s> <Esc>:w<CR> :silent ! /usr/local/bin/ctags -R<CR>
+" Auto updating Ctags
+function! DelTagOfFile(file)
+  let fullpath = a:file
+  let cwd = getcwd()
+  let tagfilename = cwd . "/tags"
+  let f = substitute(fullpath, cwd . "/", "", "")
+  let f = escape(f, './')
+  let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
+  let resp = system(cmd)
+endfunction
 
-
-
-
+function! UpdateTags()
+  let f = expand("%:p")
+  let cwd = getcwd()
+  let tagfilename = cwd . "/tags"
+  let cmd = '/usr/local/bin/ctags -a -f ' . tagfilename . ' --fields=+iaS --extra=+q ' . '"' . f . '"'
+  call DelTagOfFile(f)
+  let resp = system(cmd)
+endfunction
+autocmd BufWritePost * call UpdateTags()
+autocmd VimLeave * exe ":silent ! /usr/local/bin/ctags -R"
  
 
 "Nerd Tree
@@ -363,7 +385,7 @@ hi MatchParen guibg=NONE guifg=green gui=NONE
         noremap <Leader>u :UndotreeToggle<CR>
         " If undotree is opened, it is likely one wants to interact with it.
         let g:undotree_SetFocusWhenToggle=1
-        "noremap <D-z> :UndotreeToggle<CR> 
+        noremap <D-z> :UndotreeToggle<CR> 
     " }
 
 nnoremap <D-e> :let g:ctrlp_match_window =
@@ -383,14 +405,13 @@ imap <D-t> <Esc>:cd /users/yashasavelyev/GoogleDrive/workspace<CR>:CommandT<CR>
 
     
    "Latex compile. For various reasons I prefer to echo these so that i can
-   "them to an external terminal and run there. One can also combine and run in
-   "vim terminal.
+   "them to an external terminal and run there.
    
 map <Leader>l :!echo latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder<CR>
     \ :!echo %:p:h/document.tex<CR>
 map <Leader>s :!echo  latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder<CR>
 "forward search on os X
-map <silent> <Leader>v :silent !/Applications/Skim.app/Contents/SharedSupport/displayline
+map <silent> <Leader>v :w<CR>:silent !/Applications/Skim.app/Contents/SharedSupport/displayline
                 \ <C-R>=line('.')<CR>  ~/GoogleDrive/workspace/%:h/document.pdf
                 \ ~/GoogleDrive/workspace/%<CR>
 "let g:LatexBox_latexmk_options="-pdflatex='pdflatex -interaction=nonstopmode -synctex=1 \%O \%S'"
@@ -402,5 +423,6 @@ map <silent> <Leader>v :silent !/Applications/Skim.app/Contents/SharedSupport/di
 " autocmd FileType tex call Tex_SetTeXCompilerTarget('View','pdf') 
 "let tlist_tex_settings   = 'latex;s:sections;g:graphics;l:labels'
 "let tlist_make_settings  = 'make;m:makros;t:targets'
-
+" let g:easytags_cmd = '/usr/local/bin/ctags'
+"  let g:easytags_events = ['BufWritePost']
  
