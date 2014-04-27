@@ -76,3 +76,6 @@
 [submodule "bundle/ultisnippps"]
 	path = bundle/ultisnippps
 	url = https://github.com/SirVer/ultisnips.git
+[submodule "bundle/ulti"]
+	path = bundle/ulti
+	url = https://github.com/SirVer/ultisnips.git
