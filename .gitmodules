@@ -70,6 +70,3 @@
 [submodule "bundle/yank"]
 	path = bundle/yank
 	url = https://github.com/vim-scripts/YankRing.vim.git
-[submodule "bundle/ultisnipps"]
-	path = bundle/ultisnipps
-	url = https://github.com/SirVer/ultisnips.git
