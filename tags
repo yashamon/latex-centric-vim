@@ -107,7 +107,6 @@ $ıÀÃã5Å_–ÀeˇˇˇˇÕÕVS,æı Ãåâfor the pull-back. We need to un
 (this can be made canonical by  5Å_–ÂÁÊ$ˇˇˇˇÌVS6ˆUı˙Fcontraction of	undo/%Users%yashasavelyev%GoogleDrive%workspace%lalonde%document.tex	/^/;"	m
 ) such5Å_–oqpè"ˇˇˇˇ1?2EVESıéêçH As mentioned we need to specify  lex of	undo/%Users%yashasavelyev%GoogleDrive%workspace%GlobalFukaya%document.tex	/^/;"	m
 ), and such foliations are all diffeomorphic to each0other. Given a metric $met$ on	undo/%Users%yashasavelyev%GoogleDrive%workspace%GlobalFukaya%document.tex	/^a leaf is /;"	m
-+=	bundle/autotag/plugin/autotag.vim	/^            cmd += " '%s'" % source$/;"	m
 ,	bundle/vim-easymotion/t/easymotion_spec.vim	/^        map , <Plug>(easymotion-prev)$/;"	m
 ,	bundle/vim-easymotion/t/easymotion_spec.vim	/^        normal ,$/;"	m
 ,	undo/%Users%yashasavelyev%GoogleDrive%workspace%GlobalFukaya%document.tex	/^/;"	m
@@ -516,8 +515,6 @@ $ıÀÃã5Å_–ÀeˇˇˇˇÕÕVS,æı Ãåâfor the pull-back. We need to un
 <SID>yrrecord	bundle/yank/plugin/yankring.vim	/^nnoremap <silent> <SID>yrrecord :call YRRecord3()<cr>$/;"	m
 <c-x>	bundle/supertab/plugin/supertab.vim	/^  imap <silent> <c-x> <c-r>=<SID>ManualCompletionEnter()<cr>$/;"	m
 <cr>	bundle/supertab/plugin/supertab.vim	/^      inoremap <silent> <cr> <c-r>=<SID>SelectCompletion(1)<cr>$/;"	m
-=	bundle/autotag/plugin/autotag.vim	/^         cmd = "%s -a " % (self.ctags_cmd,)$/;"	m
-=	bundle/autotag/plugin/autotag.vim	/^         cmd = "%s -f %s -a " % (self.ctags_cmd, self.tags_file)$/;"	m
 =0A=20=20=20=20=20=20\int_0^1=20(\max_M=20H_t=20-=20\min_M=20H_t)=20=Ldt.=0A=20=20=20=20=20=20	undo/%Users%yashasavelyev%GoogleDrive%workspace%Francois%Francois---copie.tex	/^VimüUnDoÂ/;"	m
 A \mapsto NA$ determines a5Å_–# è4ˇˇˇˇHvR)¨ıéêé4the maps	undo/%Users%yashasavelyev%GoogleDrive%workspace%GlobalFukaya%document.tex	/^/;"	m
 A \to C$ in	undo/%Users%yashasavelyev%GoogleDrive%workspace%GlobalFukaya%document.tex	/^/;"	m
@@ -547,8 +544,6 @@ Anon_Trigger_Multi	bundle/ultisnips/test.py	/^class Anon_Trigger_Multi(_AnonBase
 Anon_Trigger_Opts	bundle/ultisnips/test.py	/^class Anon_Trigger_Opts(_AnonBase):$/;"	c
 Anon_Trigger_Simple	bundle/ultisnips/test.py	/^class Anon_Trigger_Simple(_AnonBase):$/;"	c
 Anon_Trigger_Twice	bundle/ultisnips/test.py	/^class Anon_Trigger_Twice(_AnonBase):$/;"	c
-AutoTag	bundle/autotag/plugin/autotag.vim	/^function! AutoTag()$/;"	f
-AutoTagDebug	bundle/autotag/plugin/autotag.vim	/^function! AutoTagDebug()$/;"	f
 BINDIR	bundle/command-t/ruby/command-t/Makefile	/^BINDIR        = $(DESTDIR)$(bindir)$/;"	m
 BRACES	bundle/ultisnips/test.py	/^    BRACES = re.compile("([}{])")$/;"	v	class:VimInterfaceWindows
 BS	bundle/ultisnips/test.py	/^BS = '\\x7f'$/;"	v
@@ -2425,7 +2420,6 @@ autocmds	bundle/ctrlp/autoload/ctrlp.vim	/^fu! s:autocmds()$/;"	f
 autoload/vimproc_win32.dll	bundle/vimproc/make_msvc32.mak	/^autoload\/vimproc_win32.dll: autoload\/proc_w32.c autoload\/vimstack.c$/;"	t
 autoload/vimproc_win64.dll	bundle/vimproc/make_msvc64.mak	/^autoload\/vimproc_win64.dll: autoload\/proc_w32.c autoload\/vimstack.c$/;"	t
 autoload\$(VIMPROC).dll	bundle/vimproc/make_msvc.mak	/^autoload\\$(VIMPROC).dll: $(OBJS)$/;"	t
-autotag	bundle/autotag/plugin/autotag.vim	/^augroup autotag$/;"	a
 b	bundle/ultisnips/plugin/UltiSnips/tests/test_diff.py	/^    b = "hi first line\\nsecond line k world"$/;"	v	class:MultiLine
 b	bundle/ultisnips/plugin/UltiSnips/tests/test_diff.py	/^    b = "s"$/;"	v	class:MatchIsTooCheap
 b	bundle/ultisnips/plugin/UltiSnips/tests/test_diff.py	/^    b = "this is it a this is it"$/;"	v	class:TestUltiSnipsProblem
@@ -2947,7 +2941,6 @@ figuregeodsegm	undo/%Users%yashasavelyev%GoogleDrive%workspace%GlobalFukaya%docu
 file	bundle/vimproc/vest/test-fopen.vim	/^  let file = vimproc#fopen(filename, 'O_RDONLY', 0)$/;"	v
 file_finder	bundle/command-t/ruby/command-t/controller.rb	/^    def file_finder$/;"	f	class:CommandT.Controller.quickfix.ensure_appropriate_window_selection
 file_to_edit	bundle/ultisnips/plugin/UltiSnips/__init__.py	/^    def file_to_edit(self, ft):$/;"	m	class:SnippetManager
-fileinput	bundle/autotag/plugin/autotag.vim	/^import fileinput$/;"	m
 filename	bundle/easytags/misc/easytags/why-so-slow.py	/^    filename = filename.replace(os.environ['HOME'], '~')$/;"	v
 filename	bundle/easytags/misc/easytags/why-so-slow.py	/^  filename = fields[1]$/;"	v
 filename	bundle/vimproc/vest/test-fopen.vim	/^  let filename = expand('<sfile>')$/;"	v
@@ -3095,7 +3088,6 @@ g:UltiSnipsUsePythonVersion	bundle/ultisnips/plugin/UltiSnips.vim	/^    let g:Ul
 g:_uspy	bundle/ultisnips/plugin/UltiSnips.vim	/^        let g:_uspy=":py "$/;"	v
 g:_uspy	bundle/ultisnips/plugin/UltiSnips.vim	/^        let g:_uspy=":py3 "$/;"	v
 g:_uspy	bundle/ultisnips/plugin/UltiSnips.vim	/^    let g:_uspy=":py3 "$/;"	v
-g:autotag_vim_version_sourced	bundle/autotag/plugin/autotag.vim	/^let g:autotag_vim_version_sourced=s:autotag_vim_version$/;"	v
 g:clever_f_use_migemo	bundle/vim-easymotion/t/easymotion_spec.vim	/^        let g:clever_f_use_migemo = 0$/;"	v
 g:colors_name	bundle/very-monochrome-grey-theme/colors/grey.vim	/^let g:colors_name="grey"$/;"	v
 g:colors_name	bundle/vim-monochrome/colors/monochrome.vim	/^let g:colors_name = 'monochrome'$/;"	v
@@ -4072,7 +4064,6 @@ localstatedir	bundle/command-t/ruby/command-t/Makefile	/^localstatedir = $(prefi
 lock	bundle/command-t/ruby/command-t/match_window.rb	/^    def lock$/;"	f	class:CommandT.MatchWindow.match_with_syntax_highlight
 log	bundle/ctrlp/autoload/ctrlp.vim	/^fu! s:log(m)$/;"	f
 log	bundle/undotree/plugin/undotree.vim	/^function! s:log(msg)$/;"	f
-logging	bundle/autotag/plugin/autotag.vim	/^import logging$/;"	m
 logout	bundle/vmail/autoload/gmail/imap.vim	/^function! s:logout()$/;"	f
 looped_symlink?	bundle/command-t/ruby/command-t/scanner/file_scanner.rb	/^    def looped_symlink? path$/;"	f	class:CommandT.FileScanner
 lsCmd	bundle/ctrlp/autoload/ctrlp.vim	/^fu! s:lsCmd()$/;"	f
@@ -4326,7 +4317,6 @@ optparse	bundle/ultisnips/test.py	/^    import optparse$/;"	i
 opts	bundle/ctrlp/autoload/ctrlp.vim	/^fu! s:opts(...)$/;"	f
 ordered_matches	bundle/command-t/spec/command-t/matcher_spec.rb	/^    def ordered_matches(paths, query)$/;"	f
 origin	bundle/vim-easymotion/t/easymotion_spec.vim	/^        let origin = CursorPos()$/;"	v
-os	bundle/autotag/plugin/autotag.vim	/^import os$/;"	m
 os	bundle/easytags/misc/easytags/normalize-tags.py	/^import os, sys, time$/;"	i
 os	bundle/easytags/misc/easytags/why-so-slow.py	/^import os, sys$/;"	i
 os	bundle/ultisnips/plugin/UltiSnips/__init__.py	/^import os$/;"	i
@@ -4340,7 +4330,6 @@ os	bundle/ultisnips/test.py	/^import os$/;"	i
 os	bundle/ultisnips/utils/convert_snipmate_snippets.py	/^import os$/;"	i
 os	bundle/ultisnips/utils/get_tm_snippets.py	/^import os$/;"	i
 os	bundle/vimproc/tools/fork.py	/^import os$/;"	i
-os.path	bundle/autotag/plugin/autotag.vim	/^import os.path$/;"	m
 out	bundle/vimproc/vest/test-socket.vim	/^    let out = sock.read(-1, 100)$/;"	v
 out	bundle/vimproc/vest/test-socket.vim	/^  let out = sock.read(-1, 100)$/;"	v
 output	bundle/ultisnips/test.py	/^    output = None$/;"	v	class:_VimTest
@@ -4585,7 +4574,6 @@ s:TreeFileNode	bundle/nerdtree/lib/nerdtree/tree_file_node.vim	/^let s:TreeFileN
 s:aliases	bundle/easytags/autoload/xolox/easytags.vim	/^let s:aliases = {}$/;"	v
 s:ars	bundle/ctrlp/autoload/ctrlp/dir.vim	/^let s:ars = ['s:maxdepth', 's:maxfiles', 's:compare_lim', 's:glob', 's:caching']$/;"	v
 s:auEvents	bundle/undotree/plugin/undotree.vim	/^let s:auEvents = "BufEnter,InsertLeave,CursorMoved,BufWritePost"$/;"	v
-s:autotag_vim_version	bundle/autotag/plugin/autotag.vim	/^let s:autotag_vim_version=1$/;"	v
 s:base	bundle/vim-easymotion/autoload/vital/_easymotion/Over/Commandline.vim	/^let s:base = {$/;"	v
 s:bg_processes	bundle/vimproc/autoload/vimproc.vim	/^let s:bg_processes = {}$/;"	v
 s:bins	bundle/ctrlp/autoload/ctrlp/buffertag.vim	/^let s:bins = [$/;"	v
@@ -5270,7 +5258,6 @@ stereo_r$. To define tifying the $r$ level sets for	undo/%Users%yashasavelyev%Go
 stereo_r$. To define ying the $r$ level sets for	undo/%Users%yashasavelyev%GoogleDrive%workspace%GlobalFukaya%document.tex	/^/;"	m
 str2hd	bundle/vimproc/autoload/vimproc.vim	/^function! s:str2hd(str)$/;"	f
 str2list	bundle/vimproc/autoload/vimproc.vim	/^function! s:str2list(str)$/;"	f
-string	bundle/autotag/plugin/autotag.vim	/^import string$/;"	m
 string	bundle/ultisnips/plugin/UltiSnips/text_objects/_lexer.py	/^import string$/;"	i
 string	bundle/ultisnips/plugin/UltiSnips/text_objects/_python_code.py	/^        self._code = "import re, os, vim, string, random\\n" + code$/;"	i
 structure on	undo/%Users%yashasavelyev%GoogleDrive%workspace%GlobalFukaya%document.tex	/^% % stable/;"	m
@@ -5287,7 +5274,6 @@ subject to the constraint that area of	undo/%Users%yashasavelyev%GoogleDrive%wor
 subject to the constraint that area of $C$ is5Å_–Ü,ˇˇˇˇÑÑvR›øìıÖáû_  may minimize the length of	undo/%Users%yashasavelyev%GoogleDrive%workspace%misha_epsilonball2%document.tex	/^/;"	m
 sublist	bundle/ctrlp/autoload/ctrlp.vim	/^fu! s:sublist(l, s, e)$/;"	f
 sublist7071	bundle/ctrlp/autoload/ctrlp.vim	/^fu! s:sublist7071(l, s, e)$/;"	f
-subprocess	bundle/autotag/plugin/autotag.vim	/^   import subprocess$/;"	m
 subprocess	bundle/ultisnips/plugin/UltiSnips/text_objects/_shell_code.py	/^import subprocess$/;"	i
 subprocess	bundle/ultisnips/test.py	/^import subprocess$/;"	i
 such that for $i5Å_–—“Œ9ˇˇˇˇ√ÃÕ$v$S&Î$ıÕœÈM	undo/%Users%yashasavelyev%GoogleDrive%workspace%GlobalFukaya%document.tex	/^/;"	m
@@ -5301,7 +5287,6 @@ syntax	bundle/ctrlp/autoload/ctrlp/line.vim	/^fu! s:syntax()$/;"	f
 syntax	bundle/ctrlp/autoload/ctrlp/quickfix.vim	/^fu! s:syntax()$/;"	f
 syntax	bundle/ctrlp/autoload/ctrlp/tag.vim	/^fu! s:syntax()$/;"	f
 syntax	bundle/ctrlp/autoload/ctrlp/undo.vim	/^fu! s:syntax()$/;"	f
-sys	bundle/autotag/plugin/autotag.vim	/^import sys$/;"	m
 sys	bundle/easytags/misc/easytags/highlight.py	/^import sys$/;"	i
 sys	bundle/easytags/misc/easytags/normalize-tags.py	/^import os, sys, time$/;"	i
 sys	bundle/easytags/misc/easytags/why-so-slow.py	/^import os, sys$/;"	i
@@ -5423,7 +5408,6 @@ thread_args_t	bundle/command-t/ruby/command-t/matcher.c	/^} thread_args_t;$/;"	t
 thread_count	bundle/command-t/ruby/command-t/matcher.c	/^    int thread_count;$/;"	m	struct:__anon3	file:
 thread_index	bundle/command-t/ruby/command-t/matcher.c	/^    int thread_index;$/;"	m	struct:__anon3	file:
 ticular 0-simplex of	undo/%Users%yashasavelyev%GoogleDrive%workspace%GlobalFukaya%document.tex	/^/;"	m
-time	bundle/autotag/plugin/autotag.vim	/^import time$/;"	m
 time	bundle/easytags/misc/easytags/normalize-tags.py	/^import os, sys, time$/;"	i
 time	bundle/ultisnips/test.py	/^import time$/;"	i
 time	bundle/vimproc/tools/fork.py	/^import time$/;"	i
@@ -5440,7 +5424,6 @@ top	bundle/vimproc/autoload/vimstack.c	/^    char *top;   \/* stack top *\/$/;"	
 topdir	bundle/command-t/ruby/command-t/Makefile	/^topdir = \/Applications\/Xcode.app\/Contents\/Developer\/Platforms\/MacOSX.platform\/Developer\/SDKs\/MacOSX10.9.sdk\/System\/Library\/Frameworks\/Ruby.framework\/Versions\/2.0\/usr\/include\/ruby-2.0.0$/;"	m
 topfiles	bundle/easytags/misc/easytags/why-so-slow.py	/^    topfiles = int(arg)$/;"	v
 topfiles	bundle/easytags/misc/easytags/why-so-slow.py	/^topfiles = 10$/;"	v
-traceback	bundle/autotag/plugin/autotag.vim	/^   import traceback$/;"	m
 traceback	bundle/ultisnips/plugin/UltiSnips/__init__.py	/^import traceback$/;"	i
 traceback	bundle/ultisnips/plugin/UltiSnips/debug.py	/^    import traceback$/;"	i
 transform	bundle/ultisnips/plugin/UltiSnips/tests/test_diff.py	/^def transform(a, cmds):$/;"	f
@@ -5548,7 +5531,6 @@ vendordir	bundle/command-t/ruby/command-t/Makefile	/^vendordir = $(rubylibprefix
 vendorhdrdir	bundle/command-t/ruby/command-t/Makefile	/^vendorhdrdir = $(rubyhdrdir)\/vendor_ruby$/;"	m
 vendorlibdir	bundle/command-t/ruby/command-t/Makefile	/^vendorlibdir = $(vendordir)\/$(ruby_version)$/;"	m
 vfha	bundle/vim-easymotion/t/easymotion_spec.vim	/^        normal vfha$/;"	m
-vim	bundle/autotag/plugin/autotag.vim	/^import vim$/;"	m
 vim	bundle/easytags/misc/easytags/highlight.py	/^import vim$/;"	i
 vim	bundle/ultisnips/plugin/UltiSnips/_vim.py	/^import vim$/;"	i
 vim	bundle/ultisnips/plugin/UltiSnips/compatibility.py	/^import vim$/;"	i
