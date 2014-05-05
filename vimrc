@@ -10,7 +10,7 @@ if has("gui_running")
    set foldcolumn=12
   set formatoptions=ant
   set textwidth=80
-  set wrapmargin=0
+  set wrapmargin=0asfap 
   set nohlsearch
   highlight SignColumn guibg=bg
       endif    
@@ -278,15 +278,22 @@ let g:UltiSnipsJumpForwardTrigger="<D-j>"
  
 
 " KeyMaps for movement, other Remaps 
- 
+" I find the default register behavior uncomfortable 
+au VIMENTER unmap p nnoremap p "0p
+nnoremap p "0p
+" nnoremap d "_d
 
+noremap w W
+noremap W w
+noremap b B
+noremap B b
  map f /
  map F ?
  map t <leader><leader>t
  map T <leader><leader>T
-"  map F  <leader><leader>F
- "vmap f <leader><leader>f     
- "vmap <leader><leader>F
+  " map F  <leader><leader>F
+"  map f <leader><leader>f
+"  vmap <leader><leader>F
  
  "nmap F ?  nnoremap v/ ?
  map 9 $
@@ -313,8 +320,8 @@ let g:UltiSnipsJumpForwardTrigger="<D-j>"
 "  vmap e <Leader><Leader>e
 "  nmap ge <Leader><Leader>ge
 "  vmap ge <Leader><Leader>ge 
- nmap ] ]S
- nmap [ [S 
+"  nmap ] ]S
+"  nmap [ [S 
 
 
   
@@ -385,7 +392,7 @@ hi MatchParen guibg=NONE guifg=green gui=NONE
         noremap <Leader>u :UndotreeToggle<CR>
         " If undotree is opened, it is likely one wants to interact with it.
         let g:undotree_SetFocusWhenToggle=1
-        noremap <D-z> :UndotreeToggle<CR> 
+        noremap <D-z> u
     " }
 
 nnoremap <D-e> :let g:ctrlp_match_window =
