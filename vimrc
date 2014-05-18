@@ -10,7 +10,7 @@ if has("gui_running")
    set foldcolumn=12
   set formatoptions=ant
   set textwidth=80
-  set wrapmargin=0asfap 
+  set wrapmargin=0
   set nohlsearch
   highlight SignColumn guibg=bg
       endif    
@@ -33,8 +33,10 @@ set undoreload=10000
 set ruler		" show the cursor position all the time
 set autoread		" auto read when file is changed from outside
 set nohlsearch
-
-
+" set macmeta
+let g:yankstack_map_keys = 0
+nmap <leader>p <Plug>yankstack_substitute_older_paste
+  nmap <leader>P <Plug>yankstack_substitute_newer_paste
 " auto reload vimrc when editing it
 autocmd! bufwritepost .vimrc source ~/.vimrc
 
@@ -279,14 +281,21 @@ let g:UltiSnipsJumpForwardTrigger="<D-j>"
 
 " KeyMaps for movement, other Remaps 
 " I find the default register behavior uncomfortable 
-au VIMENTER unmap p nnoremap p "0p
-nnoremap p "0p
-" nnoremap d "_d
+" au VIMENTER unmap p nnoremap p "0p
+" nnoremap p "0p
+nnoremap d "dd
+vnoremap d "dd
+nnoremap D "dD
+vnoremap D "dD
+nnoremap c "dc
+vnoremap c "dc
+nnoremap C "dC
+vnoremap C "dC
 
-noremap w W
-noremap W w
-noremap b B
-noremap B b
+" noremap w W
+" noremap W w
+" noremap b B
+" noremap B b
  map f /
  map F ?
  map t <leader><leader>t
@@ -376,8 +385,8 @@ function! UpdateTags()
   let resp = system(cmd)
 endfunction
 autocmd BufWritePost * call UpdateTags()
-autocmd VimLeave * exe ":silent ! /usr/local/bin/ctags -R"
- 
+" autocmd VimLeave * exe ":silent ! /usr/local/bin/ctags -R"
+map :tags  exe ":silent ! /usr/local/bin/ctags -R"
 
 "Nerd Tree
  map <leader>e :NERDTreeFind<CR>
