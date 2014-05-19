@@ -151,9 +151,9 @@ set wmh=0                     " set the min height of a window to 0 so we can ma
 "map <S-L> gt
 
 " new tab
-map <leader>t :tabnew<CR>
+" map <leader>t :tabnew<CR>
 " close tab
-map <leader>c :tabclose<CR> 
+" map <leader>c :tabclose<CR> 
 
 " ,/ turn off search highlighting
 "nmap <leader>/ :nohl<CR>
@@ -391,7 +391,8 @@ map :tags  exe ":silent ! /usr/local/bin/ctags -R"
 "Nerd Tree
  map <leader>e :NERDTreeFind<CR>
 map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
- 
+
+let g:auto_save = 1
 
 "Highlight
 hi MatchParen cterm=underline ctermbg=none ctermfg=none
