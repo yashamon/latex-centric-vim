@@ -22,9 +22,6 @@
 [submodule "supertab"]
 	path = supertab
 	url = https://github.com/ervandew/supertab.git
-[submodule "bundle/Command-T"]
-	path = bundle/Command-T
-	url = https://github.com/wincent/Command-T.git
 [submodule "bundle/ctrlp"]
 	path = bundle/ctrlp
 	url = https://github.com/kien/ctrlp.vim.git
@@ -76,3 +73,6 @@
 [submodule "vim-snippetts"]
 	path = vim-snippetts
 	url = https://github.com/yashamon/vim-snippets.git
+[submodule "bundle/Commandd-T"]
+	path = bundle/Commandd-T
+	url = https://github.com/wincent/Command-T.git
