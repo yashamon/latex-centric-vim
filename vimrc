@@ -21,7 +21,9 @@ autocmd Colorscheme * highlight FoldColumn guifg=black guibg=bg
    "autocmd InsertEnter <buffer> set fo+=a
    "autocmd InsertLeave <buffer> set fo-=a
  "augroup END"augroup END
-let g:tex_isk = '@,48-57,58,_,192-255'
+"Latex related
+   let g:tex_flavor = "latex"
+   let g:tex_isk = '@,48-57,58,_,192-255'
 set guioptions-=r 
 set guioptions-=l
 set nocompatible	" not compatible with the old-fashion vi mode
@@ -48,12 +50,12 @@ if has("gui_running")	" GUI color and font settings
   set guifont=Source\ Code\ Pro:h18
   set background=light 
   "set vimroom_background=dark
-  set t_Co=256          " 256 color mode
 "  set cursorline        " highlight current line
  colorscheme grey 
   highlight CursorLine          guibg=#003853 ctermbg=24  gui=none cterm=none
 else
 " terminal color settings
+  set t_Co=256          " 256 color mode
   colors monochrome 
 endif
 
@@ -409,8 +411,29 @@ nnoremap <D-e> :let g:ctrlp_match_window =
          \ 'bottom,order:btt,min:1,max:1000,results:1000'<CR>:CtrlPTag<CR>
 map <D-t> :cd /users/yashasavelyev/GoogleDrive/workspace<CR>:CommandT<CR>
 imap <D-t> <Esc>:cd /users/yashasavelyev/GoogleDrive/workspace<CR>:CommandT<CR>
-
 " YouCompleteMe not using this plugin at the moment
+function! g:UltiSnips_Complete()
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res == 0
+        if pumvisible()
+            return "\<C-n>"
+        else
+            call UltiSnips#JumpForwards()
+            if g:ulti_jump_forwards_res == 0
+               return "\<TAB>"
+            endif
+        endif
+    endif
+    return ""
+endfunction
+
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsListSnippets="<c-e>"
+" this mapping Enter key to <C-y> to chose the current highlight item 
+" and close the selection list, same as other IDEs.
+" CONFLICT with some plugins like tpope/Endwise
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
    " let g:ycm_collect_identifiers_from_tags_files = 1
    " let g:ycm_auto_trigger = 0 
    " set tags=~/GoogleDrive/workspace/tags 
