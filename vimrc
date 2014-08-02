@@ -12,6 +12,8 @@ if has("gui_running")
   set textwidth=80
   set wrapmargin=0
   set nohlsearch
+  " set tags= ~/.tags
+  set tags+=/usr/local/texlive/texmf-local/bibtex/bib/local/tags
   highlight SignColumn guibg=bg
       endif    
 autocmd BufWinLeave *.* mkview
@@ -29,7 +31,7 @@ set guioptions-=l
 set nocompatible	" not compatible with the old-fashion vi mode
 set bs=2		" allow backspacing over everything in insert mode
 set undofile                " Save undo's after file closes
-set undodir=/users/yashasavelyev/.vim/undo " where to save undo histories
+set undodir=~/Dropbox/undo " where to save undo histories
 set undolevels=100000         " How many undos
 set undoreload=10000		
 set ruler		" show the cursor position all the time
@@ -295,17 +297,12 @@ nnoremap C "dC
 vnoremap C "dC
 " I haven't found how to hide this function (yet)
 function! RestoreRegister()
-  let @" = s:restore_reg
-  return ''
+    let @" = s:restore_reg
+    if &clipboard == "unnamed"
+        let @* = s:restore_reg
+    endif
+    return ''
 endfunction
-
-function! s:Repl()
-    let s:restore_reg = @"
-    return "p@=RestoreRegister()\<cr>"
-endfunction
-
-" NB: this supports "rp that replaces the selection by the contents of @r
-vnoremap <silent> <expr> p <sid>Repl()
 
 " noremap w W
 " noremap W w
@@ -346,10 +343,6 @@ vnoremap <silent> <expr> p <sid>Repl()
 "  vmap ge <Leader><Leader>ge 
 "  nmap ] ]S
 "  nmap [ [S 
-
-
-  
-
  "nnoremap g zg
  "nnoremap z= =  
  "nnoremap A A<Space>
@@ -380,6 +373,26 @@ inoremap <D-]> <C-x><C-]>
 inoremap <C-]> <C-x><C-]>
 " map <D-s> <Esc>:w<CR> :silent ! /usr/local/bin/ctags -R<CR>
 " map <C-s> <Esc>:w<CR> :silent ! /usr/local/bin/ctags -R<CR>
+" I haven't found how to hide this function (yet)
+" function! RestoreRegister()
+"   let @" = s:restore_reg
+"   return ''
+" endfunction
+"
+ function! s:Repl()
+     let s:restore_reg = @"
+     return "p@=RestoreRegister()\<cr>"
+ endfunction
+function! RestoreRegister()
+    let @" = s:restore_reg
+    if &clipboard == "unnamed"
+        let @* = s:restore_reg
+    endif
+    return ''
+endfunction
+
+" NB: this supports "rp that replaces the selection by the contents of @r
+vnoremap <silent> <expr> p <sid>Repl()
 " Auto updating Ctags
 function! DelTagOfFile(file)
   let fullpath = a:file
@@ -390,6 +403,8 @@ function! DelTagOfFile(file)
   let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
   let resp = system(cmd)
 endfunction
+
+
 
 function! UpdateTags()
   let f = expand("%:p")
@@ -422,9 +437,13 @@ hi MatchParen guibg=NONE guifg=green gui=NONE
 
 nnoremap <D-e> :let g:ctrlp_match_window =
          \ 'bottom,order:btt,min:1,max:1000,results:1000'<CR>:CtrlPTag<CR>
-map <D-t> :cd /users/yashasavelyev/GoogleDrive/workspace<CR>:CommandT<CR>
-imap <D-t> <Esc>:cd /users/yashasavelyev/GoogleDrive/workspace<CR>:CommandT<CR>
+map <D-t> :cd /users/yashasavelyev/dropbox/workspace<CR>:CommandT<CR>
+imap <D-t> <Esc>:cd /users/yashasavelyev/dropbox/workspace<CR>:CommandT<CR>
+
 " YouCompleteMe not using this plugin at the moment
+let g:ycm_collect_identifiers_from_tags_files = 1
+" let g:ycm_auto_trigger = 0
+
 function! g:UltiSnips_Complete()
     call UltiSnips#ExpandSnippet()
     if g:ulti_expand_res == 0
@@ -465,8 +484,8 @@ map <Leader>l :!echo latexmk -pvc -pdf -file-line-error -synctex=1  -interaction
 map <Leader>s :!echo  latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder<CR>
 "forward search on os X
 map <silent> <Leader>v :w<CR>:silent !/Applications/Skim.app/Contents/SharedSupport/displayline
-                \ <C-R>=line('.')<CR>  ~/GoogleDrive/workspace/%:h/document.pdf
-                \ ~/GoogleDrive/workspace/%<CR>
+                \ <C-R>=line('.')<CR>  ~/dropbox/workspace/%:h/document.pdf
+                \ ~/dropbox/workspace/%<CR>
 "let g:LatexBox_latexmk_options="-pdflatex='pdflatex -interaction=nonstopmode -synctex=1 \%O \%S'"
 " let g:LatexBox_latexmk_async=1
 "let g:LatexBox_latexmk_preview_continuously=1
