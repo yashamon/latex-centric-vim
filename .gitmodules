@@ -70,9 +70,6 @@
 [submodule "bundle/autosave"]
 	path = bundle/autosave
 	url = https://github.com/vim-scripts/vim-auto-save.git
-[submodule "vim-snippetts"]
-	path = vim-snippetts
-	url = https://github.com/yashamon/vim-snippets.git
 [submodule "bundle/Commandd-T"]
 	path = bundle/Commandd-T
 	url = https://github.com/wincent/Command-T.git
