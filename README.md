@@ -1,25 +1,91 @@
-latex-centric-vim
-=================
+# Installation  
 
-dot files for vim with just a few plugins to aid in Latex editing
+_\*For simplicity, let's use **[VIM_ROOT]** which will mean ~/.vim (\*nix) or ~/vimfiles (Windows)_
 
-I wanted a minimal, non intrusive setup for Latex editing. See for instance the
-modified, hyper minimal, almost monochrome grey theme. No actual Latex plugins
-are used, as I find them all to be somewhat outdated slow and buggy. Instead
-fall back on latexmk, ultisnips, and ctags for cite/ref completion. 
+The NERD Commenter requires Vim 7 or higher is comprised of 2 files:  
 
-More specifically running latexmk with -pvc option frees one to run it once in
-terminal and forget.
- 
-On OSX forward and inverse search with pdf, is easily accomodated by adding a
-few lines to .vimrc. 
- 
-While not everyone uses pdf synchronization, \ref, \cite completion is hard to
-manage without. Thankfully this is easily accomplished with vim ctags completion
-function. It might help to first reformat labels in your bib files using Jabref.
-Note vim ctags completion is lightning fast, but a little inflexible as it does
-not fuzzy search. YouCompleteMe should enable fuzzy search to the equation, but I
-couldn't get it to work. But I don't think it is very necessary. 
+    plugin/NERD_commenter.vim  
+    doc/NERD_commenter.txt 
+
+### Classic Install
+
+1. Extract the plugin files into your **[VIM_ROOT]**/plugin and **[VIM_ROOT]**/doc folders respectively.
+2. Finish the install by updating your help files.  Run:
+
+<pre><code>:helptags [VIM_ROOT]/doc</code></pre>
+
+See **|add-local-help|** for more details. 
+
+### Pathogen Install
+1. Navigate to your **[VIM_ROOT]/bundle** directory in your local Vim setup
+2. git clone https://github.com/scrooloose/nerdcommenter.git
+
+### Post Install  
+After the **'Classic'** or **'Pathogen'** install, make sure that you have filetype plugins enabled, as the script makes use of 
+**|'commentstring'|** where possible (which is usually set in a filetype plugin). 
+See **|filetype-plugin-on|** for details, but basically, stick this in your vimrc:
+
+    filetype plugin on
+
+# Usage  
+
+The following key mappings are provided by default (there is also a menu 
+provided that contains menu items corresponding to all the below mappings): 
+
+Most of the following mappings are for normal/visual mode only. The |NERDComInsertComment| mapping is for insert mode only. 
+
+**[count]\<leader\>cc |NERDComComment|**  
+Comment out the current line or text selected in visual mode. 
 
 
-If you want to mirror this I would suggest deleting the undo, and view folders.
+**[count]\<leader\>cn |NERDComNestedComment|**  
+Same as \<leader\>cc but forces nesting. 
+
+
+**[count]\<leader\>c<space> |NERDComToggleComment|**  
+Toggles the comment state of the selected line(s). If the topmost selected 
+line is commented, all selected lines are uncommented and vice versa. 
+
+
+**[count]\<leader\>cm |NERDComMinimalComment|**  
+Comments the given lines using only one set of multipart delimiters. 
+
+
+**[count]\<leader\>ci |NERDComInvertComment|**  
+Toggles the comment state of the selected line(s) individually. 
+
+
+**[count]\<leader\>cs |NERDComSexyComment|**  
+Comments out the selected lines ``sexily'' 
+
+
+**[count]\<leader\>cy |NERDComYankComment|**  
+Same as \<leader\>cc except that the commented line(s) are yanked first. 
+
+
+**\<leader\>c$ |NERDComEOLComment|**  
+Comments the current line from the cursor to the end of line. 
+
+
+**\<leader\>cA |NERDComAppendComment|**  
+Adds comment delimiters to the end of line and goes into insert mode between 
+them. 
+
+
+**|NERDComInsertComment|**  
+Adds comment delimiters at the current cursor position and inserts between. 
+Disabled by default. 
+
+
+**\<leader\>ca |NERDComAltDelim|**  
+Switches to the alternative set of delimiters. 
+
+
+**[count]\<leader\>cl**  
+**[count]\<leader\>cb    |NERDComAlignedComment|**  
+Same as |NERDComComment| except that the delimiters are aligned down the 
+left side (\<leader\>cl) or both sides (\<leader\>cb). 
+
+
+**[count]\<leader\>cu |NERDComUncommentLine|**  
+Uncomments the selected line(s). 

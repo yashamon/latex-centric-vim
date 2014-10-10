@@ -54,9 +54,9 @@ if has("gui_running")	" GUI color and font settings
   highlight CursorLine  guibg=#003853 ctermbg=24  gui=none cterm=none
 else
 " terminal color settings
-  set background=light
+  set background=dark
   set t_Co=256          " 256 color mode
-  colors grey 
+  colors solarized 
 endif
 
 " Default Colors for CursorLine
