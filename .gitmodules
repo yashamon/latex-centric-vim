@@ -76,3 +76,9 @@
 [submodule "bundle/vim-snippets"]
 	path = bundle/vim-snippets
 	url = https://github.com/yashamon/vim-snippets.git
+[submodule "bundle/nerd"]
+	path = bundle/nerd
+	url = https://github.com/scrooloose/nerdcommenter.git
+[submodule "bundle/async"]
+	path = bundle/async
+	url = https://github.com/idbrii/AsyncCommand.git

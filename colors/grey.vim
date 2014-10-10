@@ -2,9 +2,10 @@ let g:colors_name="grey"
 
 "Normal colours
 hi Normal	guifg=black guibg=#848484
-
+   hi Normal	ctermfg=250 ctermbg=none
 " highlight groups
 hi Cursor	guibg=white guifg=black
+ hi Cursor	ctermbg=white ctermfg=black
 hi VertSplit	guibg=black guifg=white gui=none
 hi Folded	guibg=grey30 guifg=grey75
 hi FoldColumn	guibg=grey30 guifg=grey0
@@ -22,9 +23,10 @@ hi Visual	gui=none guifg=grey40 guibg=grey90
 hi WarningMsg	guifg=red gui=bold
 
 " syntax highlighting groups
-hi Comment	guifg=#515151 ctermfg=darkgrey "gui=italic
+hi Comment	guifg=#515151 ctermfg=darkgrey term=italic gui=italic
 hi Constant	guifg=#000000 ctermfg=darkgrey term=bold gui=bold
-hi Identifier	guifg=#262626 term=bold "gui=bold
+hi Identifier	guifg=235 term=bold "gui=bold
+hi Identifier	ctermfg=235 term=bold "gui=bold
 hi Statement	guifg=#4c4c4c gui=bold cterm=bold term=bold
 hi PreProc	guifg=#000000
 hi Type		guifg=#262626 term=bold cterm=NONE gui=bold

@@ -1,7 +1,7 @@
 
 call pathogen#infect()
 syntax on
-filetype plugin indent on
+ filetype plugin indent on
 
 "  General Settings
 if has("gui_running")
@@ -43,24 +43,44 @@ nmap <leader>p <Plug>yankstack_substitute_older_paste
   nmap <leader>P <Plug>yankstack_substitute_newer_paste
 " auto reload vimrc when editing it
 autocmd! bufwritepost .vimrc source ~/.vimrc
-
-
 syntax on		" syntax highlight
 " set hlsearch		" search highlighting
-
 if has("gui_running")	" GUI color and font settings
   set guifont=Source\ Code\ Pro:h18
-  set background=light 
+  set background=dark 
   "set vimroom_background=dark
 "  set cursorline        " highlight current line
  colorscheme grey 
-  highlight CursorLine          guibg=#003853 ctermbg=24  gui=none cterm=none
+  highlight CursorLine  guibg=#003853 ctermbg=24  gui=none cterm=none
 else
 " terminal color settings
+  set background=light
   set t_Co=256          " 256 color mode
-  colors monochrome 
+  colors grey 
 endif
 
+" Default Colors for CursorLine
+highlight  CursorLine cterm=NONE ctermbg=grey ctermfg=black
+" Change Color when entering Insert Mode
+ augroup CursorLine
+   au!
+     au InsertEnter * setlocal cursorline
+       au InsertLeave * setlocal nocursorline
+       augroup END
+" autocmd InsertEnter * set cursorline * 
+
+" " Revert Color to default when leaving Insert Mode
+"  autocmd InsertLeave * highlight  CursorLine ctermbg=none ctermfg=None
+if &term =~ "xterm\\|rxvt"
+  " use an orange cursor in insert mode
+     let &t_SI = "\<Esc>]12;orange\x7"
+  "     " use a red cursor otherwise
+         let &t_EI = "\<Esc>]12;white\x7"
+           silent !echo -ne "\033]12;red\007"
+  "           " reset cursor when vim exits
+               autocmd VimLeave * silent !echo -ne "\033]112\007"
+  "               " use \003]12;gray\007 for gnome-terminal
+                 endif
 set clipboard=unnamed	" yank to the system register (*) by default
 set showmatch		" Cursor shows matching ) and }
 set showmode		" Show current mode
@@ -310,8 +330,8 @@ endfunction
 " noremap B b
  map f /
  map F ?
- map t <leader><leader>t
- map T <leader><leader>T
+ map t <leader><leader>f
+ map T <leader><leader>F
   " map F  <leader><leader>F
 "  map f <leader><leader>f
 "  vmap <leader><leader>F
@@ -351,6 +371,8 @@ endfunction
 "  nnoremap / /\$<CR>
 "  nnoremap ? ?\$<CR>
  map <D-/> <Leader>__
+ map <C-c> gc
+ nmap gc gcc
  nmap ` ~
  nmap 1 <C-o>
  nmap 2 <C-i>
@@ -433,12 +455,14 @@ hi MatchParen guibg=NONE guifg=green gui=NONE
         " If undotree is opened, it is likely one wants to interact with it.
         let g:undotree_SetFocusWhenToggle=1
         noremap <D-z> u
+        noremap <S-C-z> <C-r>
+        noremap <C-z> u
     " }
 
 nnoremap <D-e> :let g:ctrlp_match_window =
          \ 'bottom,order:btt,min:1,max:1000,results:1000'<CR>:CtrlPTag<CR>
-map <D-t> :cd /users/yashasavelyev/dropbox/workspace<CR>:CommandT<CR>
-imap <D-t> <Esc>:cd /users/yashasavelyev/dropbox/workspace<CR>:CommandT<CR>
+map <C-t> :cd ~/Dropbox/workspace<CR>:CommandT<CR>
+imap <C-t> <Esc>:cd ~/Dropbox/workspace<CR>:CommandT<CR>
 
 " YouCompleteMe not using this plugin at the moment
 let g:ycm_collect_identifiers_from_tags_files = 1
@@ -461,6 +485,7 @@ endfunction
 
 au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
 let g:UltiSnipsJumpForwardTrigger="<D-j>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsListSnippets="<D-e>"
 " this mapping Enter key to <C-y> to chose the current highlight item 
 " and close the selection list, same as other IDEs.
@@ -479,13 +504,39 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
    "Latex compile. For various reasons I prefer to echo these so that i can
    "them to an external terminal and run there.
    
-map <Leader>l :!echo latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder<CR>
-    \ :!echo %:p:h/document.tex<CR>
-map <Leader>s :!echo  latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder<CR>
+map <Leader>l :!latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder %:p:h/document.tex<CR>
+map <Leader>s :read !htlatex %:p:h/document.tex<CR>
+map <Leader>d :!cd %:p:h<CR>
 "forward search on os X
-map <silent> <Leader>v :w<CR>:silent !/Applications/Skim.app/Contents/SharedSupport/displayline
-                \ <C-R>=line('.')<CR>  ~/dropbox/workspace/%:h/document.pdf
-                \ ~/dropbox/workspace/%<CR>
+map <silent> <Leader>v :w<CR>:Shell elinks document.html<CR>
+command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
+function! s:RunShellCommand(cmdline)
+     let isfirst = 1
+       let words = []
+         for word in split(a:cmdline)
+                if isfirst
+                     let isfirst = 0  " don't change first word (shell command)
+                       else
+                                if word[0] =~ '\v[%#<]'
+                                 let word = expand(word)                                        endif
+                             let word = shellescape(word, 1)
+                                               endif
+                                                                     call add(words, word)
+                                                                       endfor
+                                                                         let expanded_cmdline = join(words)
+                                                                           botright new
+                                                                      setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+                                                                               call setline(1, 'You entered:  ' . a:cmdline)
+                                                                                 call setline(2, 'Expanded to:  ' . expanded_cmdline)
+                                                                          call append(line('$'), substitute(getline(2), '.', '=', 'g'))
+                                                                                     silent execute '$read !'. expanded_cmdline
+                                                                                       1
+                                                                                    endfunction
+"                 " \ ~/dropbox/workspace/%<CR>
+" map <silent> <Leader>v :w<CR>:silent !/Applications/Skim.app/Contents/SharedSupport/displayline
+"                 \ <C-R>=line('.')<CR>  ~/dropbox/workspace/%:h/document.pdf
+"                 \ ~/dropbox/workspace/%<CR>
+"
 "let g:LatexBox_latexmk_options="-pdflatex='pdflatex -interaction=nonstopmode -synctex=1 \%O \%S'"
 " let g:LatexBox_latexmk_async=1
 "let g:LatexBox_latexmk_preview_continuously=1
@@ -498,3 +549,4 @@ map <silent> <Leader>v :w<CR>:silent !/Applications/Skim.app/Contents/SharedSupp
 " let g:easytags_cmd = '/usr/local/bin/ctags'
 "  let g:easytags_events = ['BufWritePost']
  
+source ~/.anyname
