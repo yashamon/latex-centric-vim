@@ -64,8 +64,11 @@ highlight  CursorLine cterm=NONE ctermbg=grey ctermfg=black
 " Change Color when entering Insert Mode
  augroup CursorLine
    au!
+ if has("gui_running")
+ else
      au InsertEnter * setlocal cursorline
        au InsertLeave * setlocal nocursorline
+    endif
        augroup END
 " autocmd InsertEnter * set cursorline * 
 
@@ -462,8 +465,10 @@ hi MatchParen guibg=NONE guifg=green gui=NONE
 nnoremap <D-e> :let g:ctrlp_match_window =
          \ 'bottom,order:btt,min:1,max:1000,results:1000'<CR>:CtrlPTag<CR>
 map <C-t> :cd ~/Dropbox/workspace<CR>:CommandT<CR>
-imap <C-t> <Esc>:cd ~/Dropbox/workspace<CR>:CommandT<CR>
 
+map <D-t> :cd ~/Dropbox/workspace<CR>:CommandT<CR>
+imap <C-t> <Esc>:cd ~/Dropbox/workspace<CR>:CommandT<CR>
+imap <D-t> <Esc>:cd ~/Dropbox/workspace<CR>:CommandT<CR>
 " YouCompleteMe not using this plugin at the moment
 let g:ycm_collect_identifiers_from_tags_files = 1
 " let g:ycm_auto_trigger = 0
@@ -505,37 +510,16 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
    "them to an external terminal and run there.
    
 map <Leader>l :!latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder %:p:h/document.tex<CR>
-map <Leader>s :read !htlatex %:p:h/document.tex<CR>
+" map <Leader>s :read !htlatex %:p:h/document.tex<CR>
 map <Leader>d :!cd %:p:h<CR>
 "forward search on os X
-map <silent> <Leader>v :w<CR>:Shell elinks document.html<CR>
-command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
-function! s:RunShellCommand(cmdline)
-     let isfirst = 1
-       let words = []
-         for word in split(a:cmdline)
-                if isfirst
-                     let isfirst = 0  " don't change first word (shell command)
-                       else
-                                if word[0] =~ '\v[%#<]'
-                                 let word = expand(word)                                        endif
-                             let word = shellescape(word, 1)
-                                               endif
-                                                                     call add(words, word)
-                                                                       endfor
-                                                                         let expanded_cmdline = join(words)
-                                                                           botright new
-                                                                      setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
-                                                                               call setline(1, 'You entered:  ' . a:cmdline)
-                                                                                 call setline(2, 'Expanded to:  ' . expanded_cmdline)
-                                                                          call append(line('$'), substitute(getline(2), '.', '=', 'g'))
-                                                                                     silent execute '$read !'. expanded_cmdline
-                                                                                       1
-                                                                                    endfunction
+" map <silent> <Leader>v :w<CR>:Shell elinks document.html<CR> 
+"
+
 "                 " \ ~/dropbox/workspace/%<CR>
-" map <silent> <Leader>v :w<CR>:silent !/Applications/Skim.app/Contents/SharedSupport/displayline
-"                 \ <C-R>=line('.')<CR>  ~/dropbox/workspace/%:h/document.pdf
-"                 \ ~/dropbox/workspace/%<CR>
+map <silent> <Leader>v :w<CR>:silent !/Applications/Skim.app/Contents/SharedSupport/displayline
+                \ <C-R>=line('.')<CR>  ~/dropbox/workspace/%:h/document.pdf
+                \ ~/dropbox/workspace/%<CR>
 "
 "let g:LatexBox_latexmk_options="-pdflatex='pdflatex -interaction=nonstopmode -synctex=1 \%O \%S'"
 " let g:LatexBox_latexmk_async=1
