@@ -9,8 +9,7 @@ if has("gui_running")
   au GUIEnter * set fullscreen
    set foldcolumn=12
   set formatoptions=ant
-  set textwidth=80
-  set wrapmargin=0
+  set wrapmargin=2
   set nohlsearch
   " set tags= ~/.tags
   set tags+=/usr/local/texlive/texmf-local/bibtex/bib/local/tags
