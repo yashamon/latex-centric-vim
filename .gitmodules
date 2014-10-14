@@ -82,9 +82,3 @@
 [submodule "bundle/async"]
 	path = bundle/async
 	url = https://github.com/idbrii/AsyncCommand.git
-[submodule "/root/.vim/bundle/solarized"]
-	path = /root/.vim/bundle/solarized
-	url = https://github.com/altercation/vim-colors-solarized.git
-[submodule "/root/Dropbox/.vim/bundle/solarized"]
-	path = /root/Dropbox/.vim/bundle/solarized
-	url = https://github.com/altercation/vim-colors-solarized.git
