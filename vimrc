@@ -509,8 +509,8 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
    "Latex compile. For various reasons I prefer to echo these so that i can
    "them to an external terminal and run there.
    
-map <Leader>l :!latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder %:p:h/document.tex<CR>
-" map <Leader>s :read !htlatex %:p:h/document.tex<CR>
+map <Leader>l :!echo "latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
+ map <Leader>s :!latexmk -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder %:p:h/document.tex<CR>
 map <Leader>d :!cd %:p:h<CR>
 "forward search on os X
 " map <silent> <Leader>v :w<CR>:Shell elinks document.html<CR> 
