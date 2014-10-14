@@ -85,3 +85,6 @@
 [submodule "/root/.vim/bundle/solarized"]
 	path = /root/.vim/bundle/solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
+[submodule "/root/Dropbox/.vim/bundle/solarized"]
+	path = /root/Dropbox/.vim/bundle/solarized
+	url = https://github.com/altercation/vim-colors-solarized.git
