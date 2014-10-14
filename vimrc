@@ -49,7 +49,7 @@ if has("gui_running")	" GUI color and font settings
   set background=dark 
   "set vimroom_background=dark
 "  set cursorline        " highlight current line
- colorscheme grey 
+ colorscheme solarized2 
   highlight CursorLine  guibg=#003853 ctermbg=24  gui=none cterm=none
 else
 " terminal color settings
