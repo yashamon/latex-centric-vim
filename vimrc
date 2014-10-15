@@ -4,6 +4,7 @@ syntax on
  filetype plugin indent on
 
 "  General Settings
+  au GUIEnter * set fullscreen
 if has("gui_running")
   set fuoptions=maxvert,maxhorz
   au GUIEnter * set fullscreen
@@ -17,6 +18,8 @@ if has("gui_running")
       endif    
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview
+   set foldcolumn=2
+  highlight SignColumn guibg=bg
 autocmd Colorscheme * highlight FoldColumn guifg=black guibg=bg
   "augroup PROSE|
    "autocmd InsertEnter <buffer> set fo+=a
@@ -25,6 +28,8 @@ autocmd Colorscheme * highlight FoldColumn guifg=black guibg=bg
 "Latex related
    let g:tex_flavor = "latex"
    let g:tex_isk = '@,48-57,58,_,192-255'
+  set formatoptions=ant
+  set wrapmargin=2
 set guioptions-=r 
 set guioptions-=l
 set nocompatible	" not compatible with the old-fashion vi mode
