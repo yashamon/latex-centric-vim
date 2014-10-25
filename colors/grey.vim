@@ -2,7 +2,7 @@ let g:colors_name="grey"
 
 "Normal colours
 hi Normal	guifg=black guibg=#848484
-   hi Normal	ctermfg=250 ctermbg=none
+   hi Normal	ctermfg=248 ctermbg=none
 " highlight groups
 hi Cursor	guibg=white guifg=black
  hi Cursor	ctermbg=white ctermfg=black

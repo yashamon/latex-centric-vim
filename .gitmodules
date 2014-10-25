@@ -82,3 +82,12 @@
 [submodule "bundle/async"]
 	path = bundle/async
 	url = https://github.com/idbrii/AsyncCommand.git
+[submodule "/root/.vim/bundle/youcompme"]
+	path = /root/.vim/bundle/youcompme
+	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule "bundle/colorschemes"]
+	path = bundle/colorschemes
+	url = https://github.com/flazz/vim-colorschemes.git
+[submodule "bundle/surround"]
+	path = bundle/surround
+	url = https://github.com/tpope/vim-surround.git

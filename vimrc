@@ -1,4 +1,3 @@
-
 call pathogen#infect()
 syntax on
  filetype plugin indent on
@@ -10,26 +9,30 @@ if has("gui_running")
   au GUIEnter * set fullscreen
    set foldcolumn=12
   set formatoptions=ant
-  set wrapmargin=2
+  set wrapmargin=1
   set nohlsearch
   " set tags= ~/.tags
-  set tags+=/usr/local/texlive/texmf-local/bibtex/bib/local/tags
   highlight SignColumn guibg=bg
       endif    
 autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview
-   set foldcolumn=2
-  highlight SignColumn guibg=bg
+   autocmd BufWinEnter *.* silent loadview
+   " set foldcolumn=2
+"  highlight foldcolumn ctermfg=256 ctermbg=bg
 autocmd Colorscheme * highlight FoldColumn guifg=black guibg=bg
   "augroup PROSE|
    "autocmd InsertEnter <buffer> set fo+=a
    "autocmd InsertLeave <buffer> set fo-=a
  "augroup END"augroup END
 "Latex related
+  au VIMEnter * let g:surround_108 = {
+     \'q':  " ``\r''"
+     \ }
+ 
    let g:tex_flavor = "latex"
    let g:tex_isk = '@,48-57,58,_,192-255'
+  set tags+=~/texmf/bibtex/bib/mypackage/bib/tags
   set formatoptions=ant
-  set wrapmargin=2
+  set wrapmargin=1
 set guioptions-=r 
 set guioptions-=l
 set nocompatible	" not compatible with the old-fashion vi mode
@@ -60,9 +63,21 @@ else
 " terminal color settings
   set background=dark
   set t_Co=256          " 256 color mode
-  colors solarized 
+  colorscheme solarized2 
 endif
+function Light()
+   set background=light
+   colorscheme solarized2
+highlight  CursorLine cterm=NONE ctermbg=250 ctermfg=black
+endfunction
 
+function Dark()
+   set background=dark
+   colorscheme solarized2
+highlight  CursorLine cterm=NONE ctermbg=grey ctermfg=black
+endfunction
+
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " Default Colors for CursorLine
 highlight  CursorLine cterm=NONE ctermbg=grey ctermfg=black
 " Change Color when entering Insert Mode
@@ -474,28 +489,16 @@ map <D-t> :cd ~/Dropbox/workspace<CR>:CommandT<CR>
 imap <C-t> <Esc>:cd ~/Dropbox/workspace<CR>:CommandT<CR>
 imap <D-t> <Esc>:cd ~/Dropbox/workspace<CR>:CommandT<CR>
 " YouCompleteMe not using this plugin at the moment
+let g:ycm_auto_trigger = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
-" let g:ycm_auto_trigger = 0
-
-function! g:UltiSnips_Complete()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res == 0
-        if pumvisible()
-            return "\<C-n>"
-        else
-            call UltiSnips#JumpForwards()
-            if g:ulti_jump_forwards_res == 0
-               return "\<TAB>"
-            endif
-        endif
-    endif
-    return ""
-endfunction
-
-au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+let g:ycm_key_invoke_completion = '<C-n>'
+ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+ let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+ let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsJumpForwardTrigger="<D-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsListSnippets="<D-e>"
+let g:UltiSnipsListSnippets="<C-e>"
 " this mapping Enter key to <C-y> to chose the current highlight item 
 " and close the selection list, same as other IDEs.
 " CONFLICT with some plugins like tpope/Endwise
@@ -505,15 +508,16 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
    " set tags=~/GoogleDrive/workspace/tags 
    " set tags=~/GoogleDrive/workspace/tagstest 
    " set tags+=/usr/local/texlive/texmf-local/bibtex/bib/local/tags
-   "let g:ycm_key_invoke_completion = ''
    "let g:ycm_key_invoke_completion = '<D-5>'
    " Latex shortcuts
 
     
-   "Latex compile. For various reasons I prefer to echo these so that i can
+   "Latex compile. 
    "them to an external terminal and run there.
    
-map <Leader>l :!echo "latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
+" map <Leader>l :!echo "latexmk -pvc -pdf -file-line-error -synctex=1
+" -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
+map <Leader>l :!latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
  map <Leader>s :!latexmk -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder %:p:h/document.tex<CR>
 map <Leader>d :!cd %:p:h<CR>
 "forward search on os X
