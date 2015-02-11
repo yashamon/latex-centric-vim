@@ -84,7 +84,7 @@
 "       set background=dark
 "     endif
 "
-" See the Solarized homepage at http://ethanschoonover.com/solarized for
+"" See the Solarized homepage at http://ethanschoonover.com/solarized for
 " screenshots which will help you select either the light or dark background.
 "
 " ---------------------------------------------------------------------

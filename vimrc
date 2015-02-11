@@ -1,7 +1,6 @@
 call pathogen#infect()
 syntax on
  filetype plugin indent on
-
 "  General Settings
   au GUIEnter * set fullscreen
 if has("gui_running")
@@ -19,6 +18,7 @@ autocmd BufWinLeave *.* mkview
    " set foldcolumn=2
 "  highlight foldcolumn ctermfg=256 ctermbg=bg
 autocmd Colorscheme * highlight FoldColumn guifg=black guibg=bg
+au VIMEnter set spell
   "augroup PROSE|
    "autocmd InsertEnter <buffer> set fo+=a
    "autocmd InsertLeave <buffer> set fo-=a
@@ -63,18 +63,19 @@ else
 " terminal color settings
   set background=dark
   set t_Co=256          " 256 color mode
+    " let g:solarized_termcolors=256
   colorscheme solarized2 
 endif
 function Light()
    set background=light
    colorscheme solarized2
-highlight  CursorLine cterm=NONE ctermbg=250 ctermfg=black
+highlight  CursorLine cterm=NONE ctermbg=blue ctermfg=white
 endfunction
 
 function Dark()
    set background=dark
    colorscheme solarized2
-highlight  CursorLine cterm=NONE ctermbg=grey ctermfg=black
+highlight  CursorLine cterm=NONE ctermbg=250 ctermfg=black
 endfunction
 
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -328,16 +329,17 @@ let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc
 " KeyMaps for movement, other Remaps 
 " I find the default register behavior uncomfortable 
 " au VIMENTER unmap p nnoremap p "0p
-" nnoremap p "0p
-nnoremap d "dd
-vnoremap d "dd
-nnoremap D "dD
-vnoremap D "dD
-nnoremap c "dc
-vnoremap c "dc
-nnoremap C "dC
-vnoremap C "dC
+"  nnoremap p "0p
+nnoremap d "_d
+vnoremap d "_d
+nnoremap D "_D
+vnoremap D "_D
+nnoremap c "_c
+vnoremap c "_c
+nnoremap C "_C
+vnoremap C "_C
 " I haven't found how to hide this function (yet)
+"allows paste to not overwrite default register
 function! RestoreRegister()
     let @" = s:restore_reg
     if &clipboard == "unnamed"
@@ -418,11 +420,11 @@ inoremap <C-]> <C-x><C-]>
 " map <D-s> <Esc>:w<CR> :silent ! /usr/local/bin/ctags -R<CR>
 " map <C-s> <Esc>:w<CR> :silent ! /usr/local/bin/ctags -R<CR>
 " I haven't found how to hide this function (yet)
-" function! RestoreRegister()
-"   let @" = s:restore_reg
-"   return ''
-" endfunction
-"
+ function! RestoreRegister()
+   let @" = s:restore_reg
+   return ''
+ endfunction
+
  function! s:Repl()
      let s:restore_reg = @"
      return "p@=RestoreRegister()\<cr>"
