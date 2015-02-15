@@ -73,9 +73,6 @@
 [submodule "bundle/Commandd-T"]
 	path = bundle/Commandd-T
 	url = https://github.com/wincent/Command-T.git
-[submodule "bundle/vim-snippets"]
-	path = bundle/vim-snippets
-	url = https://github.com/yashamon/vim-snippets.git
 [submodule "bundle/nerd"]
 	path = bundle/nerd
 	url = https://github.com/scrooloose/nerdcommenter.git
