@@ -7,14 +7,14 @@ if has("gui_running")
   set fuoptions=maxvert,maxhorz
   au GUIEnter * set fullscreen
    set foldcolumn=12
-  set formatoptions=ant
+   set formatoptions=ant
   set wrapmargin=1
   set nohlsearch
   " set tags= ~/.tags
   highlight SignColumn guibg=bg
       endif    
 autocmd BufWinLeave *.* mkview
-   autocmd BufWinEnter *.* silent loadview
+autocmd BufWinEnter *.* silent loadview
    " set foldcolumn=2
 "  highlight foldcolumn ctermfg=256 ctermbg=bg
 autocmd Colorscheme * highlight FoldColumn guifg=black guibg=bg
@@ -30,7 +30,9 @@ au VIMEnter set spell
  
    let g:tex_flavor = "latex"
    let g:tex_isk = '@,48-57,58,_,192-255'
-  set tags+=~/texmf/bibtex/bib/mypackage/bib/tags
+"   set tags+=~/texmf/bibtex/bib/mypackage/bib/tags
+set tags+=~/Dropbox/workspace/tags
+
   set formatoptions=ant
   set wrapmargin=1
 set guioptions-=r 
@@ -466,7 +468,7 @@ map :tags  exe ":silent ! /usr/local/bin/ctags -R"
 
 "Nerd Tree
  map <leader>e :NERDTreeFind<CR>
-map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
+" map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
 
 let g:auto_save = 1
 
@@ -482,15 +484,17 @@ hi MatchParen guibg=NONE guifg=green gui=NONE
         noremap <S-C-z> <C-r>
         noremap <C-z> u
     " }
-
-nnoremap <D-e> :let g:ctrlp_match_window =
+nnoremap <C-e> :let g:ctrlp_match_window =
          \ 'bottom,order:btt,min:1,max:1000,results:1000'<CR>:CtrlPTag<CR>
-map <C-t> :cd ~/Dropbox/workspace<CR>:CommandT<CR>
-
+" map <C-t> :cd ~/Dropbox/workspace<CR>:CommandT<CR>
+map <C-t> :CtrlP<CR>
 map <D-t> :cd ~/Dropbox/workspace<CR>:CommandT<CR>
-imap <C-t> <Esc>:cd ~/Dropbox/workspace<CR>:CommandT<CR>
+" imap <C-t> <Esc>:cd ~/Dropbox/workspace<CR>:CommandT<CR>
+imap <C-t> <Esc>:CtrlP<CR>
 imap <D-t> <Esc>:cd ~/Dropbox/workspace<CR>:CommandT<CR>
+
 " YouCompleteMe not using this plugin at the moment
+
 let g:ycm_auto_trigger = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_key_invoke_completion = '<C-n>'

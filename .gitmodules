@@ -70,15 +70,9 @@
 [submodule "bundle/autosave"]
 	path = bundle/autosave
 	url = https://github.com/vim-scripts/vim-auto-save.git
-[submodule "bundle/Commandd-T"]
-	path = bundle/Commandd-T
-	url = https://github.com/wincent/Command-T.git
 [submodule "bundle/nerd"]
 	path = bundle/nerd
 	url = https://github.com/scrooloose/nerdcommenter.git
-[submodule "bundle/async"]
-	path = bundle/async
-	url = https://github.com/idbrii/AsyncCommand.git
 [submodule "/root/.vim/bundle/youcompme"]
 	path = /root/.vim/bundle/youcompme
 	url = https://github.com/Valloric/YouCompleteMe.git
