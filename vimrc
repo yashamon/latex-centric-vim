@@ -13,8 +13,8 @@ if has("gui_running")
   " set tags= ~/.tags
   highlight SignColumn guibg=bg
       endif    
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview
+ autocmd BufWinLeave *.* mkview
+ autocmd BufWinEnter *.* silent loadview
    " set foldcolumn=2
 "  highlight foldcolumn ctermfg=256 ctermbg=bg
 autocmd Colorscheme * highlight FoldColumn guifg=black guibg=bg
@@ -32,9 +32,9 @@ au VIMEnter set spell
    let g:tex_isk = '@,48-57,58,_,192-255'
 "   set tags+=~/texmf/bibtex/bib/mypackage/bib/tags
 set tags+=~/Dropbox/workspace/tags
-
-  set formatoptions=ant
-  set wrapmargin=1
+  " set formatoptions=ant
+  " set wrapmargin=1
+  set tw=70
 set guioptions-=r 
 set guioptions-=l
 set nocompatible	" not compatible with the old-fashion vi mode
@@ -328,7 +328,7 @@ let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc
 " let g:UltiSnipsJumpForwardTrigger="<D-j>"  
  
 
-" KeyMaps for movement, other Remaps 
+" KeyMaps for movement, other Remaps, bindings
 " I find the default register behavior uncomfortable 
 " au VIMENTER unmap p nnoremap p "0p
 "  nnoremap p "0p
@@ -340,6 +340,9 @@ nnoremap c "_c
 vnoremap c "_c
 nnoremap C "_C
 vnoremap C "_C
+nnoremap <Left> :bnext<CR>
+nnoremap <Right> :bprevious<CR>
+
 " I haven't found how to hide this function (yet)
 "allows paste to not overwrite default register
 function! RestoreRegister()
@@ -404,7 +407,7 @@ endfunction
  nmap 2 <C-i>
  nmap <S-CR> k$
  noremap <Leader>1 :buffer 1<CR>
-nnoremap <silent> <Leader>b :CommandTBuffer<CR>
+nnoremap <silent> <Leader>b :CtrlPbuffer<CR>
  noremap <Leader>2 :buffer 2<CR>
  noremap <Leader>3 :buffer 3<CR>
 noremap <Leader>4 :buffer 4<CR>
