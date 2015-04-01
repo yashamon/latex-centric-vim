@@ -19,6 +19,16 @@ if has("gui_running")
 "  highlight foldcolumn ctermfg=256 ctermbg=bg
 autocmd Colorscheme * highlight FoldColumn guifg=black guibg=bg
 au VIMEnter set spell
+ set timeout
+   set timeoutlen=750
+     set ttimeoutlen=250
+
+       "NeoVim handles ESC keys as alt+key set this to solve the
+       "problem
+         if has('nvim')
+              set ttimeout
+                   set ttimeoutlen=0
+                     endif
   "augroup PROSE|
    "autocmd InsertEnter <buffer> set fo+=a
    "autocmd InsertLeave <buffer> set fo-=a
@@ -106,7 +116,17 @@ if &term =~ "xterm\\|rxvt"
                autocmd VimLeave * silent !echo -ne "\033]112\007"
   "               " use \003]12;gray\007 for gnome-terminal
                  endif
-set clipboard=unnamed	" yank to the system register (*) by default
+" function! ClipboardYank()
+"      call system('xclip -i -selection clipboard', @@)
+"   endfunction
+"   function! ClipboardPaste()
+"        let @@ = system('xclip -o -selection clipboard')
+"     endfunction
+"
+"     vnoremap <silent> y y:call ClipboardYank()<cr>
+"     vnoremap <silent> d d:call ClipboardYank()<cr>
+"     nnoremap <silent> p :call ClipboardPaste()<cr>p
+" set clipboard=unnamedplus	" yank to the system register (*) by default
 set showmatch		" Cursor shows matching ) and }
 set showmode		" Show current mode
 set wildchar=<TAB>	" start wild expansion in the command line using <TAB>
