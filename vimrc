@@ -360,6 +360,7 @@ nnoremap c "_c
 vnoremap c "_c
 nnoremap C "_C
 vnoremap C "_C
+nnoremap s "_x
 nnoremap <Left> :bnext<CR>
 nnoremap <Right> :bprevious<CR>
 
