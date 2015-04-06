@@ -88,6 +88,8 @@ function Dark()
    set background=dark
    colorscheme solarized2
 highlight  CursorLine cterm=NONE ctermbg=250 ctermfg=black
+highlight clear SpellBad
+highlight SpellBad cterm=underline
 endfunction
 
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
