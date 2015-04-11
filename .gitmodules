@@ -79,12 +79,15 @@
 [submodule "bundle/surround"]
 	path = bundle/surround
 	url = https://github.com/tpope/vim-surround.git
-[submodule "bundle/youcompme"]
-	path = bundle/youcompme
-	url = https://github.com/Valloric/YouCompleteMe.git
-[submodule "bundle/vim-snippets"]
-	path = bundle/vim-snippets
-	url = https://github.com/yashamon/vim-snippets.git
 [submodule "bundle/vim-pandoc"]
 	path = bundle/vim-pandoc
 	url = https://github.com/vim-pandoc/vim-pandoc.git
+[submodule "bundle/vim-snippets"]
+	path = bundle/vim-snippets
+	url = https://github.com/yashamon/vim-snippets.git
+[submodule "bundle/youcompme"]
+	path = bundle/youcompme
+	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule "bundle/vimtex"]
+	path = bundle/vimtex
+	url = https://github.com/lervag/vimtex.git

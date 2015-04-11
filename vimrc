@@ -349,11 +349,22 @@ let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc
 " let g:UltiSnipsExpandTrigger="<tab>"                                            
 " let g:UltiSnipsJumpForwardTrigger="<D-j>"  
  
-
+" I haven't found how to hide this function (yet)
+"allows paste to not overwrite default register
+function! RestoreRegister()
+    let @" = s:restore_reg
+    if &clipboard == "unnamed"
+        let @* = s:restore_reg
+    endif
+    return ''
+endfunction
 " KeyMaps for movement, other Remaps, bindings
 " I find the default register behavior uncomfortable 
 " au VIMENTER unmap p nnoremap p "0p
 "  nnoremap p "0p
+
+
+
 nnoremap d "_d
 vnoremap d "_d
 nnoremap D "_D
@@ -366,15 +377,6 @@ nnoremap s "_x
 nnoremap <Left> :bnext<CR>
 nnoremap <Right> :bprevious<CR>
 
-" I haven't found how to hide this function (yet)
-"allows paste to not overwrite default register
-function! RestoreRegister()
-    let @" = s:restore_reg
-    if &clipboard == "unnamed"
-        let @* = s:restore_reg
-    endif
-    return ''
-endfunction
 
 " noremap w W
 " noremap W w
@@ -423,6 +425,8 @@ endfunction
 "  nnoremap / /\$<CR>
 "  nnoremap ? ?\$<CR>
  map <D-/> <Leader>__
+ map <A-/> <Leader>__
+ map <A-r>  <C-r>
  map <C-c> gc
  nmap gc gcc
  nmap ` ~
@@ -518,9 +522,9 @@ map <D-t> :cd ~/Dropbox/workspace<CR>:CommandT<CR>
 " imap <C-t> <Esc>:cd ~/Dropbox/workspace<CR>:CommandT<CR>
 imap <C-t> <Esc>:CtrlP<CR>
 imap <D-t> <Esc>:cd ~/Dropbox/workspace<CR>:CommandT<CR>
-
+nnoremap  <leader>v <leader>lv
+nnoremap  <leader>r <leader>lr
 " YouCompleteMe not using this plugin at the moment
-
 let g:ycm_auto_trigger = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_key_invoke_completion = '<C-n>'
@@ -546,20 +550,22 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
     
    "Latex compile. 
    "them to an external terminal and run there.
-   
+let g:vimtex_view_method = 'mupdf'
+let g:latex_viewer = 'mupdf'
+let 
 " map <Leader>l :!echo "latexmk -pvc -pdf -file-line-error -synctex=1
 " -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
-map <Leader>l :!latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
- map <Leader>s :!latexmk -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder %:p:h/document.tex<CR>
-map <Leader>d :!cd %:p:h<CR>
+" map <Leader>l :!latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
+"  map <Leader>s :!latexmk -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder %:p:h/document.tex<CR>
+" map <Leader>d :!cd %:p:h<CR>
 "forward search on os X
 " map <silent> <Leader>v :w<CR>:Shell elinks document.html<CR> 
 "
 
 "                 " \ ~/dropbox/workspace/%<CR>
-map <silent> <Leader>v :w<CR>:silent !/Applications/Skim.app/Contents/SharedSupport/displayline
-                \ <C-R>=line('.')<CR>  ~/dropbox/workspace/%:h/document.pdf
-                \ ~/dropbox/workspace/%<CR>
+" map <silent> <Leader>v :w<CR>:silent !/Applications/Skim.app/Contents/SharedSupport/displayline
+"                 \ <C-R>=line('.')<CR>  ~/dropbox/workspace/%:h/document.pdf
+"                 \ ~/dropbox/workspace/%<CR>
 "
 "let g:LatexBox_latexmk_options="-pdflatex='pdflatex -interaction=nonstopmode -synctex=1 \%O \%S'"
 " let g:LatexBox_latexmk_async=1
