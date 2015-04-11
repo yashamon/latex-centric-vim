@@ -1,4 +1,4 @@
-call pathogen#infect()
+call pathogen#infect() 
 syntax on
  filetype plugin indent on
 "  General Settings
@@ -444,11 +444,15 @@ noremap <Leader>6 :buffer 6<CR>
 noremap <Leader>8 :buffer 8<CR>
 noremap <Leader>9 :buffer 9<CR>
 noremap <D-d> <C-d>
+
+noremap <A-d> <C-d>
 noremap <D-u> <C-u>
+noremap <A-u> <C-u>
 nnoremap <silent> <Leader>y :YRGetElem<CR>
 map ' "
 inoremap <D-]> <C-x><C-]>
 inoremap <C-]> <C-x><C-]>
+imap <Backspace> \
 " map <D-s> <Esc>:w<CR> :silent ! /usr/local/bin/ctags -R<CR>
 " map <C-s> <Esc>:w<CR> :silent ! /usr/local/bin/ctags -R<CR>
 " I haven't found how to hide this function (yet)
