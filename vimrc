@@ -453,7 +453,7 @@ imap / \
 
 " vimtex mappings
 nmap  <localleader>v <localleader>lv
-nmap <localleader>r   <localleader>lr
+nmap <localleader>r  <localleader>lr
 nmap  <leader>v <localleader>lv
 nmap <leader>r  <localleader>lr
 " imap <Backspace> \
@@ -525,8 +525,10 @@ hi MatchParen guibg=NONE guifg=green gui=NONE
 nnoremap <C-e> :let g:ctrlp_match_window =
          \ 'bottom,order:btt,min:1,max:1000,results:1000'<CR>:CtrlPTag<CR>
 " map <C-t> :cd ~/Dropbox/workspace<CR>:CommandT<CR>
-map <C-t> :CtrlP<CR>
+map <D-t> :CtrlP<CR>
+map <A-t> :CtrlP<CR>
 map <D-t> :cd ~/Dropbox/workspace<CR>:CommandT<CR>
+map <A-t> :cd ~/Dropbox/workspace<CR>:CommandT<CR>
 " imap <C-t> <Esc>:cd ~/Dropbox/workspace<CR>:CommandT<CR>
 imap <C-t> <Esc>:CtrlP<CR>
 imap <D-t> <Esc>:cd ~/Dropbox/workspace<CR>:CommandT<CR>
@@ -540,6 +542,7 @@ let g:ycm_key_invoke_completion = '<C-n>'
  let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
  let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsJumpForwardTrigger="<D-j>"
+let g:UltiSnipsJumpForwardTrigger="<A-j>" 
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsListSnippets="<D-e>"
 let g:UltiSnipsListSnippets="<C-e>"
@@ -559,7 +562,6 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
    "Latex compile. 
    "them to an external terminal and run there.
 let g:vimtex_view_method = 'okular'
-let g:latex_viewer = 'okular'
 " map <Leader>l :!echo "latexmk -pvc -pdf -file-line-error -synctex=1
 " -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
 " map <Leader>l :!latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
