@@ -1,6 +1,6 @@
-call pathogen#infect() 
-syntax on
- filetype plugin indent on
+call pathogen#infect()   
+syntax on  
+ ufiletype plugin indent on
 "  General Settings
   au GUIEnter * set fullscreen
 if has("gui_running")
@@ -128,7 +128,7 @@ if &term =~ "xterm\\|rxvt"
 "     vnoremap <silent> y y:call ClipboardYank()<cr>
 "     vnoremap <silent> d d:call ClipboardYank()<cr>
 "     nnoremap <silent> p :call ClipboardPaste()<cr>p
-" set clipboard=unnamedplus	" yank to the system register (*) by default
+set clipboard=unnamedplus	" yank to the system register (*) by default
 set showmatch		" Cursor shows matching ) and }
 set showmode		" Show current mode
 set wildchar=<TAB>	" start wild expansion in the command line using <TAB>
@@ -364,7 +364,6 @@ endfunction
 "  nnoremap p "0p
 
 
-
 nnoremap d "_d
 vnoremap d "_d
 nnoremap D "_D
@@ -382,7 +381,7 @@ nnoremap <Right> :bprevious<CR>
 " noremap W w
 " noremap b B
 " noremap B b
- map f /
+ noremap f /
  map F ?
  map t <leader><leader>f
  map T <leader><leader>F
@@ -452,7 +451,8 @@ nnoremap <silent> <Leader>y :YRGetElem<CR>
 map ' "
 inoremap <D-]> <C-x><C-]>
 inoremap <C-]> <C-x><C-]>
-imap <Backspace> \
+imap / \ 
+" imap <Backspace> \
 " map <D-s> <Esc>:w<CR> :silent ! /usr/local/bin/ctags -R<CR>
 " map <C-s> <Esc>:w<CR> :silent ! /usr/local/bin/ctags -R<CR>
 " I haven't found how to hide this function (yet)
@@ -582,5 +582,4 @@ let
 "let tlist_make_settings  = 'make;m:makros;t:targets'
 " let g:easytags_cmd = '/usr/local/bin/ctags'
 "  let g:easytags_events = ['BufWritePost']
- 
-source ~/.anyname
+"source ~/.anyname
