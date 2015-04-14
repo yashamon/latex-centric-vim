@@ -1,6 +1,6 @@
 call pathogen#infect()   
 syntax on  
- ufiletype plugin indent on
+filetype plugin indent on
 "  General Settings
   au GUIEnter * set fullscreen
 if has("gui_running")
@@ -37,9 +37,10 @@ au VIMEnter set spell
   au VIMEnter * let g:surround_108 = {
      \'q':  " ``\r''"
      \ }
- 
-   let g:tex_flavor = "latex"
-   let g:tex_isk = '@,48-57,58,_,192-255'
+au FileType  nmap  <leader>v <localleader>lv
+au FileType  nmap <leader>r <localleader>lr
+let g:tex_flavor = "latex"
+let g:tex_isk = '@,48-57,58,_,192-255'
 "   set tags+=~/texmf/bibtex/bib/mypackage/bib/tags
 set tags+=~/Dropbox/workspace/tags
   " set formatoptions=ant
@@ -375,8 +376,6 @@ vnoremap C "_C
 nnoremap s "_x
 nnoremap <Left> :bnext<CR>
 nnoremap <Right> :bprevious<CR>
-
-
 " noremap w W
 " noremap W w
 " noremap b B
@@ -388,7 +387,6 @@ nnoremap <Right> :bprevious<CR>
   " map F  <leader><leader>F
 "  map f <leader><leader>f
 "  vmap <leader><leader>F
- 
  "nmap F ?  nnoremap v/ ?
  map 9 $
  nmap j gj
@@ -433,7 +431,7 @@ nnoremap <Right> :bprevious<CR>
  nmap 2 <C-i>
  nmap <S-CR> k$
  noremap <Leader>1 :buffer 1<CR>
-nnoremap <silent> <Leader>b :CtrlPbuffer<CR>
+nnoremap <silent> <Leader>b :CtrlPBuffer<CR>
  noremap <Leader>2 :buffer 2<CR>
  noremap <Leader>3 :buffer 3<CR>
 noremap <Leader>4 :buffer 4<CR>
@@ -451,7 +449,13 @@ nnoremap <silent> <Leader>y :YRGetElem<CR>
 map ' "
 inoremap <D-]> <C-x><C-]>
 inoremap <C-]> <C-x><C-]>
-imap / \ 
+imap / \
+
+" vimtex mappings
+nmap  <localleader>v <localleader>lv
+nmap <localleader>r   <localleader>lr
+nmap  <leader>v <localleader>lv
+nmap <leader>r  <localleader>lr
 " imap <Backspace> \
 " map <D-s> <Esc>:w<CR> :silent ! /usr/local/bin/ctags -R<CR>
 " map <C-s> <Esc>:w<CR> :silent ! /usr/local/bin/ctags -R<CR>
@@ -526,7 +530,7 @@ map <D-t> :cd ~/Dropbox/workspace<CR>:CommandT<CR>
 " imap <C-t> <Esc>:cd ~/Dropbox/workspace<CR>:CommandT<CR>
 imap <C-t> <Esc>:CtrlP<CR>
 imap <D-t> <Esc>:cd ~/Dropbox/workspace<CR>:CommandT<CR>
-nnoremap  <leader>v <leader>lv
+nnoremap  <leader>v <Leader>lv
 nnoremap  <leader>r <leader>lr
 " YouCompleteMe not using this plugin at the moment
 let g:ycm_auto_trigger = 0
@@ -554,9 +558,8 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
     
    "Latex compile. 
    "them to an external terminal and run there.
-let g:vimtex_view_method = 'mupdf'
-let g:latex_viewer = 'mupdf'
-let 
+let g:vimtex_view_method = 'okular'
+let g:latex_viewer = 'okular'
 " map <Leader>l :!echo "latexmk -pvc -pdf -file-line-error -synctex=1
 " -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
 " map <Leader>l :!latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
