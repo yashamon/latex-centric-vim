@@ -282,29 +282,29 @@ elseif (has("gui_running") && g:solarized_degrade == 1)
     let s:green       = "#5f8700"
 elseif g:solarized_termcolors != 256 && &t_Co >= 16
     let s:vmode       = "cterm"
-    let s:base03      = "8"
-    let s:base02      = "0"
-    let s:base01      = "10"
-    let s:base00      = "11"
-    let s:base0       = "12"
-    let s:base1       = "14"
-    let s:base2       = "7"
-    let s:base3       = "15"
-    let s:yellow      = "3"
-    let s:orange      = "9"
-    let s:red         = "1"
-    let s:magenta     = "5"
-    let s:violet      = "13"
-    let s:blue        = "4"
-    let s:cyan        = "6"
-    let s:green       = "2"
+    let s:base03      = "234"
+    let s:base02      = "235"
+    let s:base01      = "239"
+    let s:base00      = "240"
+    let s:base0       = "247"
+    let s:base1       = "245"
+    let s:base2       = "187"
+    let s:base3       = "230"
+    let s:yellow      = "136"
+    let s:orange      = "166"
+    let s:red         = "124"
+    let s:magenta     = "125"
+    let s:violet      = "61"
+    let s:blue        = "33"
+    let s:cyan        = "37"
+    let s:green       = "64"
 elseif g:solarized_termcolors == 256
     let s:vmode       = "cterm"
     let s:base03      = "234"
     let s:base02      = "235"
     let s:base01      = "239"
     let s:base00      = "240"
-    let s:base0       = "244"
+    let s:base0       = "247"
     let s:base1       = "245"
     let s:base2       = "187"
     let s:base3       = "230"
@@ -536,7 +536,7 @@ endif
 " note that link syntax to avoid duplicate configuration doesn't work with the
 " exe compiled formats
 
-exe "hi! Normal"         .s:fmt_none   .s:fg_base0  .s:bg_back
+exe "hi! Normal"         .s:fmt_none   .s:fg_base0  .s:bg_none
 
 exe "hi! Comment"        .s:fmt_ital   .s:fg_base01 .s:bg_none
 "       *Comment         any comment
@@ -668,7 +668,7 @@ exe "hi! TabLine"        .s:fmt_undr   .s:fg_base0  .s:bg_base02  .s:sp_base0
 exe "hi! TabLineFill"    .s:fmt_undr   .s:fg_base0  .s:bg_base02  .s:sp_base0
 exe "hi! TabLineSel"     .s:fmt_undr   .s:fg_base01 .s:bg_base2   .s:sp_base0  .s:fmt_revbbu
 exe "hi! CursorColumn"   .s:fmt_none   .s:fg_none   .s:bg_base02
-exe "hi! CursorLine"     .s:fmt_uopt   .s:fg_none   .s:bg_base02  .s:sp_base1
+" exe "hi! CursorLine"     .s:fmt_uopt   .s:fg_none   .s:bg_base02  .s:sp_base1
 exe "hi! ColorColumn"    .s:fmt_none   .s:fg_none   .s:bg_base02
 exe "hi! Cursor"         .s:fmt_none   .s:fg_base03 .s:bg_base0
 hi! link lCursor Cursor
@@ -776,11 +776,11 @@ exe "hi! perlStatementFileDesc". s:fg_cyan.s:bg_back.s:fmt_none
 "}}}
 " tex highlighting "{{{
 " ---------------------------------------------------------------------
-exe "hi! texStatement"   . s:fg_cyan   .s:bg_back   .s:fmt_none
-exe "hi! texMathZoneX"   . s:fg_yellow .s:bg_back   .s:fmt_none
-exe "hi! texMathMatcher" . s:fg_yellow .s:bg_back   .s:fmt_none
-exe "hi! texMathMatcher" . s:fg_yellow .s:bg_back   .s:fmt_none
-exe "hi! texRefLabel"    . s:fg_yellow .s:bg_back   .s:fmt_none
+exe "hi! texStatement"   . s:fg_cyan   .s:bg_none   .s:fmt_none
+exe "hi! texMathZoneX"   . s:fg_yellow .s:bg_none   .s:fmt_none
+exe "hi! texMathMatcher" . s:fg_yellow .s:bg_none   .s:fmt_none
+exe "hi! texMathMatcher" . s:fg_yellow .s:bg_none   .s:fmt_none
+exe "hi! texRefLabel"    . s:fg_yellow .s:bg_none   .s:fmt_none
 "}}}
 " ruby highlighting "{{{
 " ---------------------------------------------------------------------

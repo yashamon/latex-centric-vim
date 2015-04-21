@@ -77,19 +77,22 @@ else
   set background=dark
   set t_Co=256          " 256 color mode
     " let g:solarized_termcolors=256
-  colorscheme solarized2 
+  colorscheme solarized
 endif
 function Light()
    set background=light
-   colorscheme solarized2
+   set t_Co=256
+   colorscheme solarized
 highlight  CursorLine cterm=NONE ctermbg=blue ctermfg=white
+ highlight clear SpellBad
+highlight SpellBad cterm=underline
 endfunction
 
 function Dark()
    set background=dark
    colorscheme solarized2
 highlight  CursorLine cterm=NONE ctermbg=250 ctermfg=black
-highlight clear SpellBad
+ highlight clear SpellBad
 highlight SpellBad cterm=underline
 endfunction
 
@@ -129,7 +132,7 @@ if &term =~ "xterm\\|rxvt"
 "     vnoremap <silent> y y:call ClipboardYank()<cr>
 "     vnoremap <silent> d d:call ClipboardYank()<cr>
 "     nnoremap <silent> p :call ClipboardPaste()<cr>p
-set clipboard=unnamedplus	" yank to the system register (*) by default
+set clipboard=unnamed	" yank to the system register (*) by default
 set showmatch		" Cursor shows matching ) and }
 set showmode		" Show current mode
 set wildchar=<TAB>	" start wild expansion in the command line using <TAB>
@@ -364,7 +367,6 @@ endfunction
 " au VIMENTER unmap p nnoremap p "0p
 "  nnoremap p "0p
 
-
 nnoremap d "_d
 vnoremap d "_d
 nnoremap D "_D
@@ -398,6 +400,10 @@ nnoremap <Right> :bprevious<CR>
 
  nmap <S-h> v<Left>T<Space>ad
  nmap <S-l> vt<Space>ad
+nnoremap <S-k> <C-u>
+nnoremap <S-j> <C-d>
+nnoremap <leader>j J
+nnoremap <leader>k K
  "imap <D-Space> <C-X><C-o>
 "  imap <C-s> <Esc>:w<CR>
  "nunmap w
@@ -441,20 +447,20 @@ noremap <Leader>6 :buffer 6<CR>
 noremap <Leader>8 :buffer 8<CR>
 noremap <Leader>9 :buffer 9<CR>
 noremap <D-d> <C-d>
-
+map ;s <Esc>:w<CR>
 noremap <A-d> <C-d>
 noremap <D-u> <C-u>
 noremap <A-u> <C-u>
 nnoremap <silent> <Leader>y :YRGetElem<CR>
-map ' "
+map ' " 
 inoremap <D-]> <C-x><C-]>
 inoremap <C-]> <C-x><C-]>
-imap / \
-
+inoremap / \
+inoremap  \ /
 " vimtex mappings
 nmap  <localleader>v <localleader>lv
 nmap <localleader>r  <localleader>lr
-nmap  <leader>v <localleader>lv
+map  <leader>v <Esc>:w<CR><leader>lv
 nmap <leader>r  <localleader>lr
 " imap <Backspace> \
 " map <D-s> <Esc>:w<CR> :silent ! /usr/local/bin/ctags -R<CR>
@@ -508,8 +514,10 @@ map :tags  exe ":silent ! /usr/local/bin/ctags -R"
  map <leader>e :NERDTreeFind<CR>
 " map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
 
-let g:auto_save = 1
-
+" autosave
+" let g:auto_save = 1
+" let g:auto_save_in_insert_mode = 0
+" let g:auto_save_silent = 1
 "Highlight
 hi MatchParen cterm=underline ctermbg=none ctermfg=none
 hi MatchParen guibg=NONE guifg=green gui=NONE
@@ -525,10 +533,10 @@ hi MatchParen guibg=NONE guifg=green gui=NONE
 nnoremap <C-e> :let g:ctrlp_match_window =
          \ 'bottom,order:btt,min:1,max:1000,results:1000'<CR>:CtrlPTag<CR>
 " map <C-t> :cd ~/Dropbox/workspace<CR>:CommandT<CR>
-map <D-t> :CtrlP<CR>
-map <A-t> :CtrlP<CR>
-map <D-t> :cd ~/Dropbox/workspace<CR>:CommandT<CR>
-map <A-t> :cd ~/Dropbox/workspace<CR>:CommandT<CR>
+map <D-e> :CtrlP<CR>
+map <A-e> :CtrlP<CR>
+map <D-t> :cd ~/Dropbox/workspace<CR>:CtrlP<CR>
+map <A-t> :cd ~/Dropbox/workspace<CR>:CtrlP<CR>
 " imap <C-t> <Esc>:cd ~/Dropbox/workspace<CR>:CommandT<CR>
 imap <C-t> <Esc>:CtrlP<CR>
 imap <D-t> <Esc>:cd ~/Dropbox/workspace<CR>:CommandT<CR>
@@ -541,11 +549,11 @@ let g:ycm_key_invoke_completion = '<C-n>'
  let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
  let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
  let g:SuperTabDefaultCompletionType = '<C-n>'
-let g:UltiSnipsJumpForwardTrigger="<D-j>"
-let g:UltiSnipsJumpForwardTrigger="<A-j>" 
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsListSnippets="<D-e>"
-let g:UltiSnipsListSnippets="<C-e>"
+" let g:UltiSnipsJumpForwardTrigger="<D-j>"
+let g:UltiSnipsJumpForwardTrigger="<A-j>"  
+let g:UltiSnipsJumpForwardTrigger="<A-j>"
+let g:UltiSnipsListSnippets="<A-e>"
+let g:UltiSnipsListSnippets="<A-e>"
 " this mapping Enter key to <C-y> to chose the current highlight item 
 " and close the selection list, same as other IDEs.
 " CONFLICT with some plugins like tpope/Endwise
@@ -561,7 +569,7 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
     
    "Latex compile. 
    "them to an external terminal and run there.
-let g:vimtex_view_method = 'okular'
+let g:vimtex_view_method = 'mupdf'
 " map <Leader>l :!echo "latexmk -pvc -pdf -file-line-error -synctex=1
 " -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
 " map <Leader>l :!latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
