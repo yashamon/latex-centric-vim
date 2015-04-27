@@ -570,7 +570,7 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
     
    "Latex compile. 
    "them to an external terminal and run there.
-let g:vimtex_view_method = 'okular'
+" let g:vimtex_view_method = 'okular'
 " map <Leader>l :!echo "latexmk -pvc -pdf -file-line-error -synctex=1
 " -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
 " map <Leader>l :!latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
