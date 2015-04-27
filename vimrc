@@ -193,6 +193,8 @@ endfunction
 "--------------------------------------------------------------------------- 
 " set leader to ; 
 let mapleader=';'
+let g:maplocalleader = ';'
+let maplocalleader = ';'
 let g:mapleader=';'
 
 "replace the current word in all opened buffers
@@ -398,12 +400,12 @@ nnoremap <Right> :bprevious<CR>
  "vnoremap <Space> /<Space><enter>
  "vnoremap <S-Space> <CR> <Space><CR>
 
- nmap <S-h> <C-w>h
- nmap <S-l> <C-w>l
-nnoremap <S-k> <C-u>
-nnoremap <S-j> <C-d>
-nnoremap <leader>j J
-nnoremap <leader>k K
+nmap <S-h> <C-w>h
+nmap <S-l> <C-w>l
+noremap <S-k> <C-u>
+noremap <S-j> <C-d>
+noremap <leader>j J
+noremap <leader>k K
  "imap <D-Space> <C-X><C-o>
 "  imap <C-s> <Esc>:w<CR>
  "nunmap w
@@ -458,8 +460,8 @@ inoremap <C-]> <C-x><C-]>
 inoremap / \
 inoremap  \ /
 " vimtex mappings
-nmap  <localleader>v <localleader>lv
-nmap <localleader>r  <localleader>lr
+nnoremap  <leader>v <localleader>lv
+nnoremap <localleader>r  <localleader>lr
 map  <leader>v <Esc>:w<CR><leader>lv
 nmap <leader>r  <localleader>lr
 " imap <Backspace> \
