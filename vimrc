@@ -132,7 +132,7 @@ if &term =~ "xterm\\|rxvt"
 "     vnoremap <silent> y y:call ClipboardYank()<cr>
 "     vnoremap <silent> d d:call ClipboardYank()<cr>
 "     nnoremap <silent> p :call ClipboardPaste()<cr>p
-set clipboard=unnamed	" yank to the system register (*) by default
+set clipboard=unnamedplus	" yank to the system register (*) by default
 set showmatch		" Cursor shows matching ) and }
 set showmode		" Show current mode
 set wildchar=<TAB>	" start wild expansion in the command line using <TAB>
@@ -431,6 +431,7 @@ noremap <leader>k K
 "  nnoremap ? ?\$<CR>
  map <D-/> <Leader>__
  map <A-/> <Leader>__
+ map <leader>c <Leader>__
  map <A-r>  <C-r>
  map <C-c> gc
  nmap gc gcc
