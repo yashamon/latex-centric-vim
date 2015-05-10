@@ -400,8 +400,8 @@ nnoremap <Right> :bprevious<CR>
  nmap <S-h> <C-w>h
  nmap <S-l> <C-w>l
 
-nnoremap <S-k> <C-u>
-nnoremap <S-j> <C-d>
+noremap <S-k> <C-u>
+noremap <S-j> <C-d>
 nnoremap <leader>j J
 nnoremap <leader>k K
  "imap <D-Space> <C-X><C-o>
@@ -427,16 +427,16 @@ nnoremap <leader>k K
  ""map <D-/> <Leader>c<Space>
 "  nnoremap / /\$<CR>
 "  nnoremap ? ?\$<CR>
- map <D-/> <Leader>__
- map <A-/> <Leader>__
- map <A-r>  <C-r>
- map <C-c> gc
- nmap gc gcc
- nmap ` ~
- nmap 1 <C-o>
- nmap 2 <C-i>
- nmap <S-CR> k$
- noremap <Leader>1 :buffer 1<CR>
+map <leader>c <Leader>__
+map <A-/> <Leader>__
+map <A-r>  <C-r>
+map <C-c> gc
+nmap gc gcc
+nmap ` ~
+nmap 1 <C-o>
+nmap 2 <C-i>
+nmap <S-CR> k$
+noremap <Leader>1 :buffer 1<CR>
 nnoremap <silent> <Leader>b :CtrlPBuffer<CR>
  noremap <Leader>2 :buffer 2<CR>
  noremap <Leader>3 :buffer 3<CR>
@@ -570,7 +570,7 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
     
    "Latex compile. 
    "them to an external terminal and run there.
-" let g:vimtex_view_method = 'okular'
+let g:vimtex_view_method = 'okular'
 " map <Leader>l :!echo "latexmk -pvc -pdf -file-line-error -synctex=1
 " -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
 " map <Leader>l :!latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
