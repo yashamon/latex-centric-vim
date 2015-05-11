@@ -535,14 +535,11 @@ hi MatchParen guibg=NONE guifg=green gui=NONE
     " }
 nnoremap <C-e> :let g:ctrlp_match_window =
          \ 'bottom,order:btt,min:1,max:1000,results:1000'<CR>:CtrlPTag<CR>
-" map <C-t> :cd ~/Dropbox/workspace<CR>:CommandT<CR>
-map <D-e> :CtrlP<CR>
-map <A-e> :CtrlP<CR>
-map <D-t> :CtrlP ~/Dropbox/workspace<CR>
-map <A-t> :CtrlP ~/Dropbox/workspace<CR>
-" imap <C-t> <Esc>:cd ~/Dropbox/workspace<CR>:CommandT<CR>
-imap <C-t> <Esc>:CtrlP<CR>
-imap <D-t> :CtrlP ~/Dropbox/workspace<CR>
+map <D-e> :<Esc>:CtrlP<CR>
+map <A-e> :<Esc>:CtrlP<CR>
+map <D-t> :<Esc>:CtrlP ~/Dropbox/workspace<CR>
+map <A-t> :<Esc>:CtrlP ~/Dropbox/workspace<CR>
+map <C-t> :<Esc>:CtrlP ~/Dropbox/workspace<CR>
 nnoremap  <leader>v <Leader>lv
 nnoremap  <leader>r <leader>lr
 " YouCompleteMe not using this plugin at the moment

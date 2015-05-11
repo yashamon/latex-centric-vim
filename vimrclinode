@@ -532,14 +532,9 @@ hi MatchParen guibg=NONE guifg=green gui=NONE
     " }
 nnoremap <C-e> :let g:ctrlp_match_window =
          \ 'bottom,order:btt,min:1,max:1000,results:1000'<CR>:CtrlPTag<CR>
-" map <C-t> :cd ~/Dropbox/workspace<CR>:CommandT<CR>
-noremap <C-t> <Esc>:cd ~/Dropbox/workspace<CR>:CtrlP<CR>
-noremap <A-t> <Esc>:cd ~/Dropbox/workspace<CR>:CtrlP<CR>
+noremap <C-t> <Esc>:CtrlP ~/Dropbox/workspace<CR>
+noremap <A-t> <Esc>:CtrlP ~/Dropbox/workspace<CR>
 map <C-e> :CtrlP<CR>
-" noremap <A-t> :CtrlP<CR>
-" map <D-t> :cd ~/Dropbox/workspace<CR>:CommandT<CR>
-" map <A-t> :cd ~/Dropbox/workspace<CR>:CommandT<CR>
-" imap <C-t> <Esc>:cd ~/Dropbox/workspace<CR>:CommandT<CR>
 map <D-e> <Esc>:cd ~/Dropbox/workspace<CR>:CtrlP<CR>
 nnoremap  <leader>v <Leader>lv
 nnoremap  <leader>r <leader>lr
