@@ -538,11 +538,11 @@ nnoremap <C-e> :let g:ctrlp_match_window =
 " map <C-t> :cd ~/Dropbox/workspace<CR>:CommandT<CR>
 map <D-e> :CtrlP<CR>
 map <A-e> :CtrlP<CR>
-map <D-t> :cd ~/Dropbox/workspace<CR>:CtrlP<CR>
-map <A-t> :cd ~/Dropbox/workspace<CR>:CtrlP<CR>
+map <D-t> :CtrlP ~/Dropbox/workspace<CR>
+map <A-t> :CtrlP ~/Dropbox/workspace<CR>
 " imap <C-t> <Esc>:cd ~/Dropbox/workspace<CR>:CommandT<CR>
 imap <C-t> <Esc>:CtrlP<CR>
-imap <D-t> <Esc>:cd ~/Dropbox/workspace<CR>:CommandT<CR>
+imap <D-t> :CtrlP ~/Dropbox/workspace<CR>
 nnoremap  <leader>v <Leader>lv
 nnoremap  <leader>r <leader>lr
 " YouCompleteMe not using this plugin at the moment
