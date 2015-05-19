@@ -132,7 +132,7 @@ if &term =~ "xterm\\|rxvt"
 "     vnoremap <silent> y y:call ClipboardYank()<cr>
 "     vnoremap <silent> d d:call ClipboardYank()<cr>
 "     nnoremap <silent> p :call ClipboardPaste()<cr>p
-set clipboard=unnamedplus	" yank to the system register (*) by default
+set clipboard=unnamedplus " yank to the system register (*) by default
 set showmatch		" Cursor shows matching ) and }
 set showmode		" Show current mode
 set wildchar=<TAB>	" start wild expansion in the command line using <TAB>
@@ -354,30 +354,24 @@ let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc
 " Set ultisnips triggers
 " let g:UltiSnipsExpandTrigger="<tab>"                                            
 " let g:UltiSnipsJumpForwardTrigger="<D-j>"  
- 
+" let g:UltiSnipsJumpForwardTrigger="<D-j>"  
 " I haven't found how to hide this function (yet)
-"allows paste to not overwrite default register
-function! RestoreRegister()
-    let @" = s:restore_reg
-    if &clipboard == "unnamed"
-        let @* = s:restore_reg
-    endif
-    return ''
-endfunction
-" KeyMaps for movement, other Remaps, bindings
+" allows paste to not overwrite default register
+" KeyMaps for for, other Remaps, bindings 
 " I find the default register behavior uncomfortable 
-" au VIMENTER unmap p nnoremap p "0p
-"  nnoremap p "0p
-
-nnoremap d "_d
-vnoremap d "_d
-nnoremap D "_D
-vnoremap D "_D
-nnoremap c "_c
-vnoremap c "_c
-nnoremap C "_C
-vnoremap C "_C
-nnoremap s "_x
+" vunmap p 
+" vmap p "0p
+nnoremap d "dd
+nnoremap d "dd
+nnoremap D "dD
+nnoremap D "dD
+nnoremap c "dc
+nnoremap c "dc
+nnoremap C "dC
+nnoremap C "dC
+nnoremap s "dx
+nnoremap x "0x
+nnoremap X "0D
 nnoremap <Left> :bnext<CR>
 nnoremap <Right> :bprevious<CR>
 " noremap w W
@@ -406,11 +400,9 @@ noremap <S-k> <C-u>
 noremap <S-j> <C-d>
 noremap <leader>j J
 noremap <leader>k K
+map ' "
  "imap <D-Space> <C-X><C-o>
 "  imap <C-s> <Esc>:w<CR>
- "nunmap w
- "map ' "
- "map " '
  "map
 "  nmap w <leader><leader>w
 "  vmap w <leader><leader>w
@@ -455,7 +447,6 @@ noremap <A-d> <C-d>
 noremap <D-u> <C-u>
 noremap <A-u> <C-u>
 nnoremap <silent> <Leader>y :YRGetElem<CR>
-map ' " 
 inoremap <D-]> <C-x><C-]>
 inoremap <C-]> <C-x><C-]>
 inoremap / \
@@ -469,23 +460,21 @@ nmap <leader>r  <localleader>lr
 " map <D-s> <Esc>:w<CR> :silent ! /usr/local/bin/ctags -R<CR>
 " map <C-s> <Esc>:w<CR> :silent ! /usr/local/bin/ctags -R<CR>
 " I haven't found how to hide this function (yet)
- function! RestoreRegister()
-   let @" = s:restore_reg
-   return ''
- endfunction
-
- function! s:Repl()
+function! s:Repl()
      let s:restore_reg = @"
      return "p@=RestoreRegister()\<cr>"
  endfunction
 function! RestoreRegister()
     let @" = s:restore_reg
-    if &clipboard == "unnamed"
-        let @* = s:restore_reg
+    if &clipboard == "unnamedplus"
+        let @+ = s:restore_reg
     endif
     return ''
 endfunction
-
+function! s:Repl()
+     let s:restore_reg = @"
+     return "p@=RestoreRegister()\<cr>"
+ endfunction
 " NB: this supports "rp that replaces the selection by the contents of @r
 vnoremap <silent> <expr> p <sid>Repl()
 " Auto updating Ctags
