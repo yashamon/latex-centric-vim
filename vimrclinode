@@ -20,8 +20,8 @@ if has("gui_running")
 autocmd Colorscheme * highlight FoldColumn guifg=black guibg=bg
 au VIMEnter set spell
  set timeout
-   set timeoutlen=750
-     set ttimeoutlen=250
+   set timeoutlen=0
+     set ttimeoutlen=0
 
        "NeoVim handles ESC keys as alt+key set this to solve the
        "problem
@@ -353,28 +353,20 @@ let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc
  
 " I haven't found how to hide this function (yet)
 "allows paste to not overwrite default register
-function! RestoreRegister()
-    let @" = s:restore_reg
-    if &clipboard == "unnamed"
-        let @* = s:restore_reg
-    endif
-    return ''
-endfunction
-" KeyMaps for movement, other Remaps, bindings
 " I find the default register behavior uncomfortable 
 " au VIMENTER unmap p nnoremap p "0p
 "  nnoremap p "0p
-
-
-nnoremap d "_d
-vnoremap d "_d
-nnoremap D "_D
-vnoremap D "_D
-nnoremap c "_c
-vnoremap c "_c
-nnoremap C "_C
-vnoremap C "_C
-nnoremap s "_x
+nnoremap d "dd
+nnoremap d "dd
+nnoremap D "dD
+nnoremap D "dD
+nnoremap c "dc
+nnoremap c "dc
+nnoremap C "dC
+nnoremap C "dC
+nnoremap s "dx
+nnoremap x "0x
+nnoremap X "0D
 nnoremap <Left> :bnext<CR>
 nnoremap <Right> :bprevious<CR>
 " noremap w W
@@ -447,6 +439,7 @@ noremap <Leader>6 :buffer 6<CR>
 noremap <Leader>8 :buffer 8<CR>
 noremap <Leader>9 :buffer 9<CR>
 noremap <D-d> <C-d>
+map ;s <Esc>:w<CR>
 noremap <A-d> <C-d>
 noremap <D-u> <C-u>
 noremap <A-u> <C-u>

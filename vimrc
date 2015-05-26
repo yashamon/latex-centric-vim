@@ -20,8 +20,8 @@ if has("gui_running")
 autocmd Colorscheme * highlight FoldColumn guifg=black guibg=bg
 au VIMEnter set spell
  set timeout
-   set timeoutlen=750
-     set ttimeoutlen=250
+   set timeoutlen=0
+     set ttimeoutlen=0
 
        "NeoVim handles ESC keys as alt+key set this to solve the
        "problem
