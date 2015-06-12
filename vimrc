@@ -41,7 +41,7 @@ au FileType  nmap  <leader>v <localleader>lv
 au FileType  nmap <leader>r <localleader>lr
 let g:tex_flavor = "latex"
 let g:tex_isk = '@,48-57,58,_,192-255'
-"   set tags+=~/texmf/bibtex/bib/mypackage/bib/tags
+set tags+=~/home/yashamon/texmf/bibtex/tags
 set tags+=~/Dropbox/workspace/tags
   " set formatoptions=ant
   " set wrapmargin=1
@@ -357,6 +357,9 @@ let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc
 " let g:UltiSnipsJumpForwardTrigger="<D-j>"  
 " I haven't found how to hide this function (yet)
 " allows paste to not overwrite default register
+"
+"
+"
 " KeyMaps for for, other Remaps, bindings 
 " I find the default register behavior uncomfortable 
 " vunmap p 
@@ -394,8 +397,11 @@ nnoremap <Right> :bprevious<CR>
  "vnoremap <Space> /<Space><enter>
  "vnoremap <S-Space> <CR> <Space><CR>
 
-nmap <S-h> <C-w>h
-nmap <S-l> <C-w>l
+" window movements
+nmap <A-h> <C-w>h
+nmap <A-l> <C-w>l
+nmap <A-k> <C-w>k
+nmap <A-j> <C-w>j
 noremap <S-k> <C-u>
 noremap <S-j> <C-d>
 noremap <leader>j J
@@ -443,9 +449,9 @@ noremap <Leader>8 :buffer 8<CR>
 noremap <Leader>9 :buffer 9<CR>
 noremap <D-d> <C-d>
 map ;s <Esc>:w<CR>
-noremap <A-d> <C-d>
+" noremap <A-d> <C-d>
 noremap <D-u> <C-u>
-noremap <A-u> <C-u>
+" noremap <A-u> <C-u>
 nnoremap <silent> <Leader>y :YRGetElem<CR>
 inoremap <D-]> <C-x><C-]>
 inoremap <C-]> <C-x><C-]>
@@ -584,4 +590,4 @@ let g:vimtex_view_method = 'mupdf'
 "let tlist_make_settings  = 'make;m:makros;t:targets'
 " let g:easytags_cmd = '/usr/local/bin/ctags'
 "  let g:easytags_events = ['BufWritePost']
-"source ~/.anyname
+source ~/.anyname
