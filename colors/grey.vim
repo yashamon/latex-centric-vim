@@ -2,7 +2,7 @@ let g:colors_name="grey"
 
 "Normal colours
 hi Normal	guifg=black guibg=#848484
-   hi Normal	ctermfg=248 ctermbg=none
+   hi Normal	ctermfg=248 ctermbg=NONE
 " highlight groups
 hi Cursor	guibg=white guifg=black
  hi Cursor	ctermbg=white ctermfg=black
@@ -45,8 +45,8 @@ hi PmenuSel		guifg=#d8d8d8 guibg=#000000
 hi SpecialKey	ctermfg=black cterm=bold term=bold
 hi NonText	guibg=grey15 cterm=bold ctermfg=black
 hi Directory	ctermfg=darkgrey  guifg=#000000
-hi ErrorMsg	cterm=bold ctermfg=7 ctermbg=1
-hi IncSearch	cterm=NONE ctermfg=grey ctermbg=black
+hi ErrorMsg	cterm=bold ctermfg=7 ctermbg=NONE
+hi IncSearch	cterm=NONE ctermfg=grey ctermbg=NONE
 hi Search	cterm=NONE ctermfg=black ctermbg=darkgrey
 hi MoreMsg	ctermfg=black
 hi ModeMsg	cterm=NONE ctermfg=black
@@ -59,13 +59,13 @@ hi Title	ctermfg=5
 hi Visual	cterm=reverse
 hi VisualNOS	cterm=bold,underline
 hi WarningMsg	ctermfg=1
-hi WildMenu	ctermfg=0 ctermbg=3
+hi WildMenu	ctermfg=0 ctermbg=NONE
 hi Folded	ctermfg=darkgrey ctermbg=NONE
 hi FoldColumn	ctermfg=darkgrey ctermbg=NONE
-hi DiffAdd	ctermbg=4
-hi DiffChange	ctermbg=5
-hi DiffDelete	cterm=bold ctermfg=4 ctermbg=6
-hi DiffText	cterm=bold ctermbg=1
+hi DiffAdd	ctermbg=NONE
+hi DiffChange	ctermbg=NONE
+hi DiffDelete	cterm=bold ctermfg=4 ctermbg=NONE
+hi DiffText	cterm=bold ctermbg=NONE
 hi Special	ctermfg=5
 hi Identifier	ctermfg=6
 hi Statement	ctermfg=3
@@ -74,4 +74,4 @@ hi Type		ctermfg=2
 hi Underlined	cterm=underline ctermfg=5
 hi Ignore	cterm=bold ctermfg=7
 hi Ignore	ctermfg=darkgrey
-hi Error	cterm=bold ctermfg=7 ctermbg=1
+hi Error	cterm=bold ctermfg=7 ctermbg=NONE

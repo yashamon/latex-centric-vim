@@ -77,13 +77,17 @@ else
   set background=dark
   set t_Co=256          " 256 color mode
     " let g:solarized_termcolors=256
-  colorscheme grey
+  colorscheme solarized2
+highlight clear SpellBad
+highlight SpellBad cterm=underline
+hi MatchParen cterm=underline ctermbg=none ctermfg=magenta
 endif
 function Light()
    set background=light
    set t_Co=256
    colorscheme solarized2
 highlight  CursorLine cterm=NONE ctermbg=blue ctermfg=white
+hi MatchParen cterm=underline ctermbg=none ctermfg=magenta
 endfunction
 
 function Dark()
@@ -92,6 +96,7 @@ function Dark()
 highlight  CursorLine cterm=NONE ctermbg=250 ctermfg=black
 highlight clear SpellBad
 highlight SpellBad cterm=underline
+hi MatchParen cterm=underline ctermbg=none ctermfg=magenta
 endfunction
 
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
