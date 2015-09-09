@@ -6,9 +6,9 @@ filetype plugin indent on
 if has("gui_running")
   set fuoptions=maxvert,maxhorz
   au GUIEnter * set fullscreen
-   set foldcolumn=12
+   set foldcolumn=10
    set formatoptions=ant
-  set wrapmargin=1
+  set wrapmargin=0
   set nohlsearch
   " set tags= ~/.tags
   highlight SignColumn guibg=bg
@@ -74,10 +74,10 @@ if has("gui_running")	" GUI color and font settings
   highlight CursorLine  guibg=#003853 ctermbg=24  gui=none cterm=none
 else
 " terminal color settings
-  set background=light
+  set background=dark
   set t_Co=256          " 256 color mode
     " let g:solarized_termcolors=256
-  colorscheme solarized2 
+  colorscheme grey
 endif
 function Light()
    set background=light
@@ -528,6 +528,7 @@ nnoremap <C-e> :let g:ctrlp_match_window =
 noremap <C-t> <Esc>:CtrlP ~/Dropbox/workspace<CR>
 noremap <A-t> <Esc>:CtrlP ~/Dropbox/workspace<CR>
 map <C-e> :CtrlP<CR>
+map <A-e> :CtrlP<CR>
 map <D-e> <Esc>:cd ~/Dropbox/workspace<CR>:CtrlP<CR>
 nnoremap  <leader>v <Leader>lv
 nnoremap  <leader>r <leader>lr
