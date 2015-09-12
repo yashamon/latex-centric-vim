@@ -6,9 +6,9 @@ filetype plugin indent on
 if has("gui_running")
   set fuoptions=maxvert,maxhorz
   au GUIEnter * set fullscreen
-   set foldcolumn=10
+   set foldcolumn=12
    set formatoptions=ant
-  set wrapmargin=0
+  set wrapmargin=1
   set nohlsearch
   " set tags= ~/.tags
   highlight SignColumn guibg=bg
@@ -41,7 +41,7 @@ au FileType  nmap  <leader>v <localleader>lv
 au FileType  nmap <leader>r <localleader>lr
 let g:tex_flavor = "latex"
 let g:tex_isk = '@,48-57,58,_,192-255'
-"   set tags+=~/texmf/bibtex/bib/mypackage/bib/tags
+set tags+=~/home/yashamon/texmf/bibtex/tags
 set tags+=~/Dropbox/workspace/tags
   " set formatoptions=ant
   " set wrapmargin=1
@@ -74,29 +74,26 @@ if has("gui_running")	" GUI color and font settings
   highlight CursorLine  guibg=#003853 ctermbg=24  gui=none cterm=none
 else
 " terminal color settings
-  set background=light
+  set background=dark
   set t_Co=256          " 256 color mode
     " let g:solarized_termcolors=256
-  colorscheme solarized2
-highlight clear SpellBad
-highlight SpellBad cterm=underline
-hi MatchParen cterm=underline ctermbg=none ctermfg=magenta
+  colorscheme solarized
 endif
 function Light()
    set background=light
    set t_Co=256
-   colorscheme solarized2
+   colorscheme solarized
 highlight  CursorLine cterm=NONE ctermbg=blue ctermfg=white
-hi MatchParen cterm=underline ctermbg=none ctermfg=magenta
+ highlight clear SpellBad
+highlight SpellBad cterm=underline
 endfunction
 
 function Dark()
    set background=dark
    colorscheme solarized2
 highlight  CursorLine cterm=NONE ctermbg=250 ctermfg=black
-highlight clear SpellBad
+ highlight clear SpellBad
 highlight SpellBad cterm=underline
-hi MatchParen cterm=underline ctermbg=none ctermfg=magenta
 endfunction
 
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -115,16 +112,16 @@ highlight  CursorLine cterm=NONE ctermbg=grey ctermfg=black
 
 " " Revert Color to default when leaving Insert Mode
 "  autocmd InsertLeave * highlight  CursorLine ctermbg=none ctermfg=None
-" if &term =~ "xterm\\|rxvt"
-"   " use an orange cursor in insert mode
-"      let &t_SI = "\<Esc>]12;orange\x7"
-"   "     " use a red cursor otherwise
-"          let &t_EI = "\<Esc>]12;white\x7"
-"            silent !echo -ne "\033]12;red\007"
-"   "           " reset cursor when vim exits
-"                autocmd VimLeave * silent !echo -ne "\033]112\007"
-"   "               " use \003]12;gray\007 for gnome-terminal
-"                  endif
+if &term =~ "xterm\\|rxvt"
+  " use an orange cursor in insert mode
+     let &t_SI = "\<Esc>]12;orange\x7"
+  "     " use a red cursor otherwise
+         let &t_EI = "\<Esc>]12;white\x7"
+           silent !echo -ne "\033]12;red\007"
+  "           " reset cursor when vim exits
+               autocmd VimLeave * silent !echo -ne "\033]112\007"
+  "               " use \003]12;gray\007 for gnome-terminal
+                 endif
 " function! ClipboardYank()
 "      call system('xclip -i -selection clipboard', @@)
 "   endfunction
@@ -135,7 +132,7 @@ highlight  CursorLine cterm=NONE ctermbg=grey ctermfg=black
 "     vnoremap <silent> y y:call ClipboardYank()<cr>
 "     vnoremap <silent> d d:call ClipboardYank()<cr>
 "     nnoremap <silent> p :call ClipboardPaste()<cr>p
-" set clipboard=unnamedplus	" yank to the system register (*) by default
+set clipboard=unnamedplus " yank to the system register (*) by default
 set showmatch		" Cursor shows matching ) and }
 set showmode		" Show current mode
 set wildchar=<TAB>	" start wild expansion in the command line using <TAB>
@@ -196,6 +193,8 @@ endfunction
 "--------------------------------------------------------------------------- 
 " set leader to ; 
 let mapleader=';'
+let g:maplocalleader = ';'
+let maplocalleader = ';'
 let g:mapleader=';'
 
 "replace the current word in all opened buffers
@@ -337,16 +336,34 @@ let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc
   
 
 
-" Remaps
+
+" --- TagBar
+" toggle TagBar with F7
+"nnoremap <silent> <F7> :TagbarToggle<CR> 
+" set focus to TagBar when opening it
+"let g:tagbar_autofocus = 1
+
+" --- PowerLine
+" let g:Powerline_symbols = 'fancy' " require fontpatcher
+"
+
+
+" --- vim-gitgutter
+"let g:gitgutter_enabled = 1
+
 " Set ultisnips triggers
 " let g:UltiSnipsExpandTrigger="<tab>"                                            
 " let g:UltiSnipsJumpForwardTrigger="<D-j>"  
- 
+" let g:UltiSnipsJumpForwardTrigger="<D-j>"  
 " I haven't found how to hide this function (yet)
-"allows paste to not overwrite default register
+" allows paste to not overwrite default register
+"
+"
+"
+" KeyMaps for for, other Remaps, bindings 
 " I find the default register behavior uncomfortable 
-" au VIMENTER unmap p nnoremap p "0p
-"  nnoremap p "0p
+" vunmap p 
+" vmap p "0p
 nnoremap d "dd
 nnoremap d "dd
 nnoremap D "dD
@@ -360,17 +377,6 @@ nnoremap x "0x
 nnoremap X "0D
 nnoremap <Left> :bnext<CR>
 nnoremap <Right> :bprevious<CR>
-tnoremap <Left> :tbnext<CR>
-tnoremap <Right> :tbprevious<CR>
-tnoremap <Leader>e <C-\><C-n> 
-" tnoremap <Esc> <C-\> 
-noremap < :tabp<CR>
-nnoremap > :tabn<CR>
-nnoremap <leader>n :tabedit %<CR>
-imap <A-j> <C-j>
-imap <M-j> <C-j>
-map <C-q> <Esc>:q!<CR>
-map <A-q> <C-q>
 " noremap w W
 " noremap W w
 " noremap b B
@@ -391,18 +397,18 @@ map <A-q> <C-q>
  "vnoremap <Space> /<Space><enter>
  "vnoremap <S-Space> <CR> <Space><CR>
 
- nmap <S-h> <C-w>h
- nmap <S-l> <C-w>l
-noremap <leader>r <C-r>
+" window movements
+nmap <A-h> <C-w>h
+nmap <A-l> <C-w>l
+nmap <A-k> <C-w>k
+nmap <A-j> <C-w>j
 noremap <S-k> <C-u>
 noremap <S-j> <C-d>
-nnoremap <leader>j J
-nnoremap <leader>k K
+noremap <leader>j J
+noremap <leader>k K
+map ' "
  "imap <D-Space> <C-X><C-o>
 "  imap <C-s> <Esc>:w<CR>
- "nunmap w
- "map ' "
- "map " '
  "map
 "  nmap w <leader><leader>w
 "  vmap w <leader><leader>w
@@ -421,16 +427,17 @@ nnoremap <leader>k K
  ""map <D-/> <Leader>c<Space>
 "  nnoremap / /\$<CR>
 "  nnoremap ? ?\$<CR>
-map <leader>c <Leader>__
-map <A-/> <Leader>__
-map <A-r>  <C-r>
-map <C-c> gc
-nmap gc gcc
-nmap ` ~
-nmap 1 <C-o>
-nmap 2 <C-i>
-nmap <S-CR> k$
-noremap <Leader>1 :buffer 1<CR>
+ map <D-/> <Leader>__
+ map <A-/> <Leader>__
+ map <leader>c <Leader>__
+ map <A-r>  <C-r>
+ map <C-c> gc
+ nmap gc gcc
+ nmap ` ~
+ nmap 1 <C-o>
+ nmap 2 <C-i>
+ nmap <S-CR> k$
+ noremap <Leader>1 :buffer 1<CR>
 nnoremap <silent> <Leader>b :CtrlPBuffer<CR>
  noremap <Leader>2 :buffer 2<CR>
  noremap <Leader>3 :buffer 3<CR>
@@ -442,49 +449,38 @@ noremap <Leader>8 :buffer 8<CR>
 noremap <Leader>9 :buffer 9<CR>
 noremap <D-d> <C-d>
 map ;s <Esc>:w<CR>
-noremap <A-d> <C-d>
+" noremap <A-d> <C-d>
 noremap <D-u> <C-u>
-noremap <A-u> <C-u>
-
+" noremap <A-u> <C-u>
 nnoremap <silent> <Leader>y :YRGetElem<CR>
-map ' "
 inoremap <D-]> <C-x><C-]>
 inoremap <C-]> <C-x><C-]>
-imap / \
-
+inoremap / \
+inoremap  \ /
 " vimtex mappings
-nmap  <localleader>v <localleader>lv
-nmap <localleader>r  <localleader>lr
-nmap  <leader>v <localleader>lv
+nnoremap  <leader>v <localleader>lv
+nnoremap <localleader>r  <localleader>lr
+map  <leader>v <Esc>:w<CR><leader>lv
 nmap <leader>r  <localleader>lr
-
-"Neovim mappings
-:tnoremap <S-h> <C-\><C-n><C-w>h
-:tnoremap <S-j> <C-\><C-n><C-w>j
-:tnoremap <S-k> <C-\><C-n><C-w>k
-:tnoremap <S-l> <C-\><C-n><C-w>l
-
 " imap <Backspace> \
 " map <D-s> <Esc>:w<CR> :silent ! /usr/local/bin/ctags -R<CR>
 " map <C-s> <Esc>:w<CR> :silent ! /usr/local/bin/ctags -R<CR>
 " I haven't found how to hide this function (yet)
- function! RestoreRegister()
-   let @" = s:restore_reg
-   return ''
- endfunction
-
- function! s:Repl()
+function! s:Repl()
      let s:restore_reg = @"
      return "p@=RestoreRegister()\<cr>"
  endfunction
 function! RestoreRegister()
     let @" = s:restore_reg
-    if &clipboard == "unnamed"
-        let @* = s:restore_reg
+    if &clipboard == "unnamedplus"
+        let @+ = s:restore_reg
     endif
     return ''
 endfunction
-
+function! s:Repl()
+     let s:restore_reg = @"
+     return "p@=RestoreRegister()\<cr>"
+ endfunction
 " NB: this supports "rp that replaces the selection by the contents of @r
 vnoremap <silent> <expr> p <sid>Repl()
 " Auto updating Ctags
@@ -515,11 +511,11 @@ map :tags  exe ":silent ! /usr/local/bin/ctags -R"
 "Nerd Tree
  map <leader>e :NERDTreeFind<CR>
 " map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
-"autosave
-let g:auto_save = 1
 
- let g:auto_save_in_insert_mode = 0
- let g:auto_save_silent = 1
+" autosave
+" let g:auto_save = 1
+" let g:auto_save_in_insert_mode = 0
+" let g:auto_save_silent = 1
 "Highlight
 hi MatchParen cterm=underline ctermbg=none ctermfg=none
 hi MatchParen guibg=NONE guifg=green gui=NONE
@@ -534,11 +530,11 @@ hi MatchParen guibg=NONE guifg=green gui=NONE
     " }
 nnoremap <C-e> :let g:ctrlp_match_window =
          \ 'bottom,order:btt,min:1,max:1000,results:1000'<CR>:CtrlPTag<CR>
-noremap <C-t> <Esc>:CtrlP ~/Dropbox/workspace<CR>
-noremap <A-t> <Esc>:CtrlP ~/Dropbox/workspace<CR>
-map <C-e> :CtrlP<CR>
-map <A-e> :CtrlP<CR>
-map <D-e> <Esc>:cd ~/Dropbox/workspace<CR>:CtrlP<CR>
+map <D-e> :<Esc>:CtrlP<CR>
+map <A-e> :<Esc>:CtrlP<CR>
+map <D-t> :<Esc>:CtrlP ~/Dropbox/workspace<CR>
+map <A-t> :<Esc>:CtrlP ~/Dropbox/workspace<CR>
+map <C-t> :<Esc>:CtrlP ~/Dropbox/workspace<CR>
 nnoremap  <leader>v <Leader>lv
 nnoremap  <leader>r <leader>lr
 " YouCompleteMe not using this plugin at the moment
@@ -548,11 +544,11 @@ let g:ycm_key_invoke_completion = '<C-n>'
  let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
  let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
  let g:SuperTabDefaultCompletionType = '<C-n>'
-let g:UltiSnipsJumpForwardTrigger="<D-j>"
-let g:UltiSnipsJumpForwardTrigger="<A-j>" 
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsListSnippets="<D-e>"
-let g:UltiSnipsListSnippets="<C-e>"
+" let g:UltiSnipsJumpForwardTrigger="<D-j>"
+let g:UltiSnipsJumpForwardTrigger="<A-j>"  
+let g:UltiSnipsJumpForwardTrigger="<A-j>"
+let g:UltiSnipsListSnippets="<A-e>"
+let g:UltiSnipsListSnippets="<A-e>"
 " this mapping Enter key to <C-y> to chose the current highlight item 
 " and close the selection list, same as other IDEs.
 " CONFLICT with some plugins like tpope/Endwise
@@ -568,8 +564,9 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
     
    "Latex compile. 
    "them to an external terminal and run there.
-let g:vimtex_view_method = 'okular'
-map <Leader>l :tabe %<CR><Esc>:term latexmk -pvc -pdf -file-line-error -synctex=1 -interaction=nonstopmode -recorder %:p:h/%<CR>
+let g:vimtex_view_method = 'mupdf'
+" map <Leader>l :!echo "latexmk -pvc -pdf -file-line-error -synctex=1
+" -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
 " map <Leader>l :!latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
 "  map <Leader>s :!latexmk -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder %:p:h/document.tex<CR>
 " map <Leader>d :!cd %:p:h<CR>
@@ -593,4 +590,4 @@ map <Leader>l :tabe %<CR><Esc>:term latexmk -pvc -pdf -file-line-error -synctex=
 "let tlist_make_settings  = 'make;m:makros;t:targets'
 " let g:easytags_cmd = '/usr/local/bin/ctags'
 "  let g:easytags_events = ['BufWritePost']
-"source ~/.anyname
+source ~/.anyname
