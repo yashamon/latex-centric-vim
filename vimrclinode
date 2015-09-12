@@ -74,7 +74,7 @@ if has("gui_running")	" GUI color and font settings
   highlight CursorLine  guibg=#003853 ctermbg=24  gui=none cterm=none
 else
 " terminal color settings
-  set background=dark
+  set background=light
   set t_Co=256          " 256 color mode
     " let g:solarized_termcolors=256
   colorscheme solarized2
@@ -337,21 +337,7 @@ let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc
   
 
 
-
-" --- TagBar
-" toggle TagBar with F7
-"nnoremap <silent> <F7> :TagbarToggle<CR> 
-" set focus to TagBar when opening it
-"let g:tagbar_autofocus = 1
-
-" --- PowerLine
-" let g:Powerline_symbols = 'fancy' " require fontpatcher
-"
-
-
-" --- vim-gitgutter
-"let g:gitgutter_enabled = 1
-
+" Remaps
 " Set ultisnips triggers
 " let g:UltiSnipsExpandTrigger="<tab>"                                            
 " let g:UltiSnipsJumpForwardTrigger="<D-j>"  
@@ -374,6 +360,14 @@ nnoremap x "0x
 nnoremap X "0D
 nnoremap <Left> :bnext<CR>
 nnoremap <Right> :bprevious<CR>
+tnoremap <Left> :tbnext<CR>
+tnoremap <Right> :tbprevious<CR>
+tnoremap <Leader>e <C-\><C-n> 
+tnoremap <Esc> <C-\> 
+noremap < :tabp
+nnoremap > :tabn
+imap <A-j> <C-j>
+imap <M-j> <C-j>
 " noremap w W
 " noremap W w
 " noremap b B
@@ -396,7 +390,7 @@ nnoremap <Right> :bprevious<CR>
 
  nmap <S-h> <C-w>h
  nmap <S-l> <C-w>l
-
+noremap <leader>r <C-r>
 noremap <S-k> <C-u>
 noremap <S-j> <C-d>
 nnoremap <leader>j J
@@ -460,6 +454,13 @@ nmap  <localleader>v <localleader>lv
 nmap <localleader>r  <localleader>lr
 nmap  <leader>v <localleader>lv
 nmap <leader>r  <localleader>lr
+
+"Neovim mappings
+:tnoremap <S-h> <C-\><C-n><C-w>h
+:tnoremap <S-j> <C-\><C-n><C-w>j
+:tnoremap <S-k> <C-\><C-n><C-w>k
+:tnoremap <S-l> <C-\><C-n><C-w>l
+
 " imap <Backspace> \
 " map <D-s> <Esc>:w<CR> :silent ! /usr/local/bin/ctags -R<CR>
 " map <C-s> <Esc>:w<CR> :silent ! /usr/local/bin/ctags -R<CR>
@@ -565,8 +566,7 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
    "Latex compile. 
    "them to an external terminal and run there.
 let g:vimtex_view_method = 'okular'
-" map <Leader>l :!echo "latexmk -pvc -pdf -file-line-error -synctex=1
-" -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
+map <Leader>l :term latexmk -pvc -pdf -file-line-error -synctex=1 -interaction=nonstopmode -recorder %:p:h/%<CR>
 " map <Leader>l :!latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
 "  map <Leader>s :!latexmk -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder %:p:h/document.tex<CR>
 " map <Leader>d :!cd %:p:h<CR>
