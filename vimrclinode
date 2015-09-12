@@ -115,16 +115,16 @@ highlight  CursorLine cterm=NONE ctermbg=grey ctermfg=black
 
 " " Revert Color to default when leaving Insert Mode
 "  autocmd InsertLeave * highlight  CursorLine ctermbg=none ctermfg=None
-if &term =~ "xterm\\|rxvt"
-  " use an orange cursor in insert mode
-     let &t_SI = "\<Esc>]12;orange\x7"
-  "     " use a red cursor otherwise
-         let &t_EI = "\<Esc>]12;white\x7"
-           silent !echo -ne "\033]12;red\007"
-  "           " reset cursor when vim exits
-               autocmd VimLeave * silent !echo -ne "\033]112\007"
-  "               " use \003]12;gray\007 for gnome-terminal
-                 endif
+" if &term =~ "xterm\\|rxvt"
+"   " use an orange cursor in insert mode
+"      let &t_SI = "\<Esc>]12;orange\x7"
+"   "     " use a red cursor otherwise
+"          let &t_EI = "\<Esc>]12;white\x7"
+"            silent !echo -ne "\033]12;red\007"
+"   "           " reset cursor when vim exits
+"                autocmd VimLeave * silent !echo -ne "\033]112\007"
+"   "               " use \003]12;gray\007 for gnome-terminal
+"                  endif
 " function! ClipboardYank()
 "      call system('xclip -i -selection clipboard', @@)
 "   endfunction
@@ -363,11 +363,14 @@ nnoremap <Right> :bprevious<CR>
 tnoremap <Left> :tbnext<CR>
 tnoremap <Right> :tbprevious<CR>
 tnoremap <Leader>e <C-\><C-n> 
-tnoremap <Esc> <C-\> 
-noremap < :tabp
-nnoremap > :tabn
+" tnoremap <Esc> <C-\> 
+noremap < :tabp<CR>
+nnoremap > :tabn<CR>
+nnoremap <leader>n :tabedit %<CR>
 imap <A-j> <C-j>
 imap <M-j> <C-j>
+map <C-q> <Esc>:q!<CR>
+map <A-q> <C-q>
 " noremap w W
 " noremap W w
 " noremap b B
@@ -566,7 +569,7 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
    "Latex compile. 
    "them to an external terminal and run there.
 let g:vimtex_view_method = 'okular'
-map <Leader>l :term latexmk -pvc -pdf -file-line-error -synctex=1 -interaction=nonstopmode -recorder %:p:h/%<CR>
+map <Leader>l :e %<Esc>:term latexmk -pvc -pdf -file-line-error -synctex=1 -interaction=nonstopmode -recorder %:p:h/%<CR>
 " map <Leader>l :!latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
 "  map <Leader>s :!latexmk -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder %:p:h/document.tex<CR>
 " map <Leader>d :!cd %:p:h<CR>
