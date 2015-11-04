@@ -41,14 +41,15 @@ au FileType  nmap  <leader>v <localleader>lv
 au FileType  nmap <leader>r <localleader>lr
 let g:tex_flavor = "latex"
 let g:tex_isk = '@,48-57,58,_,192-255'
-"   set tags+=~/texmf/bibtex/bib/mypackage/bib/tags
-set tags+=~/Dropbox/workspace/tags
+set tags+=~/texmf/bibtex/bib/tags
+" set tags+=~/Dropbox/workspace/tags
   " set formatoptions=ant
   " set wrapmargin=1
   set tw=70
 set guioptions-=r 
 set guioptions-=l
 set nocompatible	" not compatible with the old-fashion vi mode
+set mouse-=a
 set bs=2		" allow backspacing over everything in insert mode
 set undofile                " Save undo's after file closes
 set undodir=~/Dropbox/undo " where to save undo histories
@@ -338,26 +339,19 @@ let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc
 
 
 " Remaps
-" Set ultisnips triggers
-" let g:UltiSnipsExpandTrigger="<tab>"                                            
-" let g:UltiSnipsJumpForwardTrigger="<D-j>"  
- 
-" I haven't found how to hide this function (yet)
-"allows paste to not overwrite default register
 " I find the default register behavior uncomfortable 
 " au VIMENTER unmap p nnoremap p "0p
-"  nnoremap p "0p
-nnoremap d "dd
-nnoremap d "dd
-nnoremap D "dD
-nnoremap D "dD
-nnoremap c "dc
-nnoremap c "dc
-nnoremap C "dC
-nnoremap C "dC
-nnoremap s "dx
-nnoremap x "0x
-nnoremap X "0D
+noremap p "0p
+vnoremap d "dd
+noremap D "dD
+noremap D "dD
+noremap c "dc
+noremap c "dc
+noremap C "dC
+noremap C "dC
+noremap s "dx
+noremap x "0x
+noremap X "0D
 nnoremap <Left> :bnext<CR>
 nnoremap <Right> :bprevious<CR>
 tnoremap <Left> :tbnext<CR>
@@ -569,7 +563,7 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
    "Latex compile. 
    "them to an external terminal and run there.
 let g:vimtex_view_method = 'okular'
-map <Leader>l :tabe %<CR><Esc>:term latexmk -pvc -pdf -file-line-error -synctex=1 -interaction=nonstopmode -recorder %:p:h/%<CR>
+map <Leader>l :tabe %<CR><Esc>:term latexmk -pvc -pdf -file-line-error -synctex=1 -interaction=nonstopmode -recorder %:p:h/%<CR><leader>e
 " map <Leader>l :!latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
 "  map <Leader>s :!latexmk -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder %:p:h/document.tex<CR>
 " map <Leader>d :!cd %:p:h<CR>

@@ -44,7 +44,7 @@ let g:tex_isk = '@,48-57,58,_,192-255'
 "   set tags+=~/texmf/bibtex/bib/mypackage/bib/tags
 set tags+=~/Dropbox/workspace/tags
   " set formatoptions=ant
-  " set wrapmargin=1
+  " se wrapmargin=1
   set tw=70
 set guioptions-=r 
 set guioptions-=l
@@ -62,7 +62,7 @@ let g:yankstack_map_keys = 0
 nmap <leader>p <Plug>yankstack_substitute_older_paste
   nmap <leader>P <Plug>yankstack_substitute_newer_paste
 " auto reload vimrc when editing it
-autocmd! bufwritepost .vimrc source ~/.vimrc
+autocmd! bufwritepost .nvimrc source ~/.nvimrc
 syntax on		" syntax highlight
 " set hlsearch		" search highlighting
 if has("gui_running")	" GUI color and font settings
@@ -569,7 +569,8 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
    "Latex compile. 
    "them to an external terminal and run there.
 let g:vimtex_view_method = 'okular'
-map <Leader>l :tabe %<CR><Esc>:term latexmk -pvc -pdf -file-line-error -synctex=1 -interaction=nonstopmode -recorder %:p:h/%<CR>
+map <Leader>l :tabe %<CR><Esc>:term latexmk -pvc -pdf -file-line-error
+-synctex=1 -interaction=nonstopmode -recorder %:p:h/%<CR><leader>e
 " map <Leader>l :!latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
 "  map <Leader>s :!latexmk -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder %:p:h/document.tex<CR>
 " map <Leader>d :!cd %:p:h<CR>
