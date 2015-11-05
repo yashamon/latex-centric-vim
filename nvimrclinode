@@ -13,8 +13,8 @@ if has("gui_running")
   " set tags= ~/.tags
   highlight SignColumn guibg=bg
       endif    
- autocmd BufWinLeave *.* mkview
- autocmd BufWinEnter *.* silent loadview
+"  autocmd BufWinLeave *.* mkview
+"  autocmd BufWinEnter *.* silent loadview
    " set foldcolumn=2
 "  highlight foldcolumn ctermfg=256 ctermbg=bg
 autocmd Colorscheme * highlight FoldColumn guifg=black guibg=bg
@@ -341,6 +341,7 @@ let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc
 " Remaps
 " I find the default register behavior uncomfortable 
 " au VIMENTER unmap p nnoremap p "0p
+inoremap \ /
 noremap p "0p
 vnoremap d "dd
 noremap D "dD
@@ -444,7 +445,7 @@ nnoremap <silent> <Leader>y :YRGetElem<CR>
 map ' "
 inoremap <D-]> <C-x><C-]>
 inoremap <C-]> <C-x><C-]>
-imap / \
+inoremap / \
 
 " vimtex mappings
 nmap  <localleader>v <localleader>lv
@@ -562,7 +563,7 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
     
    "Latex compile. 
    "them to an external terminal and run there.
-let g:vimtex_view_method = 'okular'
+" let g:vimtex_view_method = 'okular'
 map <Leader>l :tabe %<CR><Esc>:term latexmk -pvc -pdf -file-line-error -synctex=1 -interaction=nonstopmode -recorder %:p:h/%<CR><leader>e
 " map <Leader>l :!latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
 "  map <Leader>s :!latexmk -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder %:p:h/document.tex<CR>
@@ -587,4 +588,4 @@ map <Leader>l :tabe %<CR><Esc>:term latexmk -pvc -pdf -file-line-error -synctex=
 "let tlist_make_settings  = 'make;m:makros;t:targets'
 " let g:easytags_cmd = '/usr/local/bin/ctags'
 "  let g:easytags_events = ['BufWritePost']
-"source ~/.anyname
+"source ~/.anyname 
