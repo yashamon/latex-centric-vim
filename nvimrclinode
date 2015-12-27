@@ -393,6 +393,7 @@ noremap <S-k> <C-u>
 noremap <S-j> <C-d>
 nnoremap <leader>j J
 nnoremap <leader>k K
+nnoremap . '
  "imap <D-Space> <C-X><C-o>
 "  imap <C-s> <Esc>:w<CR>
  "nunmap w
