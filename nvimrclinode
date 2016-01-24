@@ -13,8 +13,8 @@ if has("gui_running")
   " set tags= ~/.tags
   highlight SignColumn guibg=bg
       endif    
-"  autocmd BufWinLeave *.* mkview
-"  autocmd BufWinEnter *.* silent loadview
+  autocmd BufWinLeave *.* mkview
+  autocmd BufWinEnter *.* silent loadview
    " set foldcolumn=2
 "  highlight foldcolumn ctermfg=256 ctermbg=bg
 autocmd Colorscheme * highlight FoldColumn guifg=black guibg=bg
@@ -339,19 +339,20 @@ let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc
 "--NerdTree
 let g:NERDTreeMapUpdir="<S-h>"
 " Remaps
-" I find the  default register behavior uncomfortable 
+" I find default   register behavior uncomfortable 
 inoremap \ /
-noremap P "0p
-vnoremap d "dd
-noremap D "dD
-noremap D "dD
-noremap c "dc
-noremap c "dc
-noremap C "dC
-noremap C "dC
-noremap s "dx
+inoremap / \
+noremap P p
+noremap p "0p
+" vnoremap d "dd
+" noremap D "dD
+" noremap c "dc
+" noremap C "dC
+" noremap dd "ddd
+noremap s "_x
 noremap x "0x
 noremap X "0D
+
 nnoremap <Left> :bnext<CR>
 nnoremap <Right> :bprevious<CR>
 tnoremap <Left> :tbnext<CR>
@@ -445,7 +446,6 @@ nnoremap <silent> <Leader>y :YRGetElem<CR>
 map ' "
 inoremap <D-]> <C-x><C-]>
 inoremap <C-]> <C-x><C-]>
-inoremap / \
 
 " vimtex mappings
 nmap  <localleader>v <localleader>lv
@@ -536,7 +536,8 @@ map <A-e> :CtrlP<CR>
 map <D-e> <Esc>:cd ~/Dropbox/workspace<CR>:CtrlP<CR>
 nnoremap  <leader>v <Leader>lv
 nnoremap  <leader>r <leader>lr
-" YouCompleteMe not using this plugin at the moment
+" YouCompleteMe  usage is tied to Supertab, this is a little weird but 
+" seems necessary for full interoperability with ultisnipps
 let g:ycm_auto_trigger = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_key_invoke_completion = '<C-n>'
@@ -564,7 +565,7 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
    "Latex compile. 
    "them to an external terminal and run there.
 " let g:vimtex_view_method = 'okular'
-map <Leader>l :tabe %<CR><Esc>:term latexmk -pvc -pdf -file-line-error -synctex=1 -interaction=nonstopmode -recorder %:p:h/%<CR><leader>e
+map <Leader>l :tabe %<CR><Esc>:term latexmk -pvc -pdf -file-line-error -synctex=1 -interaction=nonstopmode -recorder %<CR><leader>e
 " map <Leader>l :!latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
 "  map <Leader>s :!latexmk -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder %:p:h/document.tex<CR>
 " map <Leader>d :!cd %:p:h<CR>
@@ -588,12 +589,8 @@ map <Leader>l :tabe %<CR><Esc>:term latexmk -pvc -pdf -file-line-error -synctex=
 "let tlist_make_settings  = 'make;m:makros;t:targets'
 " let g:easytags_cmd = '/usr/local/bin/ctags'
 "  let g:easytags_events = ['BufWritePost']
-"source ~/.anyname  
+source ~/.anyname  
 
 
 
 
-nnoremap <silent> <Leader>y :YRGetElem<CR>
-nnoremap <silent> <Leader>y :YRGetElem<CR>
-nnoremap <silent> <Leader>y :YRGetElem<CR>
-nnoremap <silent> <Leader>y :YRGetElem<CR>
