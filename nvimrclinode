@@ -13,8 +13,11 @@ if has("gui_running")
   " set tags= ~/.tags
   highlight SignColumn guibg=bg
       endif    
-  autocmd BufWinLeave *.* mkview
-  autocmd BufWinEnter *.* silent loadview
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+  " autocmd BufWinLeave *.* mkview
+  " autocmd BufWinEnter *.* silent loadview
    " set foldcolumn=2
 "  highlight foldcolumn ctermfg=256 ctermbg=bg
 autocmd Colorscheme * highlight FoldColumn guifg=black guibg=bg
@@ -39,6 +42,9 @@ au VIMEnter set spell
      \ }
 au FileType  nmap  <leader>v <localleader>lv
 au FileType  nmap <leader>r <localleader>lr
+" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
 let g:tex_flavor = "latex"
 let g:tex_isk = '@,48-57,58,_,192-255'
 set tags+=~/texmf/bibtex/bib/tags
@@ -46,9 +52,10 @@ set tags+=~/texmf/bibtex/bib/tags
   " set formatoptions=ant
   " set wrapmargin=1
   set tw=70
+set autochdir
 set guioptions-=r 
 set guioptions-=l
-set nocompatible	" not compatible with the old-fashion vi mode
+" set nocompatible	" not compatible with the old-fashion vi mode
 set mouse-=a
 set bs=2		" allow backspacing over everything in insert mode
 set undofile                " Save undo's after file closes
@@ -308,9 +315,15 @@ endfun
 " PLUGIN SETTINGS
 "--------------------------------------------------------------------------- 
 
-
-
-
+         "Easy Motion
+" change the default EasyMotion shading to something more readable with Solarized
+" hi link EasyMotionTarget ErrorMsg
+" hi link EasyMotionShade  Comment
+" easymotion highlight colors
+hi link EasyMotionTarget Search
+hi link EasyMotionTarget2First Search
+hi link EasyMotionTarget2Second Search
+hi link EasyMotionShade Comment
 
 
 
@@ -342,13 +355,12 @@ let g:NERDTreeMapUpdir="<S-h>"
 " I find default   register behavior uncomfortable 
 inoremap \ /
 inoremap / \
-noremap P p
 noremap p "0p
 " vnoremap d "dd
 " noremap D "dD
-" noremap c "dc
-" noremap C "dC
-" noremap dd "ddd
+noremap c "_c
+noremap C "_C
+noremap dd "_dd
 noremap s "_x
 noremap x "0x
 noremap X "0D
@@ -359,70 +371,42 @@ tnoremap <Left> :tbnext<CR>
 tnoremap <Right> :tbprevious<CR>
 tnoremap <Leader>e <C-\><C-n> 
 " tnoremap <Esc> <C-\> 
-noremap < :tabp<CR>
+nnoremap < :tabp<CR>
 nnoremap > :tabn<CR>
 nnoremap <leader>n :tabedit %<CR>
 imap <A-j> <C-j>
 imap <M-j> <C-j>
 map <C-q> <Esc>:q!<CR>
 map <A-q> <C-q>
-" noremap w W
-" noremap W w
-" noremap b B
-" noremap B b
- noremap f /
- map F ?
+noremap f /
+noremap F ?
  map t <leader><leader>f
  map T <leader><leader>F
-  " map F  <leader><leader>F
-"  map f <leader><leader>f
-"  vmap <leader><leader>F
- "nmap F ?  nnoremap v/ ?
- map 9 $
+noremap 9 $
+noremap $ /\$<CR>hv?\$<CR>l
+noremap # /\$<CR>v?\$<CR>
+noremap @ /)<CR>v?(<CR>
  nmap j gj
  nmap k gk
  noremap <Space> .
  noremap <S-Space> ?<Space><enter>
- "vnoremap <Space> /<Space><enter>
- "vnoremap <S-Space> <CR> <Space><CR>
-
- nmap <S-h> <C-w>h
- nmap <S-l> <C-w>l
+nmap <S-h> <C-w>h
+nmap <S-l> <C-w>l
 noremap <leader>r <C-r>
 noremap <S-k> <C-u>
 noremap <S-j> <C-d>
 nnoremap <leader>j J
 nnoremap <leader>k K
-nnoremap . '
+nnoremap . `
 map ' "
- "imap <D-Space> <C-X><C-o>
-"  imap <C-s> <Esc>:w<CR>
- "nunmap w
- "map " '
- "map
-"  nmap w <leader><leader>w
-"  vmap w <leader><leader>w
-"  nmap b <Leader><Leader>b
-"  vmap b <Leader><Leader>b
-"  nmap e <Leader><Leader>e
-"  vmap e <Leader><Leader>e
-"  nmap ge <Leader><Leader>ge
-"  vmap ge <Leader><Leader>ge 
-"  nmap ] ]S
-"  nmap [ [S 
- "nnoremap g zg
- "nnoremap z= =  
- "nnoremap A A<Space>
- nnoremap <Backspace> i<Backspace><Esc> 
- ""map <D-/> <Leader>c<Space>
-"  nnoremap / /\$<CR>
-"  nnoremap ? ?\$<CR>
+" nnoremap <Backspace> i<Backspace><Esc> 
 map <leader>c <Leader>__
 map <A-/> <Leader>__
 map <A-r>  <C-r>
 map <C-c> gc
 nmap gc gcc
-nmap ` ~
+nnoremap ` ~
+nnoremap . `
 nmap 1 <C-o>
 nmap 2 <C-i>
 nmap <S-CR> k$
@@ -446,6 +430,7 @@ nnoremap <silent> <Leader>y :YRGetElem<CR>
 map ' "
 inoremap <D-]> <C-x><C-]>
 inoremap <C-]> <C-x><C-]>
+
 
 " vimtex mappings
 nmap  <localleader>v <localleader>lv
@@ -512,7 +497,6 @@ map :tags  exe ":silent ! /usr/local/bin/ctags -R"
 " map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
 "autosave
 let g:auto_save = 1
-
  let g:auto_save_in_insert_mode = 0
  let g:auto_save_silent = 1
 "Highlight
@@ -565,7 +549,7 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
    "Latex compile. 
    "them to an external terminal and run there.
 " let g:vimtex_view_method = 'okular'
-map <Leader>l :tabe %<CR><Esc>:term latexmk -pvc -pdf -file-line-error -synctex=1 -interaction=nonstopmode -recorder %<CR><leader>e
+map <Leader>l :tabe %<CR><Esc>:term ; latexmk -pvc -pdf -file-line-error -synctex=1 -interaction=nonstopmode -recorder %<CR><leader>e
 " map <Leader>l :!latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
 "  map <Leader>s :!latexmk -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder %:p:h/document.tex<CR>
 " map <Leader>d :!cd %:p:h<CR>

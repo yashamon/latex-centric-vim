@@ -343,10 +343,10 @@ let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc
 " let g:UltiSnipsJumpForwardTrigger="<D-j>"  
  
 " I haven't found how to hide this function (yet)
-"allows paste to not overwrite default register
-" I find the default register behavior uncomfortable 
+"allows paste to not overwrite register overwriteoverwrite register 
+" I find the default register behavior 
 " au VIMENTER unmap p nnoremap p "0p
-"  nnoremap p "0p
+  nnoremap p "0p
 nnoremap d "dd
 nnoremap d "dd
 nnoremap D "dD
