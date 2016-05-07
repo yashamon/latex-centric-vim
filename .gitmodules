@@ -58,9 +58,6 @@
 [submodule "bundle/misc"]
 	path = bundle/misc
 	url = https://github.com/xolox/vim-misc.git
-[submodule "bundle/ultisnippps"]
-	path = bundle/ultisnippps
-	url = https://github.com/SirVer/ultisnips.git
 [submodule "bundle/autosave"]
 	path = bundle/autosave
 	url = https://github.com/vim-scripts/vim-auto-save.git
@@ -97,3 +94,6 @@
 [submodule "bundle/unite.vim"]
 	path = bundle/unite.vim
 	url = https://github.com/Shougo/unite.vim.git
+[submodule "bundle/ultisnips"]
+	path = bundle/ultisnips
+	url = https://github.com/SirVer/ultisnips.git
