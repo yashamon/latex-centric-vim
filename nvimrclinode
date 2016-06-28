@@ -65,6 +65,27 @@ set undoreload=10000
 set ruler		" show the cursor position all the time
 set autoread		" auto read when file is changed from outside
 set nohlsearch
+set showmatch		" Cursor shows matching ) and }
+set showmode		" Show current mode
+set wildchar=<TAB>	" start wild expansion in the command line using <TAB>
+set wildmenu            " wild char completion menu
+
+" ignore these files while expanding wild chars
+set wildignore=*.o,*.class,*.pyc
+
+"set autoindent		" auto indentation
+set incsearch		" incremental search
+set nobackup		" no *~ backup files
+set copyindent		" copy the previous indentation on autoindenting
+set ignorecase		" ignore case when searching
+set smartcase		" ignore case if search pattern is all lowercase,case-sensitive otherwise
+"set smarttab		" insert tabs on the start of a line according to context
+
+" disable sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
 " set macmeta
 let g:yankstack_map_keys = 0
 nmap <leader>p <Plug>yankstack_substitute_older_paste
@@ -90,6 +111,59 @@ highlight clear SpellBad
 highlight SpellBad cterm=underline
 hi MatchParen cterm=underline ctermbg=none ctermfg=magenta
 endif
+
+
+" FUNCTIONS
+
+function! DelTagOfFile(file)
+  let fullpath = a:file
+  let cwd = getcwd()
+  let tagfilename = cwd . "/tags"
+  let f = substitute(fullpath, cwd . "/", "", "")
+  let f = escape(f, './')
+  let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
+  let resp = system(cmd)
+endfunction
+
+
+
+function! UpdateTags()
+  let f = expand("%:p")
+  let cwd = getcwd()
+  let tagfilename = cwd . "/tags"
+  let cmd = '/usr/local/bin/ctags -a -f ' . tagfilename . ' --fields=+iaS --extra=+q ' . '"' . f . '"'
+  call DelTagOfFile(f)
+  let resp = system(cmd)
+endfunction
+autocmd BufWritePost * call UpdateTags()
+ function! RestoreRegister()
+   let @" = s:restore_reg
+   return ''
+ endfunction
+
+ function! s:Repl()
+     let s:restore_reg = @"
+     return "p@=RestoreRegister()\<cr>"
+ endfunction
+function! RestoreRegister()
+    let @" = s:restore_reg
+    if &clipboard == "unnamed"
+        let @* = s:restore_reg
+    endif
+    return ''
+endfunction
+function! CurDir()
+    let curdir = substitute(getcwd(), $HOME, "~", "")
+    return curdir
+endfunction
+
+function! HasPaste()
+    if &paste
+        return '[PASTE]'
+    else
+        return ''
+    endif
+endfunction
 function Light()
    set background=light
    set t_Co=256
@@ -106,6 +180,14 @@ highlight clear SpellBad
 highlight SpellBad cterm=underline
 hi MatchParen cterm=underline ctermbg=none ctermfg=magenta
 endfunction
+
+function! SearchMultiLine(bang, ...)
+  if a:0 > 0
+    let sep = (a:bang) ? '\_W\+' : '\_s\+'
+    let @/ = join(a:000, sep)
+  endif
+endfunction
+command! -bang -nargs=* -complete=tag S call SearchMultiLine(<bang>0, <f-args>)|normal! /<C-R>/<CR>
 
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " Default Colors for CursorLine
@@ -144,27 +226,6 @@ highlight  CursorLine cterm=NONE ctermbg=grey ctermfg=black
 "     vnoremap <silent> d d:call ClipboardYank()<cr>
 "     nnoremap <silent> p :call ClipboardPaste()<cr>p
 " set clipboard=unnamedplus	" yank to the system register (*) by default
-set showmatch		" Cursor shows matching ) and }
-set showmode		" Show current mode
-set wildchar=<TAB>	" start wild expansion in the command line using <TAB>
-set wildmenu            " wild char completion menu
-
-" ignore these files while expanding wild chars
-set wildignore=*.o,*.class,*.pyc
-
-"set autoindent		" auto indentation
-set incsearch		" incremental search
-set nobackup		" no *~ backup files
-set copyindent		" copy the previous indentation on autoindenting
-set ignorecase		" ignore case when searching
-set smartcase		" ignore case if search pattern is all lowercase,case-sensitive otherwise
-"set smarttab		" insert tabs on the start of a line according to context
-
-" disable sound on errors
-set noerrorbells
-set novisualbell
-set t_vb=
-set tm=500
 
 " TAB setting{
    set expandtab        "replace <TAB> with spaces
@@ -181,18 +242,6 @@ set statusline+=\ \ \ [%{&ff}/%Y]
 set statusline+=\ \ \ %<%20.30(%{hostname()}:%{CurDir()}%)\ 
 set statusline+=%=%-10.(%l,%c%V%)\ %p%%/%L
 
-function! CurDir()
-    let curdir = substitute(getcwd(), $HOME, "~", "")
-    return curdir
-endfunction
-
-function! HasPaste()
-    if &paste
-        return '[PASTE]'
-    else
-        return ''
-    endif
-endfunction
 
 "}
 
@@ -367,9 +416,6 @@ noremap X "0D
 
 nnoremap <Left> :bnext<CR>
 nnoremap <Right> :bprevious<CR>
-tnoremap <Left> :tbnext<CR>
-tnoremap <Right> :tbprevious<CR>
-tnoremap <Leader>e <C-\><C-n> 
 " tnoremap <Esc> <C-\> 
 nnoremap < :tabp<CR>
 nnoremap > :tabn<CR>
@@ -443,52 +489,17 @@ nmap <leader>r  <localleader>lr
 :tnoremap <S-j> <C-\><C-n><C-w>j
 :tnoremap <S-k> <C-\><C-n><C-w>k
 :tnoremap <S-l> <C-\><C-n><C-w>l
-
+tnoremap <Left> :tbnext<CR>
+tnoremap <Right> :tbprevious<CR>
+tnoremap <Leader>e <C-\><C-n> 
 " imap <Backspace> \
 " map <D-s> <Esc>:w<CR> :silent ! /usr/local/bin/ctags -R<CR>
 " map <C-s> <Esc>:w<CR> :silent ! /usr/local/bin/ctags -R<CR>
 " I haven't found how to hide this function (yet)
- function! RestoreRegister()
-   let @" = s:restore_reg
-   return ''
- endfunction
-
- function! s:Repl()
-     let s:restore_reg = @"
-     return "p@=RestoreRegister()\<cr>"
- endfunction
-function! RestoreRegister()
-    let @" = s:restore_reg
-    if &clipboard == "unnamed"
-        let @* = s:restore_reg
-    endif
-    return ''
-endfunction
 
 " NB: this supports "rp that replaces the selection by the contents of @r
 vnoremap <silent> <expr> p <sid>Repl()
 " Auto updating Ctags
-function! DelTagOfFile(file)
-  let fullpath = a:file
-  let cwd = getcwd()
-  let tagfilename = cwd . "/tags"
-  let f = substitute(fullpath, cwd . "/", "", "")
-  let f = escape(f, './')
-  let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
-  let resp = system(cmd)
-endfunction
-
-
-
-function! UpdateTags()
-  let f = expand("%:p")
-  let cwd = getcwd()
-  let tagfilename = cwd . "/tags"
-  let cmd = '/usr/local/bin/ctags -a -f ' . tagfilename . ' --fields=+iaS --extra=+q ' . '"' . f . '"'
-  call DelTagOfFile(f)
-  let resp = system(cmd)
-endfunction
-autocmd BufWritePost * call UpdateTags()
 " autocmd VimLeave * exe ":silent ! /usr/local/bin/ctags -R"
 map :tags  exe ":silent ! /usr/local/bin/ctags -R"
 
@@ -548,7 +559,7 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
     
    "Latex compile. 
    "them to an external terminal and run there.
-" let g:vimtex_view_method = 'okular'
+" let g:vimtex_view_method = 'mu'
 map <Leader>l :tabe %<CR><Esc>:term ; latexmk -pvc -pdf -file-line-error -synctex=1 -interaction=nonstopmode -recorder %<CR><leader>e
 map <Leader>tt :term ; ctags -R
 " map <Leader>l :!latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
