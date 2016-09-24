@@ -101,7 +101,7 @@ au VIMEnter set spell
 au FileType  nmap  <leader>v <localleader>lv
 au FileType  nmap <leader>r <localleader>lr
 " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+" let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 let g:tex_flavor = "latex"
 let g:tex_isk = '@,48-57,58,_,192-255'
@@ -170,34 +170,33 @@ highlight SpellBad cterm=underline
 hi MatchParen cterm=underline ctermbg=none ctermfg=magenta
 endif
 
-
 " FUNCTIONS
 
-function! DelTagOfFile(file)
-  let fullpath = a:file
-  let cwd = getcwd()
-  let tagfilename = cwd . "/tags"
-  let f = substitute(fullpath, cwd . "/", "", "")
-  let f = escape(f, './')
-  let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
-  let resp = system(cmd)
-endfunction
+" function! DelTagOfFile(file)
+"   let fullpath = a:file
+"   let cwd = getcwd()
+"   let tagfilename = cwd . "/tags"
+"   let f = substitute(fullpath, cwd . "/", "", "")
+"   let f = escape(f, './')
+"   let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
+"   let resp = system(cmd)
+" endfunction
 
 
 
-function! UpdateTags()
-  let f = expand("%:p")
-  let cwd = getcwd()
-  let tagfilename = cwd . "/tags"
-  let cmd = '/usr/local/bin/ctags -a -f ' . tagfilename . ' --fields=+iaS --extra=+q ' . '"' . f . '"'
-  call DelTagOfFile(f)
-  let resp = system(cmd)
-endfunction
-autocmd BufWritePost * call UpdateTags()
- function! RestoreRegister()
-   let @" = s:restore_reg
-   return ''
- endfunction
+" function! UpdateTags()
+"   let f = expand("%:p")
+"   let cwd = getcwd()
+"   let tagfilename = cwd . "/tags"
+"   let cmd = '/usr/local/bin/ctags -a -f ' . tagfilename . ' --fields=+iaS --extra=+q ' . '"' . f . '"'
+"   call DelTagOfFile(f)
+"   let resp = system(cmd)
+" endfunction
+" autocmd BufWritePost * call UpdateTags()
+"  function! RestoreRegister()
+"    let @" = s:restore_reg
+"    return ''
+"  endfunction
 
  function! s:Repl()
      let s:restore_reg = @"
@@ -637,7 +636,6 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
    "them to an external terminal and run there.
 let g:vimtex_view_method = 'zathura'
 map <Leader>l :tabe %<CR><Esc>:term ; latexmk -pvc -pdf -file-line-error -synctex=1 -interaction=nonstopmode -recorder %<CR><leader>e
-map <Leader>tt :term ; ctags -R
 map <Leader>tt :term ; ctags -R
 " map <Leader>l :!latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
 "  map <Leader>s :!latexmk -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder %:p:h/document.tex<CR>
