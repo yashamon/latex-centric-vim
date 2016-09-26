@@ -98,8 +98,6 @@ au VIMEnter set spell
   au VIMEnter * let g:surround_108 = {
      \'q':  " ``\r''"
      \ }
-au FileType  nmap  <leader>v <localleader>lv
-au FileType  nmap <leader>r <localleader>lr
 " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
@@ -538,10 +536,35 @@ inoremap <C-]> <C-x><C-]>
 
 
 " vimtex mappings
-nmap  <localleader>v <localleader>lv
-nmap <localleader>r  <localleader>lr
-nmap  <leader>v <localleader>lv
-nmap <leader>r  <localleader>lr
+"
+"
+"
+let g:vimtex_view_general_viewer
+         \ = '/Applications/Skim.app/Contents/SharedSupport/displayline'
+let g:vimtex_view_general_options = '-r @line @pdf @tex'
+let g:vimtex_latexmk_callback_hooks = ['UpdateSkim']
+   function! UpdateSkim(status)
+     if !a:status | return | endif
+
+     let l:out = b:vimtex.out()
+     let l:tex = expand('%:p')
+     let l:cmd = [g:vimtex_view_general_viewer, '-r']
+     if !empty(system('pgrep Skim'))
+       call extend(l:cmd, ['-g'])
+     endif
+     if has('nvim')
+       call jobstart(l:cmd + [line('.'), l:out, l:tex])
+     elseif has('job')
+       call job_start(l:cmd + [line('.'), l:out, l:tex])
+     else
+       call system(join(l:cmd + [line('.'), shellescape(l:out), shellescape(l:tex)], ' '))
+     endif
+   endfunction
+let g:vimtex_latexmk_build_dir = './build'
+let g:vimtex_latexmk_progname = 'nvr'
+nmap  <leader>v  <Esc>:VimtexView<CR>
+
+
 
 "Neovim mappings
 :tnoremap <S-h> <C-\><C-n><C-w>h
@@ -552,9 +575,6 @@ tnoremap <Left> :tbnext<CR>
 tnoremap <Right> :tbprevious<CR>
 tnoremap <Leader>e <C-\><C-n> 
 " imap <Backspace> \
-" map <D-s> <Esc>:w<CR> :silent ! /usr/local/bin/ctags -R<CR>
-" map <C-s> <Esc>:w<CR> :silent ! /usr/local/bin/ctags -R<CR>
-" I haven't found how to hide this function (yet)
 
 " NB: this supports "rp that replaces the selection by the contents of @r
 vnoremap <silent> <expr> p <sid>Repl()
@@ -599,13 +619,9 @@ nnoremap <C-e> :let g:ctrlp_match_window =
 noremap <C-t> <Esc>:FZF ~/Dropbox/workspace<CR>
 noremap <A-t> <Esc>:FZF ~/Dropbox/workspace<CR>
 noremap S <Esc>:BLines<CR>
-map <C-e> :CtrlP<CR>
 map <A-e> :FZF ~<CR>
-map <D-e> <Esc>:cd ~/Dropbox/workspace<CR>:CtrlP<CR>
 
 
-nnoremap  <leader>v <Leader>lv
-nnoremap  <leader>r <leader>lr
 " YouCompleteMe  usage is tied to Supertab, this is a little weird but 
 " seems necessary for full interoperability with ultisnipps
 let g:ycm_auto_trigger = 0
@@ -619,16 +635,13 @@ let g:UltiSnipsJumpForwardTrigger="<A-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsListSnippets="<D-e>"
 let g:UltiSnipsListSnippets="<C-e>"
+
 " this mapping Enter key to <C-y> to chose the current highlight item 
 " and close the selection list, same as other IDEs.
 " CONFLICT with some plugins like tpope/Endwise
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-   " let g:ycm_collect_identifiers_from_tags_files = 1
-   " let g:ycm_auto_trigger = 0 
-   " set tags=~/GoogleDrive/workspace/tags 
-   " set tags=~/GoogleDrive/workspace/tagstest 
-   " set tags+=/usr/local/texlive/texmf-local/bibtex/bib/local/tags
-   "let g:ycm_key_invoke_completion = '<D-5>'
+
+
    " Latex shortcuts
 
     
@@ -637,29 +650,6 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 let g:vimtex_view_method = 'zathura'
 map <Leader>l :tabe %<CR><Esc>:term ; latexmk -pvc -pdf -file-line-error -synctex=1 -interaction=nonstopmode -recorder %<CR><leader>e
 map <Leader>tt :term ; ctags -R
-" map <Leader>l :!latexmk -pvc -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder" %:p:h/document.tex<CR>
-"  map <Leader>s :!latexmk -pdf -file-line-error -synctex=1  -interaction=nonstopmode -recorder %:p:h/document.tex<CR>
-" map <Leader>d :!cd %:p:h<CR>
-"forward search on os X
-" map <silent> <Leader>v :w<CR>:Shell elinks document.html<CR> 
-"
-
-"                 " \ ~/dropbox/workspace/%<CR>
-" map <silent> <Leader>v :w<CR>:silent !/Applications/Skim.app/Contents/SharedSupport/displayline
-"                 \ <C-R>=line('.')<CR>  ~/dropbox/workspace/%:h/document.pdf
-"                 \ ~/dropbox/workspace/%<CR>
-"
-"let g:LatexBox_latexmk_options="-pdflatex='pdflatex -interaction=nonstopmode -synctex=1 \%O \%S'"
-" let g:LatexBox_latexmk_async=1
-"let g:LatexBox_latexmk_preview_continuously=1
-"let g:LatexBox_quickfix=2
-"let g:LatexBox_show_warnings=0
-"let g:LatexBox_ignore_warnings = ['Package pgfplots Warning']
-" autocmd FileType tex call Tex_SetTeXCompilerTarget('View','pdf') 
-"let tlist_tex_settings   = 'latex;s:sections;g:graphics;l:labels'
-"let tlist_make_settings  = 'make;m:makros;t:targets'
-" let g:easytags_cmd = '/usr/local/bin/ctags'
-"  let g:easytags_events = ['BufWritePost']
 "source ~/.anyname  
 
 
