@@ -17,7 +17,7 @@ Plug 'SirVer/ultisnips'
 " On-demand loading
 Plug 'junegunn/goyo.vim'
 
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeFind' }
 
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -34,10 +34,10 @@ Plug 'Shougo/vimproc.vim'
 
 Plug 'Lokaltog/vim-easymotion'
 
-Plug 'mbbill/undotree'
+Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 
-" Plug 'kien/ctrlp.vim'
 
+Plug 'lifepillar/vim-solarized8'
 Plug 'vim-scripts/AutoTag'
 
 Plug 'vim-scripts/vim-auto-save'
@@ -106,7 +106,6 @@ set tw=80
 set autochdir
 set guioptions-=r 
 set guioptions-=l
-set nocompatible	" not compatible with the old-fashion vi mode
 set mouse-=a
 set bs=2		" allow backspacing over everything in insert mode
 set undofile                " Save undo's after file closes
