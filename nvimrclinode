@@ -5,7 +5,7 @@ call plug#begin('~/.vim/plugged')
 " Make sure you use single quotes
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-Plug 'junegunn/vim-easy-align'
+" Plug 'junegunn/vim-easy-align'
 
 " Any valid git URL is allowed
 " Plug 'https://github.com/junegunn/vim-github-dashboard.git'
@@ -17,7 +17,7 @@ Plug 'SirVer/ultisnips'
 " On-demand loading
 Plug 'junegunn/goyo.vim'
 
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeFind' }
 
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -30,13 +30,14 @@ Plug 'ervandew/supertab'
 
 Plug 'vim-scripts/tComment'
 
-Plug 'Shougo/vimproc.vim'
+" Plug 'Shougo/vimproc.vim'
 
 Plug 'Lokaltog/vim-easymotion'
 
-Plug 'mbbill/undotree'
+Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+'}
 
-" Plug 'kien/ctrlp.vim'
+Plug 'lifepillar/vim-solarized8'
 
 Plug 'vim-scripts/AutoTag'
 
@@ -90,11 +91,6 @@ au VIMEnter set spell
               set ttimeout
                    set ttimeoutlen=0
                      endif
-  "augroup PROSE|
-   "autocmd InsertEnter <buffer> set fo+=a
-   "autocmd InsertLeave <buffer> set fo-=a
- "augroup END"augroup END
-"Latex related
   au VIMEnter * let g:surround_108 = {
      \'q':  " ``\r''"
      \ }
@@ -111,7 +107,6 @@ set tw=80
 set autochdir
 set guioptions-=r 
 set guioptions-=l
-" set nocompatible	" not compatible with the old-fashion vi mode
 set mouse-=a
 set bs=2		" allow backspacing over everything in insert mode
 set undofile                " Save undo's after file closes
@@ -155,14 +150,14 @@ if has("gui_running")	" GUI color and font settings
   set background=dark 
   "set vimroom_background=dark
 "  set cursorline        " highlight current line
- colorscheme solarized3 
+ colorscheme 3 
   highlight CursorLine  guibg=#003853 ctermbg=24  gui=none cterm=none
 else
 " terminal color settings
-  set background=light
-  set t_Co=256          " 256 color mode
-    " let g:solarized_termcolors=256
-  colorscheme solarized3
+  set background=dark
+  " set t_Co=256          " 256 color mode
+  colorscheme solarized3 
+  highlight Normal ctermbg=none
 highlight clear SpellBad
 highlight SpellBad cterm=underline
 hi MatchParen cterm=underline ctermbg=none ctermfg=magenta
@@ -221,19 +216,20 @@ function! HasPaste()
 endfunction
 function Light()
    set background=light
-   set t_Co=256
    colorscheme solarized3
-highlight  CursorLine cterm=NONE ctermbg=blue ctermfg=white
+  highlight Normal ctermbg=none
+highlight  CursorLine cterm=NONE ctermbg=black ctermfg=none
 hi MatchParen cterm=underline ctermbg=none ctermfg=magenta
 endfunction
 
 function Dark()
    set background=dark
    colorscheme solarized3
-highlight  CursorLine cterm=NONE ctermbg=250 ctermfg=black
+highlight  CursorLine cterm=NONE ctermbg=black ctermfg=none
 highlight clear SpellBad
 highlight SpellBad cterm=underline
 hi MatchParen cterm=underline ctermbg=none ctermfg=magenta
+  highlight Normal ctermbg=none
 endfunction
 
 function! SearchMultiLine(bang, ...)
@@ -245,8 +241,8 @@ endfunction
 command! -bang -nargs=* -complete=tag S call SearchMultiLine(<bang>0, <f-args>)|normal! /<C-R>/<CR>
 
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" Default Colors for CursorLine
-highlight  CursorLine cterm=NONE ctermbg=grey ctermfg=black
+" Default Colors for CursorLine_
+highlight  CursorLine cterm=NONE ctermbg=black ctermfg=none
 " Change Color when entering Insert Mode
  augroup CursorLine
    au!
@@ -539,9 +535,9 @@ inoremap <C-]> <C-x><C-]>
 "
 "
 "
-let g:vimtex_view_general_viewer
-         \ = '/Applications/Skim.app/Contents/SharedSupport/displayline'
-let g:vimtex_view_general_options = '-r @line @pdf @tex'
+" let g:vimtex_view_general_viewer
+"          \ = '/Applications/Skim.app/Contents/SharedSupport/displayline'
+" let g:vimtex_view_general_options = '-r @line @pdf @tex'
 let g:vimtex_latexmk_callback_hooks = ['UpdateSkim']
    function! UpdateSkim(status)
      if !a:status | return | endif
@@ -563,8 +559,8 @@ let g:vimtex_latexmk_callback_hooks = ['UpdateSkim']
 let g:vimtex_latexmk_build_dir = './build'
 let g:vimtex_latexmk_progname = 'nvr'
 nmap  <leader>v  <Esc>:VimtexView<CR>
-
-
+let g:vimtex_fold_enabled =1
+" let g:vimtex_view_method = 'zathura'
 
 "Neovim mappings
 :tnoremap <S-h> <C-\><C-n><C-w>h
@@ -583,7 +579,7 @@ vnoremap <silent> <expr> p <sid>Repl()
 map :tags  exe ":silent ! /usr/local/bin/ctags -R"
 
 "Nerd Tree
- map <leader>e :NERDTreeFind<CR>
+map <leader>e :NERDTreeFind<CR>
 " map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
 "
 "
@@ -647,7 +643,6 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
     
    "Latex compile. 
    "them to an external terminal and run there.
-let g:vimtex_view_method = 'zathura'
 map <Leader>l :tabe %<CR><Esc>:term ; latexmk -pvc -pdf -file-line-error -synctex=1 -interaction=nonstopmode -recorder %<CR><leader>e
 map <Leader>tt :term ; ctags -R
 "source ~/.anyname  
