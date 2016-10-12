@@ -17,6 +17,10 @@ Plug 'SirVer/ultisnips'
 " On-demand loading
 Plug 'junegunn/goyo.vim'
 
+Plug 'vim-pandoc/vim-pandoc'
+
+Plug 'vim-pandoc/vim-pandoc-syntax' 
+
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeFind' }
 
 " Plugin outside ~/.vim/plugged with post-update hook
@@ -94,8 +98,8 @@ au VIMEnter set spell
   au VIMEnter * let g:surround_108 = {
      \'q':  " ``\r''"
      \ }
-"  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-" let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 let g:tex_flavor = "latex"
 let g:tex_isk = '@,48-57,58,_,192-255'
@@ -117,6 +121,7 @@ set ruler		" show the cursor position all the time
 set autoread		" auto read when file is changed from outside
 set nohlsearch
 set showmatch		" Cursor shows matching ) and }
+set nocursorline
 set showmode		" Show current mode
 set wildchar=<TAB>	" start wild expansion in the command line using <TAB>
 set wildmenu            " wild char completion menu
@@ -135,14 +140,13 @@ set smartcase		" ignore case if search pattern is all lowercase,case-sensitive o
 " disable sound on errors
 set noerrorbells
 set novisualbell
-set t_vb=
 set tm=500
 " set macmeta
 let g:yankstack_map_keys = 0
 nmap <leader>p <Plug>yankstack_substitute_older_paste
   nmap <leader>P <Plug>yankstack_substitute_newer_paste
 " auto reload vimrc when editing it
-autocmd! bufwritepost .vimrc source ~/.vimrc
+" autocmd! bufwritepost .vimrc source ~/.vimrc
 syntax on		" syntax highlight
 " set hlsearch		" search highlighting
 if has("gui_running")	" GUI color and font settings
@@ -156,14 +160,25 @@ else
 " terminal color settings
   set background=dark
   " set t_Co=256          " 256 color mode
-  colorscheme solarized3 
-  highlight Normal ctermbg=none
+  colorscheme solarized8_dark_flat 
+  " highlight Normal ctermbg=none
 highlight clear SpellBad
 highlight SpellBad cterm=underline
 hi MatchParen cterm=underline ctermbg=none ctermfg=magenta
 endif
 
 " FUNCTIONS
+
+" " Change Color when entering Insert Mode
+"  augroup CursorLine
+"    au!
+"  if has("gui_running")
+"  else
+"      au InsertEnter * setlocal cursorline
+"        au InsertLeave * setlocal nocursorline
+"     endif
+"        augroup END
+
 
 " function! DelTagOfFile(file)
 "   let fullpath = a:file
@@ -243,15 +258,6 @@ command! -bang -nargs=* -complete=tag S call SearchMultiLine(<bang>0, <f-args>)|
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " Default Colors for CursorLine_
 highlight  CursorLine cterm=NONE ctermbg=black ctermfg=none
-" Change Color when entering Insert Mode
- augroup CursorLine
-   au!
- if has("gui_running")
- else
-     au InsertEnter * setlocal cursorline
-       au InsertLeave * setlocal nocursorline
-    endif
-       augroup END
 " autocmd InsertEnter * set cursorline * 
 
 " " Revert Color to default when leaving Insert Mode
@@ -538,29 +544,33 @@ inoremap <C-]> <C-x><C-]>
 " let g:vimtex_view_general_viewer
 "          \ = '/Applications/Skim.app/Contents/SharedSupport/displayline'
 " let g:vimtex_view_general_options = '-r @line @pdf @tex'
-let g:vimtex_latexmk_callback_hooks = ['UpdateSkim']
-   function! UpdateSkim(status)
-     if !a:status | return | endif
-
-     let l:out = b:vimtex.out()
-     let l:tex = expand('%:p')
-     let l:cmd = [g:vimtex_view_general_viewer, '-r']
-     if !empty(system('pgrep Skim'))
-       call extend(l:cmd, ['-g'])
-     endif
-     if has('nvim')
-       call jobstart(l:cmd + [line('.'), l:out, l:tex])
-     elseif has('job')
-       call job_start(l:cmd + [line('.'), l:out, l:tex])
-     else
-       call system(join(l:cmd + [line('.'), shellescape(l:out), shellescape(l:tex)], ' '))
-     endif
-   endfunction
+let g:latex_view_general_viewer = 'zathura'
+let g:vimtex_view_method = "zathura"
+" let g:vimtex_latexmk_callback_hooks = ['UpdateSkim']
+"    function! UpdateSkim(status)
+"      if !a:status | return | endif
+"
+"      let l:out = b:vimtex.out()
+"      let l:tex = expand('%:p')
+"      let l:cmd = [g:vimtex_view_general_viewer, '-r']
+"      if !empty(system('pgrep Skim'))
+"        call extend(l:cmd, ['-g'])
+"      endif
+"      if has('nvim')
+"        call jobstart(l:cmd + [line('.'), l:out, l:tex])
+"      elseif has('job')
+"        call job_start(l:cmd + [line('.'), l:out, l:tex])
+"      else
+"        call system(join(l:cmd + [line('.'), shellescape(l:out), shellescape(l:tex)], ' '))
+"      endif
+"    endfunction
 let g:vimtex_latexmk_build_dir = './build'
 let g:vimtex_latexmk_progname = 'nvr'
-nmap  <leader>v  <Esc>:VimtexView<CR>
-let g:vimtex_fold_enabled =1
-" let g:vimtex_view_method = 'zathura'
+nmap  <leader>v <Esc>:VimtexView<CR>
+let g:vimtex_quickfix_mode = 0
+let g:vimtex_fold_enabled =0
+nmap <leader>l <Esc>:VimtexCompileToggle<CR>
+nmap <leader>s <Esc>:VimtexErrors<CR>
 
 "Neovim mappings
 :tnoremap <S-h> <C-\><C-n><C-w>h
@@ -643,7 +653,7 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
     
    "Latex compile. 
    "them to an external terminal and run there.
-map <Leader>l :tabe %<CR><Esc>:term ; latexmk -pvc -pdf -file-line-error -synctex=1 -interaction=nonstopmode -recorder %<CR><leader>e
+" map <Leader>l :tabe %<CR><Esc>:term ; latexmk -pvc -pdf -file-line-error -synctex=1 -interaction=nonstopmode -recorder %<CR><leader>e
 map <Leader>tt :term ; ctags -R
 "source ~/.anyname  
 
