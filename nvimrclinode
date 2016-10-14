@@ -454,11 +454,11 @@ let g:CommandTMaxHeight = 15
 " --- SuperTab
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
-let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
+let g:SuperTabContextDiscoverDiscovery= ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
   
 "--NerdTree
 let g:NERDTreeMapUpdir="<S-h>"
-" Remaps
+" 
 " I find default   register behavior uncomfortable 
 inoremap \ /
 inoremap / \
@@ -467,11 +467,18 @@ noremap p "0p
 " noremap D "dD
 noremap c "_c
 noremap C "_C
-noremap dd "_dd
 noremap s "_x
 noremap x "0x
 noremap X "0D
 
+" Softwrap 
+nmap D _dg$
+nmap V 0vg$
+nmap A g$a
+nnoremap dd 0"_dg$i<backspace><ESC><CR>
+" nmap dd 0dg$
+
+vmap q xi<CR><CR><CR><CR><ESC>kkpvip<leader>c
 nnoremap <Left> :bnext<CR>
 nnoremap <Right> :bprevious<CR>
 " tnoremap <Esc> <C-\> 
